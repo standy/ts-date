@@ -1,0 +1,33 @@
+{
+  "name": "ts-date",
+  "version": "0.1.0",
+  "description": "",
+  "main": "ts-date.ts",
+  "scripts": {
+    "coverage": "nyc npm test",
+    "test": "mocha -r ts-node/register src/**/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "@types/power-assert": "^1.4.29",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.2",
+    "power-assert": "^1.4.4",
+    "ts-node": "^3.0.6",
+    "typescript": "^2.3.4"
+  },
+  "nyc": {
+    "include": "src/**/*.ts",
+    "exclude": [
+      "src/**/*.d.ts",
+      "src/**/*.test.ts"
+    ],
+    "extension": ".ts",
+    "require": ["ts-node/register"],
+    "reporter": ["text"],
+    "all": true
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

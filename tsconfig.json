@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["es2017", "dom"],
+    "target": "esnext",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "allowJs": true
+  }
+}
