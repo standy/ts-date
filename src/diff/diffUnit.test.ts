@@ -142,6 +142,11 @@ describe('diffUnit', function () {
 	});
 
 	describe('diffYear edge cases', function() {
+		it('diff between same year', function () {
+			const d1 = createTsDate(new Date(2017, Month.Jan, 1));
+			const d2 = createTsDate(new Date(2017, Month.Dec, 31, 23, 59, 59, 999));
+			assert.equal(diffYear(d1, d2), 0);
+		});
 		it('diff between leap years', function () {
 			const d1 = createTsDate(new Date(2016, Month.Feb, 29));
 			const d2 = createTsDate(new Date(2017, Month.Feb, 28, 23, 59, 59, 999));
@@ -161,5 +166,10 @@ describe('diffUnit', function () {
 			const tsDstDate2HoursUTC = addUTCHours(tsDstDate, 2);
 			assert.equal(diffHours(tsDstDate2HoursUTC, tsDstDate), 2);
 		});
+	});
+
+	describe('null handling', function () {
+		const d1 = createTsDate(new Date());
+		assert.equal(diffMilliseconds(null, d1), null);
 	});
 });

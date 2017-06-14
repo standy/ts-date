@@ -1,14 +1,16 @@
-import {formatters} from '../locale/ru';
+import defaultFormatters from '../locale/default-formatters';
+import {formatters} from '../locale/ru/ru';
 import {tokensRx} from '../utils/tokens-rx';
 
-const RX_TOKENS = tokensRx(Object.keys(formatters));
+const totalFormatters = Object.assign({}, defaultFormatters, formatters);
+const RX_TOKENS = tokensRx(Object.keys(totalFormatters));
 
 export function formatFn(format: string): ValidDateMethod1D<string> {
 	const tokens = format.match(RX_TOKENS) as string[];
 	// this regexp cant fail because of "|."
 
 	const functions = tokens.map(token => {
-		const tokenFn = formatters[token];
+		const tokenFn = totalFormatters[token];
 		if (tokenFn) {
 			return (date: ValidDate) => tokenFn(date);
 		}
@@ -23,6 +25,5 @@ export function formatFn(format: string): ValidDateMethod1D<string> {
 
 
 export const format = function(d: ValidDate | null, format: string): string | null {
-	if (!d) return null;
 	return formatFn(format)(d);
 } as ValidDateMethod1D1Arg<string, string>;

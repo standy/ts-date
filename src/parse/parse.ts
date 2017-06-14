@@ -1,10 +1,12 @@
-import {parsers} from '../locale/ru';
+import defaultParsers from '../locale/default-parsers';
+import {parsers} from '../locale/ru/ru';
 import {tokensRx} from '../utils/tokens-rx';
 import {toTsDateOrNull} from '../create/create-ts-date';
 
 type Parser = (date: Date, value: string) => void;
 
-const RX_TOKENS = tokensRx(Object.keys(parsers));
+const totalParsers = Object.assign({}, defaultParsers, parsers);
+const RX_TOKENS = tokensRx(Object.keys(totalParsers));
 
 function escapeRegExp(text: string) {
 	return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -15,7 +17,7 @@ export function parseFn(template: string): (str: string) => ValidDate | null {
 
 	const parsersFn: Array<Parser> = [];
 	const rxStr = tokens.map(token => {
-		const parser = parsers[token];
+		const parser = totalParsers[token];
 		if (parser) {
 			parsersFn.push(parser[1]);
 			const regexpPart = parser[0];

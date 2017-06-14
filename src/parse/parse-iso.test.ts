@@ -58,8 +58,27 @@ describe('parseIso', function () {
 				correctResult: null,
 			},
 			{
+				dateStr: '',
+				correctResult: null,
+			},
+			{
 				/* NOTE Cant omit minutes */
 				dateStr: '2017-06-01T12',
+				correctResult: null,
+			},
+			{
+				/* NOTE Invalid minutes */
+				dateStr: '2017-06-01T12:60',
+				correctResult: null,
+			},
+			{
+				/* NOTE Zero days */
+				dateStr: '2017-06-00',
+				correctResult: null,
+			},
+			{
+				/* NOTE Invalid TZ */
+				dateStr: '2017-06-01T09:00+13:00',
 				correctResult: null,
 			},
 		];

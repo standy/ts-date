@@ -1,6 +1,7 @@
-import defaultFormatters, {FormatterObj} from './_formatters';
-import defaultParsers, {ParserObj} from './_parsers';
+import defaultFormatters, {FormatterObj} from '../default-formatters';
+import {ParserObj} from '../default-parsers';
 
+// http://new.gramota.ru/spravka/buro/search-answer?s=242637
 const monthsShort = ['янв.', 'фев.', 'март', 'апр.', 'май', 'июнь', 'июль', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.'];
 const monthsFull = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
 const monthsGenitive = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
@@ -9,7 +10,7 @@ const weekdays3char = ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн
 const weekdaysFull = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
 const meridiem = ['ночи', 'утра', 'дня', 'вечера'];
 
-export const formatters: FormatterObj = Object.assign({
+export const formatters: FormatterObj = {
 	// Month: янв., фев., ..., дек.
 	'MMM': date => monthsShort[date.getMonth()],
 
@@ -40,13 +41,13 @@ export const formatters: FormatterObj = Object.assign({
 	},
 
 	// Generate ordinal version of formatters: M -> Mo, DDD -> DDDo, etc.
-	'Do': date => formatters['D'](date) + '-е',
-	// 'Wo': date => formatters['W'](date) + '-й',
-	'Mo': date => formatters['M'](date) + '-й',
-	// 'DDDo': date => formatters['DDD'](date) + '-й',
-	'do': date => formatters['d'](date) + '-й',
-	'Qo': date => formatters['Q'](date) + '-й',
-} as FormatterObj, defaultFormatters);
+	'Do': date => defaultFormatters['D'](date) + '-е',
+	// 'Wo': date => defaultFormatters['W'](date) + '-й',
+	'Mo': date => defaultFormatters['M'](date) + '-й',
+	// 'DDDo': date => defaultFormatters['DDD'](date) + '-й',
+	'do': date => defaultFormatters['d'](date) + '-й',
+	'Qo': date => defaultFormatters['Q'](date) + '-й',
+};
 
 formatters.a = formatters.aa = formatters.A;
 
@@ -55,11 +56,11 @@ formatters.a = formatters.aa = formatters.A;
 // where month is in the genitive case: января, февраля, ..., декабря
 const monthsGenitiveFormatters = ['D', 'Do', 'DD'];
 monthsGenitiveFormatters.forEach(formatterToken => {
-	formatters[formatterToken + ' MMMM'] = (date) => formatters[formatterToken](date) + ' ' + monthsGenitive[date.getMonth()];
+	formatters[formatterToken + ' MMMM'] = (date) => defaultFormatters[formatterToken](date) + ' ' + monthsGenitive[date.getMonth()];
 });
 
 
-export const parsers: ParserObj = Object.assign({
+export const parsers: ParserObj = {
 	// Month: янв., фев., ..., дек.
 	'MMM': [monthsShort.join('|'), (date, value) => {
 		const index = monthsShort.indexOf(value.toLowerCase());
@@ -74,4 +75,4 @@ export const parsers: ParserObj = Object.assign({
 		if (index < 0) index = monthsGenitive.indexOf(value);
 		date.setMonth(index);
 	}],
-} as ParserObj, defaultParsers);
+};

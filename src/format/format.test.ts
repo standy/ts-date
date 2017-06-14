@@ -1,7 +1,7 @@
 import * as assert from 'power-assert';
 import {createTsDate} from '../create/create-ts-date';
 import {
-	format
+	format,
 } from './format'
 
 
@@ -41,6 +41,10 @@ describe('format', function () {
 				'YYYY-MM-DD HH:mm Z',
 				'2017-06-01 12:34 +03:00',
 			],
+			[
+				'MM YYYY [MM YY]',
+				'06 2017 MM YY',
+			],
 		];
 
 		for (let i = 0; i < FORMATS.length; i++) {
@@ -48,5 +52,9 @@ describe('format', function () {
 			const result = format(date, template);
 			assert.equal(result, correctResult, `format "${template}"`);
 		}
+	});
+
+	it('null handling', function () {
+		assert.equal(format(null, '[test]'), null);
 	});
 });
