@@ -15,6 +15,11 @@ describe('parse', function () {
 				correctResult: new Date(2017, Month.Jun, 1, 12, 34, 56, 789),
 			},
 			{
+				template: 'YYYY-MM-DD HH:mm:ss.SS',
+				dateStr: '2017-06-01 12:34:56.78',
+				correctResult: new Date(2017, Month.Jun, 1, 12, 34, 56, 780),
+			},
+			{
 				template: 'YYYY-MM-DD HH:mm:ss',
 				dateStr: '2017-06-01 12:34:56',
 				correctResult: new Date(2017, Month.Jun, 1, 12, 34, 56),
@@ -40,24 +45,24 @@ describe('parse', function () {
 				correctResult: new Date(2017, Month.Jun),
 			},
 			{
+				template: 'X',
+				dateStr: '1483142400',
+				correctResult: new Date(1483142400000),
+			},
+			{
 				template: 'x',
 				dateStr: '1483142400000',
-				correctResult: new Date(2017, 0, 0, 0, -new Date(2017, 0).getTimezoneOffset()),
+				correctResult: new Date(1483142400000),
 			},
 			{
 				template: 'x',
 				dateStr: (MAX_DATE + 1).toString(),
 				correctResult: null,
 			},
-			// {
-			// 	template: 'YYYY-MM',
-			// 	dateStr: '2017-13',
-			// 	correctResult: null,
-			// },
 			{
-				template: 'D.M.YY H:mm',
-				dateStr: '1.6.17 12:34',
-				correctResult: new Date(2017, Month.Jun, 1, 12, 34),
+				template: 'D.M.YY H:m:s.S',
+				dateStr: '1.6.17 2:3:4.5',
+				correctResult: new Date(2017, Month.Jun, 1, 2, 3, 4, 500),
 			},
 		];
 

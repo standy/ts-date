@@ -4,7 +4,7 @@ import {
 	formatLocalIso,
 	formatDateTimeIso,
 	formatDateIso
-} from './format-predefined'
+} from './format-iso'
 
 
 describe('format-predefined', function () {

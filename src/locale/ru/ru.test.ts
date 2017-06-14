@@ -20,6 +20,22 @@ describe('ru format', function () {
 				'D MMMM hh A',
 				'1 августа 12 дня',
 			],
+			[
+				'Do MMMM, dddd',
+				'1-е августа, вторник',
+			],
+			[
+				'D MMM, dd',
+				'1 авг., вт',
+			],
+			[
+				'D MMMM, hh A, ddd',
+				'1 августа, 12 дня, втр',
+			],
+			[
+				'Qo [квартал], Mo [месяц]',
+				'3-й квартал, 8-й месяц',
+			],
 		];
 
 		for (let i = 0; i < FORMATS.length; i++) {

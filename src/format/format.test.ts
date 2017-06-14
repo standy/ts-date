@@ -14,6 +14,10 @@ describe('format', function () {
 				'2017-06-01 12:34:56.789',
 			],
 			[
+				'YYYY-MM-DD HH:mm:ss.SS',
+				'2017-06-01 12:34:56.78',
+			],
+			[
 				'YYYY-MM-DD HH:mm:ss',
 				'2017-06-01 12:34:56',
 			],
@@ -34,16 +38,24 @@ describe('format', function () {
 				'2017-06',
 			],
 			[
-				'D.M.YY H:mm',
-				'1.6.17 12:34',
-			],
-			[
-				'YYYY-MM-DD HH:mm Z',
-				'2017-06-01 12:34 +03:00',
+				'D.M.YY H:m:s.S',
+				'1.6.17 12:34:56.7',
 			],
 			[
 				'MM YYYY [MM YY]',
 				'06 2017 MM YY',
+			],
+			[
+				'x',
+				'1496309696789'
+			],
+			[
+				'X',
+				'1496309696'
+			],
+			[
+				'E',
+				'4'
 			],
 		];
 
@@ -56,5 +68,25 @@ describe('format', function () {
 
 	it('null handling', function () {
 		assert.equal(format(null, '[test]'), null);
+	});
+
+	it('7-th day of week', function () {
+		const date = createTsDate(new Date(2017, Month.Jun, 4));
+		assert.equal(format(date, 'E'), '7');
+	});
+
+	it('correct format timezone', function () {
+		const dateTimezoneMock = (offset: number) => ({
+			getTimezoneOffset() {
+				return offset;
+			}
+		} as ValidDate);
+
+		assert.equal(format(dateTimezoneMock(180), 'Z'), '-03:00');
+		assert.equal(format(dateTimezoneMock(180), 'ZZ'), '-0300');
+		assert.equal(format(dateTimezoneMock(-600), 'Z'), '+10:00');
+		assert.equal(format(dateTimezoneMock(-180), 'ZZ'), '+0300');
+		assert.equal(format(dateTimezoneMock(0), 'Z'), '+00:00');
+		assert.equal(format(dateTimezoneMock(0), 'ZZ'), '+0000');
 	});
 });

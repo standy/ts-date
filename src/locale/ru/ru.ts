@@ -47,6 +47,8 @@ export const formatters: FormatterObj = {
 	// 'DDDo': date => defaultFormatters['DDD'](date) + '-й',
 	'do': date => defaultFormatters['d'](date) + '-й',
 	'Qo': date => defaultFormatters['Q'](date) + '-й',
+
+	'Do MMMM': date => formatters['Do'](date) + ' ' + monthsGenitive[date.getMonth()]
 };
 
 formatters.a = formatters.aa = formatters.A;
@@ -54,7 +56,7 @@ formatters.a = formatters.aa = formatters.A;
 
 // Generate formatters like 'D MMMM',
 // where month is in the genitive case: января, февраля, ..., декабря
-const monthsGenitiveFormatters = ['D', 'Do', 'DD'];
+const monthsGenitiveFormatters = ['D', 'DD'];
 monthsGenitiveFormatters.forEach(formatterToken => {
 	formatters[formatterToken + ' MMMM'] = (date) => defaultFormatters[formatterToken](date) + ' ' + monthsGenitive[date.getMonth()];
 });
