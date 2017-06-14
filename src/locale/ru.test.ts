@@ -1,14 +1,12 @@
 import * as assert from 'power-assert';
-import {createTsDate} from '../../create/create-ts-date';
+import {createTsDate} from '../create/create-ts-date';
 import {
 	format,
-} from '../../format/format';
-import {
 	parse,
-} from '../../parse/parse';
+} from './ru';
 
 
-describe('ru format', function () {
+describe('ru locale', function () {
 	it('correct formatting', function () {
 		const date = createTsDate(new Date(2017, Month.Aug, 1, 12, 34, 56, 789));
 		const FORMATS = [
@@ -89,7 +87,7 @@ describe('ru format', function () {
 		for (let i = 0; i < FORMATS.length; i++) {
 			const {template, dateStr, correctResult} = FORMATS[i];
 			const result = parse(dateStr, template);
-			assert.deepEqual(result, createTsDate(correctResult), `format "${template}"`);
+			assert.deepEqual(result, createTsDate(correctResult), `parse "${dateStr}" with "${template}"`);
 		}
 	});
 });

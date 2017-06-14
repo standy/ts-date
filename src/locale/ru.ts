@@ -1,5 +1,9 @@
-import defaultFormatters, {FormatterObj} from '../default-formatters';
-import {ParserObj} from '../default-parsers';
+import {createFormat} from '../format/create-format';
+import {createParse} from '../parse/create-parse';
+import defaultFormatters from '../format/default-formatters';
+import defaultParsers from '../parse/default-parsers';
+import {FormatterObj} from '../format/default-formatters';
+import {ParserObj} from '../parse/default-parsers';
 
 // http://new.gramota.ru/spravka/buro/search-answer?s=242637
 const monthsShort = ['янв.', 'фев.', 'март', 'апр.', 'май', 'июнь', 'июль', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.'];
@@ -10,7 +14,7 @@ const weekdays3char = ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн
 const weekdaysFull = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
 const meridiem = ['ночи', 'утра', 'дня', 'вечера'];
 
-export const formatters: FormatterObj = {
+const formatters: FormatterObj = {
 	// Month: янв., фев., ..., дек.
 	'MMM': date => monthsShort[date.getMonth()],
 
@@ -51,7 +55,7 @@ export const formatters: FormatterObj = {
 	'Do MMMM': date => formatters['Do'](date) + ' ' + monthsGenitive[date.getMonth()]
 };
 
-formatters.a = formatters.aa = formatters.A;
+formatters['a'] = formatters['aa'] = formatters['A'];
 
 
 // Generate formatters like 'D MMMM',
@@ -62,7 +66,7 @@ monthsGenitiveFormatters.forEach(formatterToken => {
 });
 
 
-export const parsers: ParserObj = {
+const parsers: ParserObj = {
 	// Month: янв., фев., ..., дек.
 	'MMM': [monthsShort.join('|'), (date, value) => {
 		const index = monthsShort.indexOf(value.toLowerCase());
@@ -78,3 +82,6 @@ export const parsers: ParserObj = {
 		date.setMonth(index);
 	}],
 };
+
+export const format = createFormat(Object.assign({}, defaultFormatters, formatters));
+export const parse = createParse(Object.assign({}, defaultParsers, parsers));
