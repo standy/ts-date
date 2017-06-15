@@ -1,6 +1,8 @@
+import {ValidDate} from '../utils/basic-types';
 import {leadZero} from '../utils/utils';
 
-export type Formatter = (date: ValidDate) => string | number;
+export type Formatter = (date:
+							 ValidDate) => string | number;
 export type FormatterObj = { [key: string]: Formatter };
 
 const formatters: FormatterObj = {

@@ -3,7 +3,7 @@ import {createParse} from '../parse/create-parse';
 import defaultFormatters from '../format/default-formatters';
 import defaultParsers from '../parse/default-parsers';
 import {FormatterObj} from '../format/default-formatters';
-import {ParserObj} from '../parse/default-parsers';
+import {ParserObj} from '../utils/basic-types';
 
 
 // Note: in English, the names of days of the week and months are capitalized.

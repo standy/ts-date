@@ -1,4 +1,4 @@
-declare interface ValidDate {
+export interface ValidDate {
 	toString(): string;
 	toDateString(): string;
 	toTimeString(): string;
@@ -30,7 +30,7 @@ declare interface ValidDate {
 	__IsValidDate: true;
 }
 
-declare const enum MS {
+export const enum MS {
 	Milliseconds = 1, // 1000;
 	Seconds = 1e3, // 1000;
 	Minutes = 6e4, // 1000 * 60;
@@ -39,7 +39,7 @@ declare const enum MS {
 }
 
 
-declare const enum Month {
+export const enum Month {
 	Jan = 0,
 	Feb,
 	Mar,
@@ -55,26 +55,31 @@ declare const enum Month {
 }
 
 
-declare interface ValidDateMethod1D<Result> {
+export interface ValidDateMethod1D<Result> {
 	(d: null): null;
 	(d: ValidDate): Result;
 	(d: ValidDate | null): Result | null;
 }
 
-declare interface ValidDateMethod1D1Arg<Arg, Result> {
+export interface ValidDateMethod1D1Arg<Arg, Result> {
 	(d: null, arg: Arg): null;
 	(d: ValidDate, arg: Arg): Result;
 	(d: ValidDate | null, arg: Arg): Result | null;
 }
 
-declare interface ValidDateMethod2D<Result> {
+export interface ValidDateMethod2D<Result> {
 	(d1: null, d2: ValidDate | null): null;
 	(d1: ValidDate | null, d2: null): null;
 	(d1: ValidDate, d2: ValidDate): Result;
 	(d1: ValidDate | null, d2: ValidDate | null): Result | null;
 }
 
-declare interface ValidDateParse {
+export interface ValidDateParse {
 	(d: undefined | null): null;
 	(d: Date | number | string): ValidDate | null;
 }
+
+
+export type Parser = (date: Date, value: string) => void;
+export type ParserData = [string, Parser];
+export type ParserObj = {[key: string]: ParserData};

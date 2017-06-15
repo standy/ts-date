@@ -1,6 +1,4 @@
-type Parser = (date: Date, value: string) => void;
-type ParserData = [string, Parser];
-export type ParserObj = {[key: string]: ParserData};
+import {ParserObj} from '../utils/basic-types';
 
 const rx1 = '\\d';
 const rx2 = '\\d\\d';

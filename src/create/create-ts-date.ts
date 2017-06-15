@@ -1,3 +1,5 @@
+import {ValidDate} from '../utils/basic-types';
+
 export function createTsDate(date: Date|number|null|undefined): ValidDate | null {
 	if (date == null) {
 		return null;

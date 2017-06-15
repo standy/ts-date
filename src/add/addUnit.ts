@@ -1,3 +1,4 @@
+import {ValidDate, ValidDateMethod1D1Arg} from '../utils/basic-types';
 function addFn(keyGet: keyof Date, keySet: keyof Date) {
 	const resFn = (d: ValidDate | null, n: number): ValidDate | null => {
 		if (!d) return null;
