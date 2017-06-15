@@ -2,8 +2,13 @@
   "name": "ts-date",
   "version": "0.1.0",
   "description": "",
-  "main": "ts-date.ts",
+  "main": "dest/ts-date.js",
+  "module": "dest-es6/ts-date.js",
+  "typings": "dest-es6/ts-date.d.ts",
+  "types": "dest-es6/ts-date.d.ts",
   "scripts": {
+    "compile-es6": "tsc -p compile/tsconfig-es6.json",
+    "compile": "rollup -c compile/rollup.config.js",
     "coverage": "nyc npm test",
     "test": "mocha -r ts-node/register src/**/*.test.ts"
   },
@@ -13,6 +18,7 @@
     "mocha": "^3.4.2",
     "nyc": "^11.0.2",
     "power-assert": "^1.4.4",
+    "rollup": "^0.43.0",
     "ts-node": "^3.0.6",
     "typescript": "^2.3.4"
   },
@@ -23,8 +29,12 @@
       "src/**/*.test.ts"
     ],
     "extension": ".ts",
-    "require": ["ts-node/register"],
-    "reporter": ["text"],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text"
+    ],
     "all": true
   },
   "keywords": [],
