@@ -9,6 +9,7 @@ import {
 describe('format', function () {
 	it('correct formatting', function () {
 		const date = createTsDate(new Date(2017, Month.Jun, 1, 12, 34, 56, 789));
+		if (!date) throw new Error('Expected to be date');
 		const FORMATS = [
 			[
 				'YYYY-MM-DD HH:mm:ss.SSS',
@@ -48,11 +49,11 @@ describe('format', function () {
 			],
 			[
 				'x',
-				'1496309696789'
+				date.valueOf().toString(),
 			],
 			[
 				'X',
-				'1496309696'
+				Math.floor(date.valueOf() / 1000).toString(),
 			],
 			[
 				'E',
