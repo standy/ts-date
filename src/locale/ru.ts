@@ -3,7 +3,7 @@ import {createParse} from '../parse/create-parse';
 import defaultFormatters from '../format/default-formatters';
 import defaultParsers from '../parse/default-parsers';
 import {FormatterObj} from '../format/default-formatters';
-import {ParserObj} from '../parse/default-parsers';
+import {ParserObj} from '../utils/basic-types';
 
 // http://new.gramota.ru/spravka/buro/search-answer?s=242637
 const monthsShort = ['янв.', 'фев.', 'март', 'апр.', 'май', 'июнь', 'июль', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.'];
