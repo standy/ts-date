@@ -7,8 +7,9 @@
   "typings": "dest-es6/ts-date.d.ts",
   "types": "dest-es6/ts-date.d.ts",
   "scripts": {
-    "compile-es6": "tsc -p compile/tsconfig-es6.json",
-    "compile": "rollup -c compile/rollup.config.js",
+    "compile": "tsc -p compile/tsconfig-es6.json && rollup -c compile/rollup.config.js",
+    "prepublish": "npm run compile",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "coverage": "nyc npm test",
     "test": "mocha -r ts-node/register src/**/*.test.ts"
   },
@@ -20,7 +21,8 @@
     "power-assert": "^1.4.4",
     "rollup": "^0.43.0",
     "ts-node": "^3.0.6",
-    "typescript": "^2.3.4"
+    "typescript": "^2.3.4",
+    "semantic-release": "^6.3.6"
   },
   "nyc": {
     "include": "src/**/*.ts",
@@ -39,5 +41,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/standy/ts-date.git"
+  }
 }
