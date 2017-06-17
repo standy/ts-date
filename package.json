@@ -1,6 +1,6 @@
 {
   "name": "ts-date",
-  "version": "0.1.0",
+  "version": "2.0.0-development",
   "description": "",
   "main": "dest/ts-date.js",
   "module": "dest-es6/ts-date.js",
