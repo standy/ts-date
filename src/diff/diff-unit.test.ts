@@ -9,8 +9,8 @@ import {
 	diffDate,
 	diffMonth,
 	diffYear,
-} from './diffUnit'
-import {addUTCHours} from '../add/addUnit';
+} from './diff-unit'
+import {addUTCHours} from '../add/add-unit';
 
 function dstForYear(year: number) {
     const start = new Date(year, 0, 1);

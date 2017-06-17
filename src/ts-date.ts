@@ -1,5 +1,5 @@
-export * from './add/addUnit';
-export * from './diff/diffUnit';
+export * from './add/add-unit';
+export * from './diff/diff-unit';
 export * from './format/format';
 export * from './format/format-iso';
 export * from './parse/parse-iso';
