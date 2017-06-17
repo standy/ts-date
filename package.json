@@ -27,6 +27,7 @@
   "nyc": {
     "include": "src/**/*.ts",
     "exclude": [
+      "src/utils/basic-types.ts",
       "src/**/*.d.ts",
       "src/**/*.test.ts"
     ],

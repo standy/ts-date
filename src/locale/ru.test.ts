@@ -1,6 +1,6 @@
 import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
-import {createTsDate} from '../create/create-ts-date';
+import {newTsDate} from '../create/create-ts-date';
 import {
 	format,
 	parse,
@@ -9,7 +9,7 @@ import {
 
 describe('ru locale', function () {
 	it('correct formatting', function () {
-		const date = createTsDate(new Date(2017, Month.Aug, 1, 12, 34, 56, 789));
+		const date = newTsDate(2017, Month.Aug, 1, 12, 34, 56, 789);
 		const FORMATS = [
 			[
 				'MMMM MMM dd ddd dddd A Do Wo Mo DDDo do Qo',
@@ -44,10 +44,10 @@ describe('ru locale', function () {
 		}
 	});
 	it('correct day part format', function () {
-		const d1 = createTsDate(new Date(2017, Month.Aug, 1, 0));
-		const d2 = createTsDate(new Date(2017, Month.Aug, 1, 6));
-		const d3 = createTsDate(new Date(2017, Month.Aug, 1, 12));
-		const d4 = createTsDate(new Date(2017, Month.Aug, 1, 18));
+		const d1 = newTsDate(2017, Month.Aug, 1, 0);
+		const d2 = newTsDate(2017, Month.Aug, 1, 6);
+		const d3 = newTsDate(2017, Month.Aug, 1, 12);
+		const d4 = newTsDate(2017, Month.Aug, 1, 18);
 		const template = 'h A';
 		assert.equal(format(d1, template), '12 ночи');
 		assert.equal(format(d2, template), '6 утра');
@@ -59,17 +59,17 @@ describe('ru locale', function () {
 			{
 				template: 'D MMMM YY [года]',
 				dateStr: '1 августа 17 года',
-				correctResult: new Date(2017, Month.Aug, 1),
+				correctResult: newTsDate(2017, Month.Aug, 1),
 			},
 			{
 				template: 'D MMM YY [года]',
 				dateStr: '1 авг. 17 года',
-				correctResult: new Date(2017, Month.Aug, 1),
+				correctResult: newTsDate(2017, Month.Aug, 1),
 			},
 			{
 				template: 'MMMM YYYY',
 				dateStr: 'август 2017',
-				correctResult: new Date(2017, Month.Aug, 1),
+				correctResult: newTsDate(2017, Month.Aug, 1),
 			},
 			{
 				/* NOTE Incomplete date */
@@ -88,7 +88,7 @@ describe('ru locale', function () {
 		for (let i = 0; i < FORMATS.length; i++) {
 			const {template, dateStr, correctResult} = FORMATS[i];
 			const result = parse(dateStr, template);
-			assert.deepEqual(result, createTsDate(correctResult), `parse "${dateStr}" with "${template}"`);
+			assert.deepEqual(result, correctResult, `parse "${dateStr}" with "${template}"`);
 		}
 	});
 });

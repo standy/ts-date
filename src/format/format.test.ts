@@ -1,6 +1,6 @@
 import {Month, ValidDate} from '../utils/basic-types';
 import * as assert from 'power-assert';
-import {createTsDate} from '../create/create-ts-date';
+import {newTsDate} from '../create/create-ts-date';
 import {
 	format,
 } from './format'
@@ -8,7 +8,7 @@ import {
 
 describe('format', function () {
 	it('correct formatting', function () {
-		const date = createTsDate(new Date(2017, Month.Jun, 1, 12, 34, 56, 789));
+		const date = newTsDate(2017, Month.Jun, 1, 12, 34, 56, 789);
 		if (!date) throw new Error('Expected to be date');
 		const FORMATS = [
 			[
@@ -73,7 +73,7 @@ describe('format', function () {
 	});
 
 	it('7-th day of week', function () {
-		const date = createTsDate(new Date(2017, Month.Jun, 4));
+		const date = newTsDate(2017, Month.Jun, 4);
 		assert.equal(format(date, 'E'), '7');
 	});
 

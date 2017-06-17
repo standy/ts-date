@@ -1,6 +1,6 @@
 import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
-import {createTsDate} from '../create/create-ts-date';
+import {newTsDate} from '../create/create-ts-date';
 import {
 	parseIso
 } from './parse-iso'
@@ -11,32 +11,32 @@ describe('parseIso', function () {
 		const FORMATS = [
 			{
 				dateStr: '2017-06-01T12:34:56.789',
-				correctResult: new Date(2017, Month.Jun, 1, 12, 34, 56, 789),
+				correctResult: newTsDate(2017, Month.Jun, 1, 12, 34, 56, 789),
 			},
 			{
 				dateStr: '2017-06-01T12:34:56.7',
-				correctResult: new Date(2017, Month.Jun, 1, 12, 34, 56, 700),
+				correctResult: newTsDate(2017, Month.Jun, 1, 12, 34, 56, 700),
 			},
 			{
 				dateStr: '2017-06-01T12:34:56',
-				correctResult: new Date(2017, Month.Jun, 1, 12, 34, 56),
+				correctResult: newTsDate(2017, Month.Jun, 1, 12, 34, 56),
 			},
 			{
 				dateStr: '2017-06-01T12:34',
-				correctResult: new Date(2017, Month.Jun, 1, 12, 34),
+				correctResult: newTsDate(2017, Month.Jun, 1, 12, 34),
 			},
 			{
 				dateStr: '2017-06-07',
-				correctResult: new Date(2017, Month.Jun, 7),
+				correctResult: newTsDate(2017, Month.Jun, 7),
 			},
 			{
 				/* NOTE Should trim whitespaces */
 				dateStr: ' 2017-06-07 \t\n',
-				correctResult: new Date(2017, Month.Jun, 7),
+				correctResult: newTsDate(2017, Month.Jun, 7),
 			},
 			{
 				dateStr: '2017-06',
-				correctResult: new Date(2017, Month.Jun),
+				correctResult: newTsDate(2017, Month.Jun),
 			},
 			{
 				dateStr: '2017-06-01T12:34:5',
@@ -44,7 +44,7 @@ describe('parseIso', function () {
 			},
 			{
 				dateStr: '20170601T123456.789',
-				correctResult: new Date(2017, Month.Jun, 1, 12, 34, 56, 789),
+				correctResult: newTsDate(2017, Month.Jun, 1, 12, 34, 56, 789),
 			},
 			{
 				dateStr: '2017-06-01T12:3',
@@ -87,7 +87,7 @@ describe('parseIso', function () {
 		for (let i = 0; i < FORMATS.length; i++) {
 			const {dateStr, correctResult} = FORMATS[i];
 			const result = parseIso(dateStr);
-			assert.deepEqual(result, createTsDate(correctResult), `parse "${dateStr}"`);
+			assert.deepEqual(result, correctResult, `parse "${dateStr}"`);
 		}
 	});
 

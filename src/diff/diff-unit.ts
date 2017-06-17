@@ -37,7 +37,8 @@ function compareArrays(list1: number[], list2: number[], fromPosition: number) {
 	return 0;
 }
 
-export const diffMonth = function(d1: ValidDate, d2: ValidDate) {
+export const diffMonth = function(d1: ValidDate | null, d2: ValidDate | null) {
+	if (!d1 || !d2) return null;
 	const diff = (d1.getFullYear() - d2.getFullYear()) * 12 + d1.getMonth() - d2.getMonth();
 	if (diff === 0) return 0;
 	const diffTail = compareArrays(dateToArray(d1), dateToArray(d2), 2);
@@ -45,7 +46,8 @@ export const diffMonth = function(d1: ValidDate, d2: ValidDate) {
 	return diff + diffTail;
 } as DiffUnitFn;
 
-export const diffYear = function(d1: ValidDate, d2: ValidDate) {
+export const diffYear = function(d1: ValidDate | null, d2: ValidDate | null) {
+	if (!d1 || !d2) return null;
 	const diff = d1.getFullYear() - d2.getFullYear();
 	if (diff === 0) return 0;
 	const diffTail = compareArrays(dateToArray(d1), dateToArray(d2), 1);
