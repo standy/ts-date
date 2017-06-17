@@ -163,7 +163,7 @@ describe('diffUnit', function () {
 			const dst = dstForYear(2017);
 			if (!dst) return;
 
-			const tsDstDate = createTsDate(dst);
+			const tsDstDate = newTsDate(+dst);
 			const tsDstDate2HoursUTC = addUTCHours(tsDstDate, 2);
 			assert.equal(diffHours(tsDstDate2HoursUTC, tsDstDate), 2);
 		});

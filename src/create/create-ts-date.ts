@@ -18,7 +18,7 @@ export function toTsDateOrNull(date: Date): ValidDate | null {
 	return null;
 }
 
-interface TsDateConstructor {
+export interface TsDateConstructor {
    (): ValidDate;
    (value: number): ValidDate | null;
    (value: string): ValidDate | null;
