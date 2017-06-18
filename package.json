@@ -28,8 +28,8 @@
     "include": "src/**/*.ts",
     "exclude": [
       "src/utils/basic-types.ts",
-      "src/**/*.d.ts",
-      "src/**/*.test.ts"
+      "**/*.d.ts",
+      "**/*.test.ts"
     ],
     "extension": ".ts",
     "require": [
@@ -37,8 +37,7 @@
     ],
     "reporter": [
       "text"
-    ],
-    "all": true
+    ]
   },
   "keywords": [],
   "author": "",
