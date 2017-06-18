@@ -1,6 +1,6 @@
 import {Month, ValidDate} from '../utils/basic-types';
 import * as assert from 'power-assert';
-import {newTsDate} from '../create/create-ts-date';
+import {newTsDate, newTsDateOrThrow} from '../create/create-ts-date';
 import {
 	format,
 } from './format'
@@ -56,8 +56,20 @@ describe('format', function () {
 				Math.floor(date.valueOf() / 1000).toString(),
 			],
 			[
-				'E',
-				'4'
+				'GGGG-[W]WW-E',
+				'2017-W22-4'
+			],
+			[
+				'GG [GG]',
+				'17 GG'
+			],
+			[
+				'DDD [DDD]',
+				'152 DDD'
+			],
+			[
+				'DDDD [DDDD]',
+				'152 DDDD'
 			],
 		];
 
@@ -90,5 +102,15 @@ describe('format', function () {
 		assert.equal(format(dateTimezoneMock(-180), 'ZZ'), '+0300');
 		assert.equal(format(dateTimezoneMock(0), 'Z'), '+00:00');
 		assert.equal(format(dateTimezoneMock(0), 'ZZ'), '+0000');
+	});
+
+	it('correct format iso weeks', function() {
+		const template = 'GGGG-[W]WW-E';
+		const d1 = newTsDateOrThrow(2017, Month.Jan, 2); /* Monday */
+		assert.equal(format(d1, template), '2017-W01-1');
+		const d2 = newTsDateOrThrow(2017, Month.Jan, 1); /* Sunday */
+		assert.equal(format(d2, template), '2016-W52-7');
+		const d3 = newTsDateOrThrow(2012, Month.Dec, 31); /* Monday */
+		assert.equal(format(d3, template), '2013-W01-1');
 	});
 });

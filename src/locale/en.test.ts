@@ -13,7 +13,7 @@ describe('ru locale', function () {
 		const FORMATS = [
 			[
 				'MMMM MMM dd ddd dddd A Do Wo Mo DDDo do Qo',
-				'August Aug Tu Tue Tuesday PM 1st Wo 8th 011st 2nd 3rd',
+				'August Aug Tu Tue Tuesday PM 1st 31st 8th 213th 2nd 3rd',
 			],
 			[
 				'D MMMM hh A',

@@ -1,8 +1,10 @@
 import {ValidDate} from '../utils/basic-types';
 import {leadZero} from '../utils/utils';
+import {diffCalendarDate} from '../diff/diff-calendar-unit';
+import {newTsDateOrThrow} from '../create/create-ts-date';
+import {resetISOWeek, resetYear} from '../reset/reset-unit';
 
-export type Formatter = (date:
-							 ValidDate) => string | number;
+export type Formatter = (date: ValidDate) => string | number;
 export type FormatterObj = { [key: string]: Formatter };
 
 const formatters: FormatterObj = {
@@ -22,10 +24,10 @@ const formatters: FormatterObj = {
 	'DD': date => leadZero(date.getDate()),
 
 	// Day of year: 1, 2, ..., 366
-	// TODO 'DDD': date => getDayOfYear(date),
+	'DDD': date => diffCalendarDate(date, resetYear(date)) + 1,
 
 	// Day of year: 001, 002, ..., 366
-	// TODO 'DDDD': date => leadZero(getDayOfYear(date), 3),
+	'DDDD': date => leadZero(formatters['DDD'](date), 3),
 
 	// Day of week: 0, 1, ..., 6
 	'd': date => date.getDay(),
@@ -34,10 +36,14 @@ const formatters: FormatterObj = {
 	'E': date => date.getDay() || 7,
 
 	// ISO week: 1, 2, ..., 53
-	// TODO 'W': date => getISOWeek(date),
+	'W': date => {
+		const isoYear = +formatters['GGGG'](date);
+		const start = resetISOWeek(newTsDateOrThrow(isoYear, 0, 4));
+		return Math.floor(diffCalendarDate(date, start) / 7) + 1;
+	},
 
 	// ISO week: 01, 02, ..., 53
-	// TODO 'WW': date => leadZero(getISOWeek(date)),
+	'WW': date => leadZero(formatters['W'](date)),
 
 	// Year: 00, 01, ..., 99
 	'YY': date => date.getFullYear().toString().slice(-2),
@@ -46,10 +52,18 @@ const formatters: FormatterObj = {
 	'YYYY': date => leadZero(date.getFullYear(), 4),
 
 	// ISO week-numbering year: 00, 01, ..., 99
-	// TODO 'GG': date => getISOYear(date).toString().slice(-2),
+	'GG': date => formatters['GGGG'](date).toString().slice(-2),
 
 	// ISO week-numbering year: 1900, 1901, ..., 2099
-	// TODO 'GGGG': date => getISOYear(date),
+	'GGGG': date => {
+		const startYear = date.getFullYear();
+		const correction = date < resetISOWeek(newTsDateOrThrow(startYear, 0, 4))
+			? -1
+			: date < resetISOWeek(newTsDateOrThrow(startYear + 1, 0, 4))
+				? 0
+				: 1;
+		return leadZero(startYear + correction, 4);
+	},
 
 	// Hour: 0, 1, ... 23
 	'H': date => date.getHours(),

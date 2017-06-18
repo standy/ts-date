@@ -46,9 +46,9 @@ const formatters: FormatterObj = {
 
 	// Generate ordinal version of formatters: M -> Mo, DDD -> DDDo, etc.
 	'Do': date => defaultFormatters['D'](date) + '-е',
-	// 'Wo': date => defaultFormatters['W'](date) + '-й',
+	'Wo': date => defaultFormatters['W'](date) + '-й',
 	'Mo': date => defaultFormatters['M'](date) + '-й',
-	// 'DDDo': date => defaultFormatters['DDD'](date) + '-й',
+	'DDDo': date => defaultFormatters['DDD'](date) + '-й',
 	'do': date => defaultFormatters['d'](date) + '-й',
 	'Qo': date => defaultFormatters['Q'](date) + '-й',
 

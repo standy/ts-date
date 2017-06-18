@@ -47,7 +47,7 @@ const formatters: FormatterObj = {
 };
 
 // Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
-const ordinalFormatters = ['M', 'D', /*'DDD',*/ 'd', 'Q', /*'W'*/];
+const ordinalFormatters = ['M', 'D', 'DDD', 'd', 'Q', 'W'];
 ordinalFormatters.forEach(formatterToken => {
 	formatters[formatterToken + 'o'] = date => ordinal(defaultFormatters[formatterToken](date) as number);
 });
