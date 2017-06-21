@@ -2,30 +2,35 @@
   "name": "ts-date",
   "version": "2.0.0-development",
   "description": "",
-  "main": "dest/ts-date.js",
-  "module": "dest-es6/ts-date.js",
-  "typings": "dest-es6/ts-date.d.ts",
-  "types": "dest-es6/ts-date.d.ts",
+  "main": "es5/index.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
-    "compile": "tsc -p compile/tsconfig-es6.json && rollup -c compile/rollup.config.js",
-    "prepublish": "npm run compile",
+    "prepare-for-npm": "node scripts/prepare-for-npm",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "coverage": "nyc npm test",
-    "test": "mocha -r ts-node/register src/**/*.test.ts"
+    "test": "mocha -r ts-node/register {src,locale}/**/*.test.ts"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.41",
     "@types/power-assert": "^1.4.29",
+    "fs-extra": "^3.0.1",
     "mocha": "^3.4.2",
     "nyc": "^11.0.2",
     "power-assert": "^1.4.4",
     "rollup": "^0.43.0",
+    "rollup-plugin-typescript2": "^0.4.4",
+    "semantic-release": "^6.3.6",
+    "ts-loader": "^2.1.0",
     "ts-node": "^3.0.6",
     "typescript": "^2.3.4",
-    "semantic-release": "^6.3.6"
+    "webpack": "^3.0.0"
   },
   "nyc": {
-    "include": "src/**/*.ts",
+    "include": [
+      "src/**/*.ts",
+      "locale/**/*.ts"
+    ],
     "exclude": [
       "src/utils/basic-types.ts",
       "**/*.d.ts",
@@ -35,6 +40,7 @@
     "require": [
       "ts-node/register"
     ],
+    "temp-directory": "./.cache/.nyc_output",
     "reporter": [
       "text"
     ]

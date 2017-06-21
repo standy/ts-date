@@ -1,10 +1,10 @@
-import {Month} from '../utils/basic-types';
+import {Month} from '../../src/utils/basic-types';
 import * as assert from 'power-assert';
-import {newTsDate} from '../create/create-ts-date';
+import {newTsDate} from '../../src/create/create-ts-date';
 import {
 	format,
 	parse,
-} from './en';
+} from './index';
 
 
 describe('ru locale', function () {

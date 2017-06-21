@@ -1,9 +1,10 @@
-import {createFormat} from '../format/create-format';
-import {createParse} from '../parse/create-parse';
-import defaultFormatters from '../format/default-formatters';
-import defaultParsers from '../parse/default-parsers';
-import {FormatterObj} from '../format/default-formatters';
-import {ParserObj} from '../utils/basic-types';
+import {createFormat} from '../../src/format/create-format';
+import {createParse} from '../../src/parse/create-parse';
+import defaultFormatters from '../../src/format/default-formatters';
+import defaultParsers from '../../src/parse/default-parsers';
+import {FormatterObj} from '../../src/format/default-formatters';
+import {ParserObj, ValidDateMethod1D1Arg, ParseTemplate} from '../../src/utils/basic-types';
+export * from '../../index';
 
 // http://new.gramota.ru/spravka/buro/search-answer?s=242637
 const monthsShort = ['янв.', 'фев.', 'март', 'апр.', 'май', 'июнь', 'июль', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.'];
@@ -83,5 +84,6 @@ const parsers: ParserObj = {
 	}],
 };
 
-export const format = createFormat(Object.assign({}, defaultFormatters, formatters));
-export const parse = createParse(Object.assign({}, defaultParsers, parsers));
+export const format: ValidDateMethod1D1Arg<string, string> = createFormat(Object.assign({}, defaultFormatters, formatters));
+export const parse: ParseTemplate = createParse(Object.assign({}, defaultParsers, parsers));
+

@@ -1,5 +1,8 @@
 node_modules
 coverage
-.nyc_output
-dest
-dest-es6
+.cache
+npm
+src/**/*.js
+locale/**/*.js
+src/**/*.d.ts
+locale/**/*.d.ts

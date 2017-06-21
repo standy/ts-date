@@ -74,11 +74,9 @@ export interface ValidDateMethod2D<Result> {
 	(d1: ValidDate | null, d2: ValidDate | null): Result | null;
 }
 
-export interface ValidDateParse {
-	(d: undefined | null): null;
-	(d: Date | number | string): ValidDate | null;
+export interface ParseTemplate {
+	(dateStr: string, template: string): ValidDate | null;
 }
-
 
 export type Parser = (date: Date, value: string) => void;
 export type ParserData = [string, Parser];
