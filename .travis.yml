@@ -12,7 +12,6 @@ script:
   - npm run test
 after_success:
   - node scripts/prepare-for-npm
-  - npm adduser
   - npm publish ./npm
 branches:
   except:

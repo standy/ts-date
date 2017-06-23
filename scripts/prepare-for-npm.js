@@ -1,7 +1,7 @@
 const {execSync} = require('child_process');
 
 const {join, resolve} = require('path');
-const {copySync, emptyDir} = require('fs-extra');
+const {copySync, emptyDir, writeFileSync} = require('fs-extra');
 
 emptyDir('./npm');
 
@@ -28,3 +28,5 @@ function run(cmd) {
 run('tsc -p tsconfig.mjs.json --outDir npm');
 run('tsc -p tsconfig.node.json --outDir npm/es5');
 run('rollup -c');
+
+writeFileSync('.npmrc', `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`);
