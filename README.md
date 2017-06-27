@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/standy/ts-date.svg?branch=master)](https://travis-ci.org/standy/ts-date)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+
+
 **ts-date** is a `Date` library which shine in Typescript enviroment  
 
 Main difference from javascript `Date` libraries is:
@@ -29,7 +33,7 @@ if (d) {
     d.getDate() // 21
 }
 ```
-To make `ValidDate` to be immutable, all methods for changing the `Date` are banned:
+To make `ValidDate` immutable, all methods for `Date` mutation are banned:
 ```typescript
 d.setDate() // Property 'setDate' does not exist on type 'ValidDate'.
 ```
