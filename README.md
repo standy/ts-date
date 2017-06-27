@@ -1,43 +1,65 @@
-# ts-date
-Type-safe Date
+**ts-date** is a `Date` library which shine in Typescript enviroment  
 
-## The Problem  
-```ts
-/**
- * Method gets date string in any ISO 8601 format 
- * and returns in YYYY-MM-DD
- */
-import * as moment from 'moment';
-import * as dateFns from 'date-fns';
-function apocalypseIsoDate(pleaseIsoDate: string): string {
-  const d = new Date(pleaseIsoDate);
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; // "NaN-NaN-NaN"
-  // or
-  const m = moment(pleaseIsoDate);
-  return m.format('YYYY-MM-DD'); // "Invalid date"
-  // or
-  const f = dateFns.parse(pleaseIsoDate);
-  return dateFns.format(f, 'YYYY-MM-DD'); // "Invalid Date"
+Main difference from javascript `Date` libraries is:
+   * avoiding `"Invalid Date"`  
+   * literally no overhead under native `Date`
+   * it force to do essential checks  
+   
+## How?
+All this is possible thanks to `ValidDate` type (not a class) – the immutable wrapper under `Date`, actually `ValidDate` becomes a `Date` after compile  
+
+`ValidDate` creation occurs through methods which will return `null` instead of `Date("Invalid Date")`, and `null` is a valid argument for every method where required `ValidDate`  
+```typescript
+import { parseIso, format } from 'ts-date/locale/en';
+const d = parseIso('2021-12-21'); // ValidDate | null
+format(d, 'D MMMM YYYY'); // Type is 'string | null'
+if (d) {
+    d; // ValidDate
+    format(d, 'D MMMM YYYY'); // Type is 'string'
+    // no "Invalid Date" option here
+} else {
+    d; // null
+    format(null, 'D MMMM YYYY'); // Type is 'null'
 }
+```
+Since `ValidDate` is `Date`, you can use some `Date` methods:  
+```typescript
+const d = parseIso('2021-12-21');
+if (d) {
+    d.getDate() // 21
+}
+```
+To make `ValidDate` to be immutable, all methods for changing the `Date` are banned:
+```typescript
+d.setDate() // Property 'setDate' does not exist on type 'ValidDate'.
+```
+ 
 
+##### Compare with momentjs
+With `momentjs` you have no warnings here:  
+```typescript
+import * as moment from 'moment';
+function apocalypseIsoDate(isoDate: string): string {
+  const m = moment(isoDate);  
+  return m.format('YYYY-MM-DD'); // "Invalid date"
+}
 apocalypseIsoDate('The Day After Tomorrow');
-// You get NOT a single type warning here
 ```
 
-## The Solution
-```ts
-import {format, parseIso} from 'ts-date';
+With **ts-date** you forced to make checks or add a `null` as posible result 
+```typescript
+import { format, parseIso } from 'ts-date';
 function apocalypseIsoDateWithSafetyBelt(pleaseIsoDate: string): string {
   const d = parseIso(pleaseIsoDate); // Type is 'ValidDate | null'
   
-  // Cant just do that:   
+  // Warning here:   
   return format(d, 'YYYY-MM-DD'); // Type is 'string | null'
   // TS2322:Type 'string | null' is not assignable to type 'string'.
   
-  // Do what you should to do:
+  // To avoid warning do what you should to do:
   // change function type to 'string | null', 
   // throw error,
-  // or return another magic string
+  // or return another magic string explicitly
   if (d === null) {
     throw new TypeError(`ISO 8601 format expected`);
   }
@@ -46,10 +68,21 @@ function apocalypseIsoDateWithSafetyBelt(pleaseIsoDate: string): string {
 }
 ```
 
+## Locales
+For now there is only 2 locales: `en`, `ru`
+
+```typescript
+import { parse, format, addMonth } from 'ts-date/locale/en';
+const d = parse('1 August 2017', 'D MMMM YYYY');
+const f = format(addMonth(d, 1), 'D MMMM YYYY'); // 1 September 2017
+```
+
+
+
 ## Api
 
 ### Date creation
-```ts
+```typescript
 parse(date: string, template: string): ValidDate | null
 parseIso(dateIso: string): ValidDate | null
 createTsDate(Date | number | null | undefined): ValidDate | null
@@ -57,7 +90,7 @@ newTsDate(<same arguments as in Date constructor>): ValidDate | null
 ```
 
 ### Adding
-```ts
+```typescript
 addMilliseconds(ValidDate, number): ValidDate 
 addSeconds(ValidDate, number): ValidDate
 addMinutes(ValidDate, number): ValidDate
@@ -75,7 +108,7 @@ addUTCYear(ValidDate, number): ValidDate
 ```
 
 ### Reset
-```ts
+```typescript
 resetYear(ValidDate): ValidDate
 resetMonth(ValidDate): ValidDate
 resetISOWeek(ValidDate): ValidDate
@@ -86,7 +119,7 @@ resetSeconds(ValidDate): ValidDate
 ```
 
 ### Diffing
-```ts
+```typescript
 diffMilliseconds(ValidDate, ValidDate): number
 diffSeconds(ValidDate, ValidDate): number
 diffMinutes(ValidDate, ValidDate): number
@@ -100,7 +133,7 @@ diffCalendarYear(ValidDate, ValidDate): number
 ```
 
 ### Formatting
-```ts
+```typescript
 format(ValidDate, template: string): string
 formatDateIso(ValidDate): string
 formatDateTimeIso(ValidDate): string
