@@ -26,7 +26,7 @@ function run(cmd) {
 }
 
 run('tsc -p tsconfig.mjs.json --outDir npm');
-run('tsc -p tsconfig.node.json --outDir npm/es5');
+run('tsc -p tsconfig.cjs.json --outDir npm/cjs');
 run('rollup -c');
 
 writeFileSync('.npmrc', `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`);
