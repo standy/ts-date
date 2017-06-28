@@ -82,6 +82,12 @@ const f = format(addMonth(d, 1), 'D MMMM YYYY'); // 1 September 2017
 ```
 
 
+## ES6 modules and CommonJS
+By default library exports in [ES6 modules](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/export) syntax, to use library in CommonJS enviroment, like Node.js, you can use `cjs` version:
+```js
+import { parse, format, addMonth } from 'ts-date/cjs/locale/en';
+```
+
 
 ## Api
 
