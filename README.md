@@ -17,7 +17,7 @@ Main difference from javascript `Date` libraries is:
 All this is possible thanks to `ValidDate` type (not a class) – the immutable wrapper under `Date`, actually `ValidDate` becomes a `Date` after compile  
 
 `ValidDate` creation occurs through methods which will return `null` instead of `Date("Invalid Date")`, and `null` is a valid argument for every method where required `ValidDate`  
-```typescript
+```js
 import { parseIso, format } from 'ts-date/locale/en';
 const d = parseIso('2021-12-21'); // ValidDate | null
 format(d, 'D MMMM YYYY'); // Type is 'string | null'
@@ -31,21 +31,21 @@ if (d) {
 }
 ```
 Since `ValidDate` is `Date`, you can use some `Date` methods:  
-```typescript
+```js
 const d = parseIso('2021-12-21');
 if (d) {
     d.getDate() // 21
 }
 ```
 To make `ValidDate` immutable, all methods for `Date` mutation are banned:
-```typescript
+```js
 d.setDate() // Property 'setDate' does not exist on type 'ValidDate'.
 ```
  
 
 ##### Compare with momentjs
 With `momentjs` you have no warnings here:  
-```typescript
+```js
 import * as moment from 'moment';
 function apocalypseIsoDate(isoDate: string): string {
   const m = moment(isoDate);  
@@ -55,7 +55,7 @@ apocalypseIsoDate('The Day After Tomorrow');
 ```
 
 With **ts-date** you forced to make checks or add a `null` as posible result 
-```typescript
+```js
 import { format, parseIso } from 'ts-date';
 function apocalypseIsoDateWithSafetyBelt(pleaseIsoDate: string): string {
   const d = parseIso(pleaseIsoDate); // Type is 'ValidDate | null'
@@ -79,15 +79,18 @@ function apocalypseIsoDateWithSafetyBelt(pleaseIsoDate: string): string {
 ## Locales
 For now there is only 2 locales: `en`, `ru`
 
-```typescript
+```js
 import { parse, format, addMonth } from 'ts-date/locale/en';
 const d = parse('1 August 2017', 'D MMMM YYYY');
 const f = format(addMonth(d, 1), 'D MMMM YYYY'); // 1 September 2017
 ```
 
+:warning: Directly `ts-date` exports without any locale 
+
+
 
 ## ES6 modules and CommonJS
-By default library exports in [ES6 modules](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/export) syntax, to use library in CommonJS enviroment, like Node.js, you can use `cjs` version:
+:warning: By default library exports in [ES6 modules](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/export) syntax, to use library in CommonJS enviroment, like Node.js, you can use `cjs` version:
 ```js
 import { parse, format, addMonth } from 'ts-date/cjs/locale/en';
 ```
@@ -96,15 +99,54 @@ import { parse, format, addMonth } from 'ts-date/cjs/locale/en';
 ## Api
 
 ### Date creation
-```typescript
+
+**parse**  
+Parse date by template in `momentjs` style
+```js
 parse(date: string, template: string): ValidDate | null
-parseIso(dateIso: string): ValidDate | null
-createTsDate(Date | number | null | undefined): ValidDate | null
-newTsDate(<same arguments as in Date constructor>): ValidDate | null
 ```
 
-### Adding
-```typescript
+**parseIso**  
+Parse most of ISO 8601 formats
+```js
+parseIso(dateIso: string): ValidDate | null
+```
+
+**createTsDate**  
+Create from `Date` object
+```js
+createTsDate(Date | number | null | undefined): ValidDate | null
+```
+
+**newTsDate**  
+Create `ValidDate` in `new Date(...)` style
+```js
+newTsDate(`same arguments as in Date constructor`): ValidDate | null
+```
+
+
+
+### Format
+
+**format**  
+Format by template in `momentjs` style
+```js
+format(ValidDate, template: string): string
+```
+
+**predefined ISO formats** 
+```js
+formatDateIso(ValidDate): string // YYYY-MM-DD
+formatDateTimeIso(ValidDate): string // YYYY-MM-DD[T]HH:MM
+formatLocalIso(ValidDate): string // YYYY-MM-DD[T]HH:MM:SS.sss
+```
+
+
+### Add
+Adding fixed amount of units.  
+First argument should be `ValidDate`, `null` or either. Result will be same type as input 
+
+```js
 addMilliseconds(ValidDate, number): ValidDate 
 addSeconds(ValidDate, number): ValidDate
 addMinutes(ValidDate, number): ValidDate
@@ -122,7 +164,8 @@ addUTCYear(ValidDate, number): ValidDate
 ```
 
 ### Reset
-```typescript
+Reset to default all units after method's name unit
+```js
 resetYear(ValidDate): ValidDate
 resetMonth(ValidDate): ValidDate
 resetISOWeek(ValidDate): ValidDate
@@ -131,9 +174,15 @@ resetHours(ValidDate): ValidDate
 resetMinutes(ValidDate): ValidDate
 resetSeconds(ValidDate): ValidDate
 ```
+Example: 
+```js
+resetYear(newTsDate(2017, 5, 30, 12, 30)) // == new Date(2017, 0, 1)
+```
 
-### Diffing
-```typescript
+### Diff
+Subtract second date from first  
+In case one of arguments is `null`, result also is `null`
+```js
 diffMilliseconds(ValidDate, ValidDate): number
 diffSeconds(ValidDate, ValidDate): number
 diffMinutes(ValidDate, ValidDate): number
@@ -141,15 +190,22 @@ diffHours(ValidDate, ValidDate): number
 diffDate(ValidDate, ValidDate): number
 diffMonth(ValidDate, ValidDate): number
 diffYear(ValidDate, ValidDate): number
+```
+Example: 
+```js
+diffMilliseconds(d1, d2) // === d1 - d2
+```
+
+### Diff calendar units
+Diff like units after method's name unit are reset
+```js
 diffCalendarDate(ValidDate, ValidDate): number
 diffCalendarMonth(ValidDate, ValidDate): number
 diffCalendarYear(ValidDate, ValidDate): number
 ```
-
-### Formatting
-```typescript
-format(ValidDate, template: string): string
-formatDateIso(ValidDate): string
-formatDateTimeIso(ValidDate): string
-formatLocalIso(ValidDate): string
+Example:
+```js
+function isToday(d: ValidDate) {
+  return diffCalendarDate(d, newTsDate()) === 0;
+}
 ```
