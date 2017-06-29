@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/standy/ts-date.svg?branch=master)](https://travis-ci.org/standy/ts-date)
 [![Coverage Status](https://coveralls.io/repos/github/standy/ts-date/badge.svg?branch=master)](https://coveralls.io/github/standy/ts-date?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/standy/ts-date/badge.svg)](https://snyk.io/test/github/standy/ts-date)
+[![dependencies Status](https://david-dm.org/standy/ts-date/status.svg)](https://david-dm.org/standy/ts-date)
+[![MIT License](https://img.shields.io/npm/l/ts-date.svg)](https://github.com/standy/ts-date/blob/master/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/ts-date.svg)](https://www.npmjs.com/package/ts-date)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 
