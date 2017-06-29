@@ -9,6 +9,8 @@
     "release": "standard-version",
     "prepare-for-npm": "node scripts/prepare-for-npm",
     "github-release": "conventional-github-releaser",
+    "commitmsg": "validate-commit-msg",
+    "precommit": "npm test -- --reporter dot",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc npm test",
     "test": "mocha -r ts-node/register {src,locale}/**/*.test.ts"
@@ -19,6 +21,7 @@
     "conventional-github-releaser": "^1.1.12",
     "coveralls": "^2.13.1",
     "fs-extra": "^3.0.1",
+    "husky": "^0.14.1",
     "mocha": "^3.4.2",
     "nyc": "^11.0.2",
     "power-assert": "^1.4.4",
@@ -28,6 +31,7 @@
     "ts-loader": "^2.1.0",
     "ts-node": "^3.0.6",
     "typescript": "^2.3.4",
+    "validate-commit-msg": "^2.12.2",
     "webpack": "^3.0.0"
   },
   "nyc": {
