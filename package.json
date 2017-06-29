@@ -8,7 +8,8 @@
   "scripts": {
     "release": "standard-version",
     "prepare-for-npm": "node scripts/prepare-for-npm",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc npm test",
     "test": "mocha -r ts-node/register {src,locale}/**/*.test.ts"
   },
   "devDependencies": {
