@@ -14,6 +14,7 @@ after_success:
   - npm run coveralls || true
   - node scripts/prepare-for-npm
   - npm publish ./npm
+  - npm run github-release || true
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
