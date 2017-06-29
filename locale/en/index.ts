@@ -4,7 +4,7 @@ import defaultFormatters from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
 import {FormatterObj} from '../../src/format/default-formatters';
 import {ParserObj, ValidDateMethod1D1Arg, ParseTemplate} from '../../src/utils/basic-types';
-export * from '../../index';
+export * from '../../src/default-exports';
 
 
 // Note: in English, the names of days of the week and months are capitalized.

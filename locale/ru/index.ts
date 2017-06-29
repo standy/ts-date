@@ -4,7 +4,7 @@ import defaultFormatters from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
 import {FormatterObj} from '../../src/format/default-formatters';
 import {ParserObj, ValidDateMethod1D1Arg, ParseTemplate} from '../../src/utils/basic-types';
-export * from '../../index';
+export * from '../../src/default-exports';
 
 // http://new.gramota.ru/spravka/buro/search-answer?s=242637
 const monthsShort = ['янв.', 'фев.', 'март', 'апр.', 'май', 'июнь', 'июль', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.'];
