@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/standy/ts-date.svg?branch=master)](https://travis-ci.org/standy/ts-date)
+[![Coverage Status](https://coveralls.io/repos/github/standy/ts-date/badge.svg?branch=master)](https://coveralls.io/github/standy/ts-date?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/standy/ts-date/badge.svg)](https://snyk.io/test/github/standy/ts-date)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 
