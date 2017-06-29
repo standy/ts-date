@@ -8,12 +8,13 @@
   "scripts": {
     "release": "standard-version",
     "prepare-for-npm": "node scripts/prepare-for-npm",
-    "coverage": "nyc npm test",
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "test": "mocha -r ts-node/register {src,locale}/**/*.test.ts"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.41",
     "@types/power-assert": "^1.4.29",
+    "coveralls": "^2.13.1",
     "fs-extra": "^3.0.1",
     "mocha": "^3.4.2",
     "nyc": "^11.0.2",
