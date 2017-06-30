@@ -5,10 +5,12 @@ export function fromDate(date: Date|number|null|undefined): ValidDate | null {
 		return null;
 	}
 	const d = new Date(+date);
-	if (isFinite(+d)) {
-		return d as any as ValidDate
-	}
-	return null;
+	return toTsDateOrNull(d);
+}
+
+export function fromDateOrThrow(date: Date|number): ValidDate {
+	const d = new Date(+date);
+	return toTsDateOrThrow(d, date);
 }
 
 /** @deprecated - use fromDate */
@@ -20,11 +22,11 @@ export function toTsDateOrNull(date: Date): ValidDate | null {
 	}
 	return null;
 }
-export function toTsDateOrThrow(date: Date): ValidDate {
+export function toTsDateOrThrow(date: Date, origin: any): ValidDate {
 	if (isFinite(+date)) {
 		return date as any as ValidDate
 	}
-	throw new TypeError(`Cant parse date from "${date}"`);
+	throw new TypeError(`Cant parse date from "${origin}"`);
 }
 
 export interface TsDateConstructor {
@@ -47,5 +49,5 @@ export interface TsValidDateConstructor {
 
 export const newTsDateOrThrow = function(...args: Array<number | string>) {
 	const result = new (Date as any)(...args);
-	return toTsDateOrThrow(result);
+	return toTsDateOrThrow(result, args);
 } as TsValidDateConstructor;
