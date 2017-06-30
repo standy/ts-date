@@ -1,6 +1,6 @@
 {
   "name": "ts-date",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "",
   "main": "es5/index.js",
   "module": "index.js",
