@@ -1,6 +1,6 @@
 import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
-import {createTsDate} from '../create/create-ts-date';
+import {fromDate} from '../create/create-ts-date';
 import {
 	parse
 } from './parse'
@@ -70,7 +70,7 @@ describe('parse', function () {
 		for (let i = 0; i < FORMATS.length; i++) {
 			const {template, dateStr, correctResult} = FORMATS[i];
 			const result = parse(dateStr, template);
-			assert.deepEqual(result, createTsDate(correctResult), `parse "${dateStr}" for "${template}"`);
+			assert.deepEqual(result, fromDate(correctResult), `parse "${dateStr}" for "${template}"`);
 		}
 	});
 });

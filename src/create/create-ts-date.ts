@@ -1,6 +1,6 @@
 import {ValidDate} from '../utils/basic-types';
 
-export function createTsDate(date: Date|number|null|undefined): ValidDate | null {
+export function fromDate(date: Date|number|null|undefined): ValidDate | null {
 	if (date == null) {
 		return null;
 	}
@@ -10,6 +10,9 @@ export function createTsDate(date: Date|number|null|undefined): ValidDate | null
 	}
 	return null;
 }
+
+/** @deprecated - use fromDate */
+export const createTsDate = fromDate;
 
 export function toTsDateOrNull(date: Date): ValidDate | null {
 	if (isFinite(+date)) {

@@ -114,10 +114,10 @@ Parse most of ISO 8601 formats
 parseIso(dateIso: string): ValidDate | null
 ```
 
-**createTsDate**  
+**fromDate**  
 Create from `Date` object
 ```js
-createTsDate(Date | number | null | undefined): ValidDate | null
+fromDate(Date | number | null | undefined): ValidDate | null
 ```
 
 **newTsDate**  
