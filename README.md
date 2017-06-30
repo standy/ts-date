@@ -5,13 +5,14 @@
 [![NPM Version](https://img.shields.io/npm/v/ts-date.svg)](https://www.npmjs.com/package/ts-date)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-
+:warning: Not ready yet :warning:  
+ 
 **ts-date** is a `Date` library which shine in Typescript enviroment  
 
-Main difference from javascript `Date` libraries is:
+Main difference from most javascript `Date` libraries is:
    * avoiding `"Invalid Date"`  
    * literally no overhead under native `Date`
-   * it force to do essential checks  
+   * forcing to do essential checks  
    
 ## How?
 All this is possible thanks to `ValidDate` type (not a class) – the immutable wrapper under `Date`, actually `ValidDate` becomes a `Date` after compile  
@@ -47,17 +48,17 @@ d.setDate() // Property 'setDate' does not exist on type 'ValidDate'.
 With `momentjs` you have no warnings here:  
 ```js
 import * as moment from 'moment';
-function apocalypseIsoDate(isoDate: string): string {
+function someDateProcessing(isoDate: string): string {
   const m = moment(isoDate);  
   return m.format('YYYY-MM-DD'); // "Invalid date"
 }
-apocalypseIsoDate('The Day After Tomorrow');
+someDateProcessing('The Day After Tomorrow');
 ```
 
 With **ts-date** you forced to make checks or add a `null` as posible result 
 ```js
 import { format, parseIso } from 'ts-date';
-function apocalypseIsoDateWithSafetyBelt(pleaseIsoDate: string): string {
+function dateProcessingWithSafetyBelt(pleaseIsoDate: string): string {
   const d = parseIso(pleaseIsoDate); // Type is 'ValidDate | null'
   
   // Warning here:   
