@@ -1,9 +1,9 @@
 const {execSync} = require('child_process');
 
 const {join, resolve} = require('path');
-const {copySync, emptyDir, writeFileSync} = require('fs-extra');
+const {copySync, emptyDirSync, writeFileSync} = require('fs-extra');
 
-emptyDir('./npm');
+emptyDirSync('./npm');
 
 const files = [
 	'README.md',
