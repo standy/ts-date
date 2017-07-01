@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/standy/ts-date/compare/v1.4.3...v1.5.0) (2017-07-01)
+
+
+### Bug Fixes
+
+* rename createTsDate to fromDate ([7a8c6a1](https://github.com/standy/ts-date/commit/7a8c6a1))
+
+
+### Features
+
+* new method "asDate" ([36279b5](https://github.com/standy/ts-date/commit/36279b5))
+* new method "fromDateOrThrow" ([442808a](https://github.com/standy/ts-date/commit/442808a))
+
+
+
 <a name="1.4.3"></a>
 ## [1.4.3](https://github.com/standy/ts-date/compare/v1.4.2...v1.4.3) (2017-06-30)
 
