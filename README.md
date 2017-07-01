@@ -211,3 +211,9 @@ function isToday(d: ValidDate) {
   return diffCalendarDate(d, newTsDate()) === 0;
 }
 ```
+
+### Turn back to Date
+Method converts `ValidDate` to `Date` 
+```js
+asDate(ValidDate): Date
+```

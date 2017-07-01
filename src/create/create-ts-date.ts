@@ -51,3 +51,8 @@ export const newTsDateOrThrow = function(...args: Array<number | string>) {
 	const result = new (Date as any)(...args);
 	return toTsDateOrThrow(result, args);
 } as TsValidDateConstructor;
+
+
+export function asDate(d: ValidDate): Date {
+	return new Date(+d);
+}
