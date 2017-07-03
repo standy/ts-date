@@ -1,19 +1,20 @@
-import {ValidDate, ValidDateMethod1D1Arg} from '../utils/basic-types';
+import {INVALID_DATE, ValidDate, ValidDateMethod1D1Arg} from '../utils/basic-types';
 import {tokensRx} from '../utils/tokens-rx';
 import {FormatterObj} from './default-formatters';
 
 export function createFormat(formatters: FormatterObj): ValidDateMethod1D1Arg<string, string> {
 	const RX_TOKENS = tokensRx(Object.keys(formatters));
 
-	const format = (d: ValidDate | null, template: string) => {
+	return (d: ValidDate | Date | null, template: string): any => {
 		if (!d) return null;
+		if (!isFinite(+d)) return INVALID_DATE;
 		const tokens = template.match(RX_TOKENS) as string[];
 		// this regexp cant fail because of "|."
 
 		return tokens.map(token => {
 			const tokenFn = formatters[token];
 			if (tokenFn) {
-				return tokenFn(d);
+				return tokenFn(d as ValidDate);
 			}
 			if (token.charAt(0) === '[' && token.charAt(token.length - 1) === ']') {
 				return token.substring(1, token.length - 1);
@@ -21,8 +22,6 @@ export function createFormat(formatters: FormatterObj): ValidDateMethod1D1Arg<st
 			return token;
 		}).join('');
 	};
-
-	return format as ValidDateMethod1D1Arg<string, string>;
 }
 
 

@@ -22,7 +22,7 @@ export function parseIso(dateStr: string): ValidDate | null {
 		maybeResult.getFullYear() === Y
 	);
 	if (!isDateOk) return null;
-	if (!timeList[4]) return maybeResult as any as ValidDate;
+	if (!timeList[4]) return maybeResult as ValidDate;
 
 	const H = toNumber(timeList[4], 0);
 	const m = toNumber(timeList[5], 0);
@@ -56,5 +56,5 @@ export function parseIso(dateStr: string): ValidDate | null {
 		tzOffset += maybeResult.getTimezoneOffset();
 	}
 	maybeResult.setHours(H, m - tzOffset, s, ms);
-	return maybeResult as any as ValidDate
+	return maybeResult as ValidDate
 }

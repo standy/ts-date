@@ -18,13 +18,13 @@ export const createTsDate = fromDate;
 
 export function toTsDateOrNull(date: Date): ValidDate | null {
 	if (isFinite(+date)) {
-		return date as any as ValidDate
+		return date as ValidDate
 	}
 	return null;
 }
 export function toTsDateOrThrow(date: Date, origin: any): ValidDate {
 	if (isFinite(+date)) {
-		return date as any as ValidDate
+		return date as ValidDate
 	}
 	throw new TypeError(`Cant parse date from "${origin}"`);
 }

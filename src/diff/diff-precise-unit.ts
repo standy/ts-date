@@ -1,13 +1,12 @@
-import {MS, ValidDate, ValidDateMethod2D} from '../utils/basic-types';
+import {MS, DiffUnitFn} from '../utils/basic-types';
 import {diffCalendarMonth, diffCalendarYear} from "./diff-calendar-unit";
 
-type DiffUnitFn = ValidDateMethod2D<number>;
 
-function diffPreciseByUnits(unitsInMs: number) {
-	return ((d1: ValidDate | null, d2: ValidDate | null) => {
+function diffPreciseByUnits(unitsInMs: number): DiffUnitFn {
+	return ((d1: Date | null, d2: Date | null): any => {
 		if (!d1 || !d2) return null;
 		return (+d1 - +d2) / unitsInMs;
-	}) as DiffUnitFn;
+	});
 }
 export const diffPreciseSeconds = diffPreciseByUnits(MS.Seconds);
 export const diffPreciseMinutes = diffPreciseByUnits(MS.Minutes);
@@ -15,7 +14,7 @@ export const diffPreciseHours = diffPreciseByUnits(MS.Hours);
 export const diffPreciseDate = diffPreciseByUnits(MS.Date);
 
 
-export const diffPreciseMonth = function(d1: ValidDate | null, d2: ValidDate | null) {
+export const diffPreciseMonth: DiffUnitFn = (d1: Date | null, d2: Date | null): any => {
 	if (!d1 || !d2) return null;
 
 	const startOfMonth1 = +new Date(d1.getFullYear(), d1.getMonth());
@@ -30,15 +29,15 @@ export const diffPreciseMonth = function(d1: ValidDate | null, d2: ValidDate | n
 	const t2 = +d2 - startOfMonth2;
 
 	/**
-	 * that formula made to avoid "1 - 0.9" calculations
+	 * that formula was made to avoid "1 - 0.9" calculations
 	 * do same thing as
 	 * diffCalendarMonth(d1, d2) + t1 / m1 - t2 / m2
 	 */
 	return (diffCalendarMonth(d1, d2) * m1 * m2 + t1 * m2 - t2 * m1) / (m1 * m2);
-} as DiffUnitFn;
+};
 
 
-export const diffPreciseYear = function(d1: ValidDate | null, d2: ValidDate | null) {
+export const diffPreciseYear: DiffUnitFn = (d1: Date | null, d2: Date | null): any => {
 	if (!d1 || !d2) return null;
 
 	const startOfYear1 = +new Date(d1.getFullYear(), 0);
@@ -53,4 +52,4 @@ export const diffPreciseYear = function(d1: ValidDate | null, d2: ValidDate | nu
 	const t2 = +d2 - startOfYear2;
 
 	return (diffCalendarYear(d1, d2) * y1 * y2 + t1 * y2 - t2 * y1) / (y1 * y2);
-} as DiffUnitFn;
+};

@@ -1,13 +1,12 @@
-import {ValidDate, ValidDateMethod1D1Arg} from '../utils/basic-types';
-function addFn(keyGet: keyof Date, keySet: keyof Date) {
-	const resFn = (d: ValidDate | null, n: number): ValidDate | null => {
+import {AddUnitFn} from '../utils/basic-types';
+function addFn(keyGet: keyof Date, keySet: keyof Date): AddUnitFn {
+	return (d: Date | null, n: number): /*ValidDate | Date | null*/ any => {
 		if (!d) return null;
 		if (!isFinite(n)) return d;
 		const result = new Date(+d);
 		result[keySet as 'setDate'](result[keyGet as 'getDate']() + n);
-		return result as any as ValidDate;
+		return result;
 	};
-	return resFn as ValidDateMethod1D1Arg<number, ValidDate>;
 }
 
 export const addMilliseconds = addFn('getMilliseconds', 'setMilliseconds');

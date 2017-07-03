@@ -84,6 +84,10 @@ describe('format', function () {
 		assert.equal(format(null, '[test]'), null);
 	});
 
+	it('"Invalid Date" handling', function () {
+		assert.equal(format(new Date(NaN), '[test]'), "Invalid Date");
+	});
+
 	it('7-th day of week', function () {
 		const date = newTsDate(2017, Month.Jun, 4);
 		assert.equal(format(date, 'E'), '7');
@@ -93,7 +97,10 @@ describe('format', function () {
 		const dateTimezoneMock = (offset: number) => ({
 			getTimezoneOffset() {
 				return offset;
-			}
+			},
+			valueOf() {
+				return 0;
+			},
 		} as ValidDate);
 
 		assert.equal(format(dateTimezoneMock(180), 'Z'), '-03:00');

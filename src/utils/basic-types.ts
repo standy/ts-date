@@ -1,33 +1,19 @@
-export interface ValidDate {
-	toString(): string;
-	toDateString(): string;
-	toTimeString(): string;
-	toLocaleString(): string;
-	toLocaleDateString(): string;
-	toLocaleTimeString(): string;
-	valueOf(): number;
-	getTime(): number;
-	getFullYear(): number;
-	getUTCFullYear(): number;
-	getMonth(): number;
-	getUTCMonth(): number;
-	getDate(): number;
-	getUTCDate(): number;
-	getDay(): number;
-	getUTCDay(): number;
-	getHours(): number;
-	getUTCHours(): number;
-	getMinutes(): number;
-	getUTCMinutes(): number;
-	getSeconds(): number;
-	getUTCSeconds(): number;
-	getMilliseconds(): number;
-	getUTCMilliseconds(): number;
-	getTimezoneOffset(): number;
-	toUTCString(): string;
-	toISOString(): string;
-	toJSON(key?: any): string;
-	__IsValidDate: true;
+export interface ValidDate extends Date {
+	setTime(time: never): never;
+	setMilliseconds(ms: never): never;
+	setUTCMilliseconds(ms: never): never;
+	setSeconds(sec: never, ms?: never): never;
+	setUTCSeconds(sec: never, ms?: never): never;
+	setMinutes(min: never, sec?: never, ms?: never): never;
+	setUTCMinutes(min: never, sec?: never, ms?: never): never;
+	setHours(hours: never, min?: never, sec?: never, ms?: never): never;
+	setUTCHours(hours: never, min?: never, sec?: never, ms?: never): never;
+	setDate(date: never): never;
+	setUTCDate(date: never): never;
+	setMonth(month: never, date?: never): never;
+	setUTCMonth(month: never, date?: never): never;
+	setFullYear(year: never, month?: never, date?: never): never;
+	setUTCFullYear(year: never, month?: never, date?: never): never;
 }
 
 export const enum MS {
@@ -38,6 +24,7 @@ export const enum MS {
 	Date = 864e5, // 1000 * 60 * 60 * 24;
 }
 
+export const INVALID_DATE = 'Invalid Date';
 
 export const enum Month {
 	Jan = 0,
@@ -57,22 +44,31 @@ export const enum Month {
 
 export interface ValidDateMethod1D<Result> {
 	(d: null): null;
-	(d: ValidDate): Result;
+	(d: ValidDate | Date): Result;
 	(d: ValidDate | null): Result | null;
 }
 
 export interface ValidDateMethod1D1Arg<Arg, Result> {
 	(d: null, arg: Arg): null;
-	(d: ValidDate, arg: Arg): Result;
+	(d: ValidDate | Date, arg: Arg): Result;
 	(d: ValidDate | null, arg: Arg): Result | null;
 }
 
 export interface ValidDateMethod2D<Result> {
 	(d1: null, d2: ValidDate | null): null;
 	(d1: ValidDate | null, d2: null): null;
-	(d1: ValidDate, d2: ValidDate): Result;
+	(d1: ValidDate | Date, d2: ValidDate | Date): Result;
 	(d1: ValidDate | null, d2: ValidDate | null): Result | null;
 }
+
+
+export interface AddUnitFn {
+	<T extends ValidDate | Date | null>(d: T, arg: number): T;
+}
+
+export interface DiffUnitFn extends ValidDateMethod2D<number> {
+}
+
 
 export interface ParseTemplate {
 	(dateStr: string, template: string): ValidDate | null;

@@ -14,9 +14,11 @@ describe('format-predefined', function () {
 			const date = newTsDate(2017, Month.Jun, 1, 12, 34, 56, 789);
 			assert.equal(formatLocalIso(date), '2017-06-01T12:34:56.789');
 		});
-		it('null for Invalid date', function () {
-			const date = newTsDate(NaN);
-			assert.equal(formatLocalIso(date), null);
+		it('null handling', function () {
+			assert.equal(formatLocalIso(null), null);
+		});
+		it('"Invalid Date" handling', function () {
+			assert.equal(formatLocalIso(new Date(NaN)), "Invalid Date");
 		});
 	});
 
@@ -25,9 +27,11 @@ describe('format-predefined', function () {
 			const date = newTsDate(2017, Month.Jun, 1, 12, 34, 56, 789);
 			assert.equal(formatDateTimeIso(date), '2017-06-01T12:34');
 		});
-		it('null for Invalid date', function () {
-			const date = newTsDate(NaN);
-			assert.equal(formatDateTimeIso(date), null);
+		it('null handling', function () {
+			assert.equal(formatDateTimeIso(null), null);
+		});
+		it('"Invalid Date" handling', function () {
+			assert.equal(formatDateTimeIso(new Date(NaN)), "Invalid Date");
 		});
 	});
 
@@ -36,9 +40,11 @@ describe('format-predefined', function () {
 			const date = newTsDate(2017, Month.Jun, 1, 12, 34, 56, 789);
 			assert.equal(formatDateIso(date), '2017-06-01');
 		});
-		it('null for Invalid date', function () {
-			const date = newTsDate(NaN);
-			assert.equal(formatDateIso(date), null);
+		it('null handling', function () {
+			assert.equal(formatDateIso(null), null);
+		});
+		it('"Invalid Date" handling', function () {
+			assert.equal(formatDateIso(new Date(NaN)), "Invalid Date");
 		});
 	});
 });

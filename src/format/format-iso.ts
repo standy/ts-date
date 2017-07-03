@@ -1,21 +1,24 @@
-import {ValidDate, ValidDateMethod1D} from '../utils/basic-types';
+import {INVALID_DATE, ValidDate, ValidDateMethod1D} from '../utils/basic-types';
 
+/**
+ * Makes function that return part of ISO 8610 formatted string
+ */
+function createFormatIso(len: number): ValidDateMethod1D<string> {
+	return (d: Date | null): /*string | null*/ any => {
+		if (!d) return null;
+		if (!isFinite(+d)) return INVALID_DATE;
+		const date = new Date(+d);
+		date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+		return date.toISOString().substring(0, len);
+	};
+}
 
-export const formatDateIso = function(d: ValidDate | null): string | null {
-	if (!d) return null;
-	return formatLocalIso(d).substring(0, 10);
-} as ValidDateMethod1D<string>;
+// YYYY-MM-DD
+export const formatDateIso = createFormatIso(10);
 
+// YYYY-MM-DDTHH:mm
+export const formatDateTimeIso = createFormatIso(16);
 
-export const formatDateTimeIso = function(d: ValidDate | null): string | null {
-	if (!d) return null;
-	return formatLocalIso(d).substring(0, 16);
-} as ValidDateMethod1D<string>;
+// YYYY-MM-DDTHH:mm:ss.SSS
+export const formatLocalIso = createFormatIso(23);
 
-
-export const formatLocalIso = function(d: ValidDate | null): string | null {
-	if (!d) return null;
-	const date = new Date(+d);
-	date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-	return date.toISOString().slice(0, -1);
-} as ValidDateMethod1D<string>;
