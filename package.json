@@ -2,8 +2,8 @@
   "name": "ts-date",
   "version": "1.5.0",
   "description": "",
-  "main": "es5/index.js",
-  "module": "index.js",
+  "main": "index.js",
+  "module": "esm/index.js",
   "typings": "index.d.ts",
   "scripts": {
     "release": "standard-version",

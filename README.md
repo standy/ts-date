@@ -91,11 +91,16 @@ const f = format(addMonth(d, 1), 'D MMMM YYYY'); // 1 September 2017
 
 
 ## ES6 modules and CommonJS
-:warning: By default library exports in [ES6 modules](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/export) syntax, 
-to use library in CommonJS enviroment, like Node.js, you probably want to use `cjs` version:
+To get full benefit from [tree shaking](https://webpack.js.org/guides/tree-shaking/) 
+you probably want to use library in [ES6 Modules](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/export) syntax
+
+This library have few entry points for different locales, and unfortunately [pkg.module](https://github.com/rollup/rollup/wiki/pkg.module) supports only single file.  
+But you can import as `ES6 Modules` from `esm` folder
 ```js
-const {parse, format, addMonth} = require('ts-date/cjs/locale/en');
+import {parse, format, addMonth} from 'ts-date/esm/locale/en';
 ```
+You may also use [resolve.alias](https://webpack.js.org/configuration/resolve/#resolve-alias) for Webpack, 
+or [rollup-plugin-alias](https://github.com/rollup/rollup-plugin-alias) for Rollup 
 
 
 ## Api
