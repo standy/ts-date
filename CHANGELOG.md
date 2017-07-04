@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0-alpha.0"></a>
+# [2.0.0-alpha.0](https://github.com/standy/ts-date/compare/v1.5.0...v2.0.0-alpha.0) (2017-07-04)
+
+
+### Bug Fixes
+
+* provide CommonJS version as default ([da1e3e7](https://github.com/standy/ts-date/commit/da1e3e7)), closes [#1](https://github.com/standy/ts-date/issues/1)
+
+
+### Features
+
+* make ValidDate compatible with Date ([76c1f48](https://github.com/standy/ts-date/commit/76c1f48)), closes [#2](https://github.com/standy/ts-date/issues/2)
+* new methods "diffPrecise[Unit]" ([15f1eca](https://github.com/standy/ts-date/commit/15f1eca))
+
+
+### BREAKING CHANGES
+
+* changed import paths to locales for cjs and es6 modules
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/standy/ts-date/compare/v1.4.3...v1.5.0) (2017-07-01)
 
