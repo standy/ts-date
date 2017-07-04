@@ -1,5 +1,5 @@
-import {AddUnitFn} from '../utils/basic-types';
-function addFn(keyGet: keyof Date, keySet: keyof Date): AddUnitFn {
+import {ValidDateMethod1ArgWithDateResult} from '../utils/basic-types';
+function addFn(keyGet: keyof Date, keySet: keyof Date): ValidDateMethod1ArgWithDateResult {
 	return (d: Date | null, n: number): /*ValidDate | Date | null*/ any => {
 		if (!d) return null;
 		if (!isFinite(n)) return d;

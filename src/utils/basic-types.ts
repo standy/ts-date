@@ -62,7 +62,10 @@ export interface ValidDateMethod2D<Result> {
 }
 
 
-export interface AddUnitFn {
+export interface ValidDateMethodWithDateResult {
+	<T extends ValidDate | Date | null>(d: T): T;
+}
+export interface ValidDateMethod1ArgWithDateResult {
 	<T extends ValidDate | Date | null>(d: T, arg: number): T;
 }
 
