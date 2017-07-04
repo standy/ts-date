@@ -1,7 +1,11 @@
 {
   "name": "ts-date",
   "version": "2.0.0-alpha.0",
-  "description": "",
+  "description": "Typescript Date library",
+  "author": {
+    "name": "Andrey Mostovoy",
+    "email": "mostovoyav@gmail.com"
+  },
   "main": "index.js",
   "module": "esm/index.js",
   "typings": "index.d.ts",
@@ -53,11 +57,20 @@
       "text"
     ]
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "typescript",
+    "date",
+    "time",
+    "valid date",
+    "parse",
+    "format"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/standy/ts-date.git"
+  },
+  "bugs": {
+    "url": "https://github.com/standy/ts-date/issues"
   }
 }
