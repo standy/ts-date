@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0-alpha.1"></a>
+# [2.0.0-alpha.1](https://github.com/standy/ts-date/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2017-07-05)
+
+
+### Bug Fixes
+
+* format methods should return null instead of magic strings ([e639ad9](https://github.com/standy/ts-date/commit/e639ad9))
+* rename newTsDate creation methods to newValidDate ([3837b76](https://github.com/standy/ts-date/commit/3837b76))
+* resetUnit should return type Date for Date ([4ed3e6e](https://github.com/standy/ts-date/commit/4ed3e6e)), closes [#2](https://github.com/standy/ts-date/issues/2)
+
+
+### BREAKING CHANGES
+
+* this methods available only with new names: newValidDate, newValidDateOrThrow
+
+
+
 <a name="2.0.0-alpha.0"></a>
 # [2.0.0-alpha.0](https://github.com/standy/ts-date/compare/v1.5.0...v2.0.0-alpha.0) (2017-07-04)
 
