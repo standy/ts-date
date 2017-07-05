@@ -1,7 +1,7 @@
 import {ValidDate} from '../utils/basic-types';
 import {leadZero} from '../utils/utils';
 import {diffCalendarDate} from '../diff/diff-calendar-unit';
-import {newTsDateOrThrow} from '../create/create-ts-date';
+import {newValidDateOrThrow} from '../create/create-ts-date';
 import {resetISOWeek, resetYear} from '../reset/reset-unit';
 
 export type Formatter = (date: ValidDate) => string | number;
@@ -38,7 +38,7 @@ const formatters: FormatterObj = {
 	// ISO week: 1, 2, ..., 53
 	'W': date => {
 		const isoYear = +formatters['GGGG'](date);
-		const start = resetISOWeek(newTsDateOrThrow(isoYear, 0, 4));
+		const start = resetISOWeek(newValidDateOrThrow(isoYear, 0, 4));
 		return Math.floor(diffCalendarDate(date, start) / 7) + 1;
 	},
 
@@ -57,9 +57,9 @@ const formatters: FormatterObj = {
 	// ISO week-numbering year: 1900, 1901, ..., 2099
 	'GGGG': date => {
 		const startYear = date.getFullYear();
-		const correction = date < resetISOWeek(newTsDateOrThrow(startYear, 0, 4))
+		const correction = date < resetISOWeek(newValidDateOrThrow(startYear, 0, 4))
 			? -1
-			: date < resetISOWeek(newTsDateOrThrow(startYear + 1, 0, 4))
+			: date < resetISOWeek(newValidDateOrThrow(startYear + 1, 0, 4))
 				? 0
 				: 1;
 		return leadZero(startYear + correction, 4);

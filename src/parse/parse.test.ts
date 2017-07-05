@@ -70,7 +70,7 @@ describe('parse', function () {
 		for (let i = 0; i < FORMATS.length; i++) {
 			const {template, dateStr, correctResult} = FORMATS[i];
 			const result = parse(dateStr, template);
-			assert.deepEqual(result, fromDate(correctResult), `parse "${dateStr}" for "${template}"`);
+			assert.deepEqual(result, correctResult, `parse "${dateStr}" for "${template}"`);
 		}
 	});
 });

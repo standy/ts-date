@@ -1,56 +1,50 @@
 import {ValidDate} from '../utils/basic-types';
 
-export function fromDate(date: Date|number|null|undefined): ValidDate | null {
-	if (date == null) {
-		return null;
-	}
+export function fromDate(date: Date | number): ValidDate | null {
 	const d = new Date(+date);
-	return toTsDateOrNull(d);
+	return asValidDateOrNull(d);
 }
 
-export function fromDateOrThrow(date: Date|number): ValidDate {
+export function fromDateOrThrow(date: Date | number): ValidDate {
 	const d = new Date(+date);
-	return toTsDateOrThrow(d, date);
+	return asValidDateOrThrow(d, date);
 }
 
-/** @deprecated - use fromDate */
-export const createTsDate = fromDate;
-
-export function toTsDateOrNull(date: Date): ValidDate | null {
+export function asValidDateOrNull(date: Date): ValidDate | null {
 	if (isFinite(+date)) {
 		return date as ValidDate
 	}
 	return null;
 }
-export function toTsDateOrThrow(date: Date, origin: any): ValidDate {
+export function asValidDateOrThrow(date: Date, origin: any): ValidDate {
 	if (isFinite(+date)) {
 		return date as ValidDate
 	}
 	throw new TypeError(`Cant parse date from "${origin}"`);
 }
 
-export interface TsDateConstructor {
+export interface NewValidDateFn {
    (): ValidDate;
    (value: number): ValidDate | null;
    (value: string): ValidDate | null;
    (year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): ValidDate | null;
 }
-export const newTsDate = function(...args: Array<number | string>) {
+export const newValidDate = function(...args: Array<number | string>) {
 	const result = new (Date as any)(...args);
-	return toTsDateOrNull(result);
-} as TsDateConstructor;
+	return asValidDateOrNull(result);
+} as NewValidDateFn;
 
-export interface TsValidDateConstructor {
+export interface NewValidDateOrThrowFn {
    (): ValidDate;
    (value: number): ValidDate;
    (value: string): ValidDate;
    (year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): ValidDate;
 }
 
-export const newTsDateOrThrow = function(...args: Array<number | string>) {
+export const newValidDateOrThrow = function(...args: Array<number | string>) {
 	const result = new (Date as any)(...args);
-	return toTsDateOrThrow(result, args);
-} as TsValidDateConstructor;
+	return asValidDateOrThrow(result, args);
+} as NewValidDateOrThrowFn;
 
 
 export function asDate(d: ValidDate): Date {

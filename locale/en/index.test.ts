@@ -1,6 +1,6 @@
 import {Month} from '../../src/utils/basic-types';
 import * as assert from 'power-assert';
-import {newTsDate} from '../../src/create/create-ts-date';
+import {newValidDate} from '../../src/create/create-ts-date';
 import {
 	format,
 	parse,
@@ -9,7 +9,7 @@ import {
 
 describe('ru locale', function () {
 	it('correct formatting', function () {
-		const date = newTsDate(2017, Month.Aug, 1, 12, 34, 56, 789);
+		const date = newValidDate(2017, Month.Aug, 1, 12, 34, 56, 789);
 		const FORMATS = [
 			[
 				'MMMM MMM dd ddd dddd A Do Wo Mo DDDo do Qo',
@@ -44,16 +44,16 @@ describe('ru locale', function () {
 		}
 	});
 	it('correct ordinal', function () {
-		const d1 = newTsDate(2017, Month.Aug, 12);
-		const d2 = newTsDate(2017, Month.Aug, 22);
-		const d3 = newTsDate(2017, Month.Aug, 23);
+		const d1 = newValidDate(2017, Month.Aug, 12);
+		const d2 = newValidDate(2017, Month.Aug, 22);
+		const d3 = newValidDate(2017, Month.Aug, 23);
 		assert.equal(format(d1, 'Do MMMM'), '12th August');
 		assert.equal(format(d2, 'Do MMMM'), '22nd August');
 		assert.equal(format(d3, 'Do MMMM'), '23rd August');
 	});
 	it('correct day part format', function () {
-		const d1 = newTsDate(2017, Month.Aug, 1, 0);
-		const d2 = newTsDate(2017, Month.Aug, 1, 18);
+		const d1 = newValidDate(2017, Month.Aug, 1, 0);
+		const d2 = newValidDate(2017, Month.Aug, 1, 18);
 		assert.equal(format(d1, 'h A'), '12 AM');
 		assert.equal(format(d2, 'h A'), '6 PM');
 		assert.equal(format(d1, 'h a'), '12 am');
@@ -66,12 +66,12 @@ describe('ru locale', function () {
 			{
 				template: 'D MMMM YY [Year]',
 				dateStr: '1 August 17 Year',
-				correctResult: newTsDate(2017, Month.Aug, 1),
+				correctResult: newValidDate(2017, Month.Aug, 1),
 			},
 			{
 				template: 'YYYY MMMM',
 				dateStr: '2017 AUGUST',
-				correctResult: newTsDate(2017, Month.Aug, 1),
+				correctResult: newValidDate(2017, Month.Aug, 1),
 			},
 			{
 				/* NOTE Wrong format*/
@@ -82,12 +82,12 @@ describe('ru locale', function () {
 			{
 				template: 'D MMM YY',
 				dateStr: '1 Aug 17',
-				correctResult: newTsDate(2017, Month.Aug, 1),
+				correctResult: newValidDate(2017, Month.Aug, 1),
 			},
 			{
 				template: 'MMMM YYYY',
 				dateStr: 'August 2017',
-				correctResult: newTsDate(2017, Month.Aug, 1),
+				correctResult: newValidDate(2017, Month.Aug, 1),
 			},
 		];
 

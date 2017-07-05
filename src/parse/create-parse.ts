@@ -1,6 +1,6 @@
 import {ValidDate, ParserObj} from '../utils/basic-types';
 import {tokensRx} from '../utils/tokens-rx';
-import {toTsDateOrNull} from '../create/create-ts-date';
+import {asValidDateOrNull} from '../create/create-ts-date';
 
 type Parser = (date: Date, value: string) => void;
 
@@ -37,6 +37,6 @@ export function createParse(parsers: ParserObj) {
 			const parserFn = parsersFn[index];
 			parserFn(date, value);
 		});
-		return toTsDateOrNull(date);
+		return asValidDateOrNull(date);
 	}
 }

@@ -125,10 +125,10 @@ Create from `Date` object
 fromDate(Date | number | null | undefined): ValidDate | null
 ```
 
-**newTsDate**  
+**newValidDate**  
 Create `ValidDate` in `new Date(...)` style
 ```js
-newTsDate(`same arguments as in Date constructor`): ValidDate | null
+newValidDate(`same arguments as in Date constructor`): ValidDate | null
 ```
 
 
@@ -183,7 +183,7 @@ resetSeconds(ValidDate): ValidDate
 ```
 Example: 
 ```js
-resetYear(newTsDate(2017, 5, 30, 12, 30)) // == new Date(2017, 0, 1)
+resetYear(newValidDate(2017, 5, 30, 12, 30)) // == new Date(2017, 0, 1)
 ```
 
 ### Diff
@@ -213,7 +213,7 @@ diffCalendarYear(ValidDate, ValidDate): number
 Example:
 ```js
 function isToday(d: ValidDate) {
-  return diffCalendarDate(d, newTsDate()) === 0;
+  return diffCalendarDate(d, newValidDate()) === 0;
 }
 ```
 

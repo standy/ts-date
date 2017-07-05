@@ -1,6 +1,6 @@
 import {Month, ValidDate} from '../utils/basic-types';
 import * as assert from 'power-assert';
-import {newTsDate, newTsDateOrThrow} from '../create/create-ts-date';
+import {newValidDate, newValidDateOrThrow} from '../create/create-ts-date';
 import {
 	format,
 } from './format'
@@ -8,7 +8,7 @@ import {
 
 describe('format', function () {
 	it('correct formatting', function () {
-		const date = newTsDate(2017, Month.Jun, 1, 12, 34, 56, 789);
+		const date = newValidDate(2017, Month.Jun, 1, 12, 34, 56, 789);
 		if (!date) throw new Error('Expected to be date');
 		const FORMATS = [
 			[
@@ -89,7 +89,7 @@ describe('format', function () {
 	});
 
 	it('7-th day of week', function () {
-		const date = newTsDate(2017, Month.Jun, 4);
+		const date = newValidDate(2017, Month.Jun, 4);
 		assert.equal(format(date, 'E'), '7');
 	});
 
@@ -113,11 +113,11 @@ describe('format', function () {
 
 	it('correct format iso weeks', function() {
 		const template = 'GGGG-[W]WW-E';
-		const d1 = newTsDateOrThrow(2017, Month.Jan, 2); /* Monday */
+		const d1 = newValidDateOrThrow(2017, Month.Jan, 2); /* Monday */
 		assert.equal(format(d1, template), '2017-W01-1');
-		const d2 = newTsDateOrThrow(2017, Month.Jan, 1); /* Sunday */
+		const d2 = newValidDateOrThrow(2017, Month.Jan, 1); /* Sunday */
 		assert.equal(format(d2, template), '2016-W52-7');
-		const d3 = newTsDateOrThrow(2012, Month.Dec, 31); /* Monday */
+		const d3 = newValidDateOrThrow(2012, Month.Dec, 31); /* Monday */
 		assert.equal(format(d3, template), '2013-W01-1');
 	});
 });
