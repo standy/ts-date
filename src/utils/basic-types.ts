@@ -24,8 +24,6 @@ export const enum MS {
 	Date = 864e5, // 1000 * 60 * 60 * 24;
 }
 
-export const INVALID_DATE = 'Invalid Date';
-
 export const enum Month {
 	Jan = 0,
 	Feb,
@@ -44,14 +42,14 @@ export const enum Month {
 
 export interface ValidDateMethod1D<Result> {
 	(d: null): null;
-	(d: ValidDate | Date): Result;
-	(d: ValidDate | null): Result | null;
+	(d: ValidDate): Result;
+	(d: ValidDate | Date | null): Result | null;
 }
 
 export interface ValidDateMethod1D1Arg<Arg, Result> {
 	(d: null, arg: Arg): null;
-	(d: ValidDate | Date, arg: Arg): Result;
-	(d: ValidDate | null, arg: Arg): Result | null;
+	(d: ValidDate, arg: Arg): Result;
+	(d: ValidDate | Date | null, arg: Arg): Result | null;
 }
 
 export interface ValidDateMethod2D<Result> {

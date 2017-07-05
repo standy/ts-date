@@ -85,7 +85,7 @@ describe('format', function () {
 	});
 
 	it('"Invalid Date" handling', function () {
-		assert.equal(format(new Date(NaN), '[test]'), "Invalid Date");
+		assert.equal(format(new Date(NaN), '[test]'), null);
 	});
 
 	it('7-th day of week', function () {

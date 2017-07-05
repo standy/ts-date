@@ -18,7 +18,7 @@ describe('format-predefined', function () {
 			assert.equal(formatLocalIso(null), null);
 		});
 		it('"Invalid Date" handling', function () {
-			assert.equal(formatLocalIso(new Date(NaN)), "Invalid Date");
+			assert.equal(formatLocalIso(new Date(NaN)), null);
 		});
 	});
 
@@ -31,7 +31,7 @@ describe('format-predefined', function () {
 			assert.equal(formatDateTimeIso(null), null);
 		});
 		it('"Invalid Date" handling', function () {
-			assert.equal(formatDateTimeIso(new Date(NaN)), "Invalid Date");
+			assert.equal(formatDateTimeIso(new Date(NaN)), null);
 		});
 	});
 
@@ -44,7 +44,7 @@ describe('format-predefined', function () {
 			assert.equal(formatDateIso(null), null);
 		});
 		it('"Invalid Date" handling', function () {
-			assert.equal(formatDateIso(new Date(NaN)), "Invalid Date");
+			assert.equal(formatDateIso(new Date(NaN)), null);
 		});
 	});
 });

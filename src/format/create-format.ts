@@ -1,4 +1,4 @@
-import {INVALID_DATE, ValidDate, ValidDateMethod1D1Arg} from '../utils/basic-types';
+import {ValidDate, ValidDateMethod1D1Arg} from '../utils/basic-types';
 import {tokensRx} from '../utils/tokens-rx';
 import {FormatterObj} from './default-formatters';
 
@@ -6,8 +6,7 @@ export function createFormat(formatters: FormatterObj): ValidDateMethod1D1Arg<st
 	const RX_TOKENS = tokensRx(Object.keys(formatters));
 
 	return (d: ValidDate | Date | null, template: string): any => {
-		if (!d) return null;
-		if (!isFinite(+d)) return INVALID_DATE;
+		if (!d || !isFinite(+d)) return null;
 		const tokens = template.match(RX_TOKENS) as string[];
 		// this regexp cant fail because of "|."
 
