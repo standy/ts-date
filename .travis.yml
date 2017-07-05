@@ -15,4 +15,4 @@ deploy:
     tags: true
   provider: script
   skip_cleanup: true
-  script: scripts/deploy.sh $TRAVIS_TAG
+  script: sh scripts/deploy.sh $TRAVIS_TAG
