@@ -44,7 +44,6 @@
       "locale/**/*.ts"
     ],
     "exclude": [
-      "src/utils/basic-types.ts",
       "**/*.d.ts",
       "**/*.test.ts"
     ],
