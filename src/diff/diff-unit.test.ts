@@ -186,4 +186,23 @@ describe('diffUnit', function () {
 		assert.equal(diffMonth(d1, null), null);
 		assert.equal(diffYear(d1, null), null);
 	});
+
+	it('correct Invalid Date handling', function () {
+		const d = newValidDate();
+		const invalidDate = new Date(NaN);
+		assert.equal(diffMilliseconds(invalidDate, d), null);
+		assert.equal(diffSeconds(invalidDate, d), null);
+		assert.equal(diffMinutes(invalidDate, d), null);
+		assert.equal(diffHours(invalidDate, d), null);
+		assert.equal(diffDate(invalidDate, d), null);
+		assert.equal(diffMonth(invalidDate, d), null);
+		assert.equal(diffYear(invalidDate, d), null);
+		assert.equal(diffMilliseconds(d, invalidDate), null);
+		assert.equal(diffSeconds(d, invalidDate), null);
+		assert.equal(diffMinutes(d, invalidDate), null);
+		assert.equal(diffHours(d, invalidDate), null);
+		assert.equal(diffDate(d, invalidDate), null);
+		assert.equal(diffMonth(d, invalidDate), null);
+		assert.equal(diffYear(d, invalidDate), null);
+	});
 });

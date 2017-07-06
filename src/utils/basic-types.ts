@@ -53,10 +53,10 @@ export interface ValidDateMethod1D1Arg<Arg, Result> {
 }
 
 export interface ValidDateMethod2D<Result> {
-	(d1: null, d2: ValidDate | null): null;
-	(d1: ValidDate | null, d2: null): null;
-	(d1: ValidDate | Date, d2: ValidDate | Date): Result;
-	(d1: ValidDate | null, d2: ValidDate | null): Result | null;
+	(d1: null, d2: Date | null): null;
+	(d1: Date | null, d2: null): null;
+	(d1: ValidDate, d2: ValidDate): Result;
+	(d1: Date | null, d2: Date | null): Result | null;
 }
 
 

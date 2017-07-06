@@ -1,4 +1,5 @@
 import {MS, DiffUnitFn} from '../utils/basic-types';
+import {isValidDate} from '../create/create-ts-date';
 
 
 function absFloor(num: number) {
@@ -12,7 +13,7 @@ function absFloor(num: number) {
 
 function diffByUnits(unitsInMs: number): DiffUnitFn {
 	return (d1: Date | null, d2: Date | null): any => {
-		if (!d1 || !d2) return null;
+		if (!isValidDate(d1) || !isValidDate(d2)) return null;
 		return absFloor((+d1 - +d2) / unitsInMs)
 	};
 }
@@ -35,7 +36,7 @@ function compareArrays(list1: number[], list2: number[], fromPosition: number) {
 }
 
 export const diffMonth: DiffUnitFn = (d1: Date | null, d2: Date | null): any => {
-	if (!d1 || !d2) return null;
+	if (!isValidDate(d1) || !isValidDate(d2)) return null;
 	const diff = (d1.getFullYear() - d2.getFullYear()) * 12 + d1.getMonth() - d2.getMonth();
 	if (diff === 0) return 0;
 	const diffTail = compareArrays(dateToArray(d1), dateToArray(d2), 2);
@@ -44,7 +45,7 @@ export const diffMonth: DiffUnitFn = (d1: Date | null, d2: Date | null): any => 
 };
 
 export const diffYear: DiffUnitFn = (d1: Date | null, d2: Date | null): any => {
-	if (!d1 || !d2) return null;
+	if (!isValidDate(d1) || !isValidDate(d2)) return null;
 	const diff = d1.getFullYear() - d2.getFullYear();
 	if (diff === 0) return 0;
 	const diffTail = compareArrays(dateToArray(d1), dateToArray(d2), 1);

@@ -1,10 +1,11 @@
 import {MS, DiffUnitFn} from '../utils/basic-types';
 import {diffCalendarMonth, diffCalendarYear} from "./diff-calendar-unit";
+import {isValidDate} from '../create/create-ts-date';
 
 
 function diffPreciseByUnits(unitsInMs: number): DiffUnitFn {
 	return ((d1: Date | null, d2: Date | null): any => {
-		if (!d1 || !d2) return null;
+		if (!isValidDate(d1) || !isValidDate(d2)) return null;
 		return (+d1 - +d2) / unitsInMs;
 	});
 }
@@ -15,7 +16,7 @@ export const diffPreciseDate = diffPreciseByUnits(MS.Date);
 
 
 export const diffPreciseMonth: DiffUnitFn = (d1: Date | null, d2: Date | null): any => {
-	if (!d1 || !d2) return null;
+	if (!isValidDate(d1) || !isValidDate(d2)) return null;
 
 	const startOfMonth1 = +new Date(d1.getFullYear(), d1.getMonth());
 	const startOfNextMonth1 = +new Date(d1.getFullYear(), d1.getMonth() + 1);
@@ -38,7 +39,7 @@ export const diffPreciseMonth: DiffUnitFn = (d1: Date | null, d2: Date | null): 
 
 
 export const diffPreciseYear: DiffUnitFn = (d1: Date | null, d2: Date | null): any => {
-	if (!d1 || !d2) return null;
+	if (!isValidDate(d1) || !isValidDate(d2)) return null;
 
 	const startOfYear1 = +new Date(d1.getFullYear(), 0);
 	const startOfNextYear1 = +new Date(d1.getFullYear() + 1, 0);
