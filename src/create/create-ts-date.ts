@@ -11,15 +11,11 @@ export function fromDateOrThrow(date: Date | number): ValidDate {
 }
 
 export function asValidDateOrNull(date: Date): ValidDate | null {
-	if (isFinite(+date)) {
-		return date as ValidDate
-	}
+	if (isValidDate(date)) return date;
 	return null;
 }
 export function asValidDateOrThrow(date: Date, origin: any): ValidDate {
-	if (isFinite(+date)) {
-		return date as ValidDate
-	}
+	if (isValidDate(date)) return date;
 	throw new TypeError(`Cant parse date from "${origin}"`);
 }
 
