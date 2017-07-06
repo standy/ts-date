@@ -3,7 +3,7 @@ import {createParse} from '../../src/parse/create-parse';
 import defaultFormatters from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
 import {FormatterObj} from '../../src/format/default-formatters';
-import {ParserObj, ValidDateMethod1D1Arg, ParseTemplate} from '../../src/utils/basic-types';
+import {ParserObj, FormatByTemplateFn, ParseByTemplateFn} from '../../src/utils/basic-types';
 export * from '../../src/default-exports';
 
 // http://new.gramota.ru/spravka/buro/search-answer?s=242637
@@ -84,6 +84,6 @@ const parsers: ParserObj = {
 	}],
 };
 
-export const format: ValidDateMethod1D1Arg<string, string> = createFormat(Object.assign({}, defaultFormatters, formatters));
-export const parse: ParseTemplate = createParse(Object.assign({}, defaultParsers, parsers));
+export const format: FormatByTemplateFn = createFormat(Object.assign({}, defaultFormatters, formatters));
+export const parse: ParseByTemplateFn = createParse(Object.assign({}, defaultParsers, parsers));
 

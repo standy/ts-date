@@ -1,9 +1,9 @@
-import {ValidDate, ValidDateMethod1D1Arg} from '../utils/basic-types';
+import {ValidDate, FormatByTemplateFn} from '../utils/basic-types';
 import {tokensRx} from '../utils/tokens-rx';
 import {FormatterObj} from './default-formatters';
 import {isValidDate} from '../default-exports';
 
-export function createFormat(formatters: FormatterObj): ValidDateMethod1D1Arg<string, string> {
+export function createFormat(formatters: FormatterObj): FormatByTemplateFn {
 	const RX_TOKENS = tokensRx(Object.keys(formatters));
 
 	return (d: ValidDate | Date | null, template: string): any => {

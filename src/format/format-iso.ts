@@ -1,10 +1,10 @@
-import {ValidDateMethod1D} from '../utils/basic-types';
+import {FormatFn} from '../utils/basic-types';
 import {isValidDate} from '../create/create-ts-date';
 
 /**
  * Makes function that return part of ISO 8610 formatted string
  */
-function createFormatIso(len: number): ValidDateMethod1D<string> {
+function createFormatIso(len: number): FormatFn {
 	return (d: Date | null): /*string | null*/ any => {
 		if (!isValidDate(d)) return null;
 		const date = new Date(+d);
