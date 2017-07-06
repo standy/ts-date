@@ -50,3 +50,8 @@ export const newValidDateOrThrow = function(...args: Array<number | string>) {
 export function asDate(d: ValidDate): Date {
 	return new Date(+d);
 }
+
+
+export function isValidDate(d: Date | null): d is ValidDate {
+	return d != null && isFinite(+d);
+}
