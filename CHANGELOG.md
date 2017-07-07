@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/standy/ts-date/compare/v2.0.0-alpha.2...v2.0.0) (2017-07-07)
+
+
+### Bug Fixes
+
+* diff method should return null if one of arguments is Invalid Date ([2b63fe6](https://github.com/standy/ts-date/commit/2b63fe6))
+
+
+### Features
+
+* new method: isValidDate ([76cb5b2](https://github.com/standy/ts-date/commit/76cb5b2))
+
+
+
 <a name="2.0.0-alpha.2"></a>
 # [2.0.0-alpha.2](https://github.com/standy/ts-date/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2017-07-05)
 
