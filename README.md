@@ -5,7 +5,6 @@
 [![NPM Version](https://img.shields.io/npm/v/ts-date.svg)](https://www.npmjs.com/package/ts-date)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-:warning: Not ready yet :warning:  
  
 **ts-date** is a `Date` library which shine in Typescript enviroment  
 
@@ -38,9 +37,9 @@ if (d) {
     d.getDate() // 21
 }
 ```
-To make `ValidDate` immutable, all methods for `Date` mutation are banned:
+To make `ValidDate` immutable, all methods for `Date` mutation are banned in type:
 ```js
-d.setDate() // Property 'setDate' does not exist on type 'ValidDate'.
+d.setDate(0) // Typescript will warn here
 ```
  
 
@@ -94,13 +93,39 @@ const f = format(addMonth(d, 1), 'D MMMM YYYY'); // 1 September 2017
 To get full benefit from [tree shaking](https://webpack.js.org/guides/tree-shaking/) 
 you probably want to use library in [ES6 Modules](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/export) syntax
 
-This library have few entry points for different locales, and unfortunately [pkg.module](https://github.com/rollup/rollup/wiki/pkg.module) supports only single file.  
+This library have few entry points for different locales, and unfortunately [pkg.module](https://github.com/rollup/rollup/wiki/pkg.module) supports only single one.  
 But you can import as `ES6 Modules` from `esm` folder
 ```js
 import {parse, format, addMonth} from 'ts-date/esm/locale/en';
 ```
 You may also use [resolve.alias](https://webpack.js.org/configuration/resolve/#resolve-alias) for Webpack, 
 or [rollup-plugin-alias](https://github.com/rollup/rollup-plugin-alias) for Rollup 
+
+
+## Type system
+`ValidDate` type equals `Date` without `Date("Invalid Date")`. 
+Abusing that knowledge you may be sure about correct result when you pass `ValidDate` to any method
+ 
+Every method who accepts `ValidDate`, will also accept `Date` and `null`  
+
+Methods which returns primitives (like `format` of `diffYears`) will always return `null` for any invalid value, but not for `ValidDate`  
+In example below result is absolutely same, but type is different 
+```js
+const validDate = newValidDate(); // Type: ValidDate
+const date = validDate as Date; // Type: Date
+
+formatDateIso(validDate); // Type: string
+formatDateIso(date); // Type: string | null
+```
+
+
+Method for date manipulation (like `addMinutes` or `resetSeconds`) returns result of same type as input
+```js
+addMinutes(validDate, 5); // Type: ValidDate
+addMinutes(date, 5); // Type: Date
+addMinutes(null, 5); // Type: null
+```
+
 
 
 ## Api
@@ -122,13 +147,15 @@ parseIso(dateIso: string): ValidDate | null
 **fromDate**  
 Create from `Date` object
 ```js
-fromDate(Date | number | null | undefined): ValidDate | null
+fromDate(date: Date | number): ValidDate | null
 ```
 
 **newValidDate**  
 Create `ValidDate` in `new Date(...)` style
 ```js
-newValidDate(`same arguments as in Date constructor`): ValidDate | null
+newValidDate(): ValidDate
+newValidDate(timestamp: number): ValidDate | null
+newValidDate(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): ValidDate | null
 ```
 
 
@@ -188,7 +215,7 @@ resetYear(newValidDate(2017, 5, 30, 12, 30)) // == new Date(2017, 0, 1)
 
 ### Diff
 Subtract second date from first  
-In case one of arguments is `null`, result also is `null`
+In case one of arguments is `null` or `Date("Invalid Date")`, result is `null`
 ```js
 diffMilliseconds(ValidDate, ValidDate): number
 diffSeconds(ValidDate, ValidDate): number
@@ -217,8 +244,8 @@ function isToday(d: ValidDate) {
 }
 ```
 
-### Turn back to Date
-Method converts `ValidDate` to `Date` 
+### Checking for ValidDate
+Type guard for `ValidDate`, return `true` if date is valid 
 ```js
-asDate(ValidDate): Date
+isValidDate(Date): boolean
 ```
