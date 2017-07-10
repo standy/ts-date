@@ -44,7 +44,7 @@ export function createParse(parsers: ParserObj): ParseByTemplateFn {
 export function parseOrThrowWrapper(fn: ParseByTemplateFn): ParseByTemplateOrThrowFn {
 	return function parseOrThrow(dateStr: string, template: string): ValidDate {
 		const result = fn(dateStr, template);
-		if (!result) throw new Error(`Cant parse date: "${dateStr}"`);
+		if (result === null) throw new Error(`Failed to parse date "${dateStr}" by template "${template}"`);
 		return result;
 	}
 }
