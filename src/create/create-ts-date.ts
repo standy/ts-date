@@ -1,12 +1,12 @@
 import {ValidDate} from '../utils/basic-types';
 
 export function fromDate(date: Date | number | undefined): ValidDate | null {
-	const d = new Date(+(date as number));
+	const d = new Date(+(date as Date));
 	return asValidDateOrNull(d);
 }
 
-export function fromDateOrThrow(date: Date | number): ValidDate {
-	const d = new Date(+date);
+export function fromDateOrThrow(date: Date | number | undefined): ValidDate {
+	const d = new Date(+(date as Date));
 	return asValidDateOrThrow(d, date);
 }
 
