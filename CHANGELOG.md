@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/standy/ts-date/compare/v2.0.0...v2.0.1) (2017-07-10)
+
+
+### Bug Fixes
+
+* added method: parseOrThrow ([4ce1b00](https://github.com/standy/ts-date/commit/4ce1b00))
+* fromDate should accept undefined ([f4e0d04](https://github.com/standy/ts-date/commit/f4e0d04))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/standy/ts-date/compare/v2.0.0-alpha.2...v2.0.0) (2017-07-07)
 
