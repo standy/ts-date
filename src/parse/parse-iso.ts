@@ -58,3 +58,9 @@ export function parseIso(dateStr: string): ValidDate | null {
 	maybeResult.setHours(H, m - tzOffset, s, ms);
 	return maybeResult as ValidDate
 }
+
+export function parseIsoOrThrow(dateStr: string): ValidDate {
+	const result = parseIso(dateStr);
+	if (result === null) throw new Error(`Failed to parse as ISO 8601 string: "${dateStr}"`);
+	return result;
+}

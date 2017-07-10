@@ -2,7 +2,8 @@ import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
 import {newValidDate} from '../create/create-ts-date';
 import {
-	parseIso
+	parseIso,
+	parseIsoOrThrow,
 } from './parse-iso'
 
 
@@ -99,5 +100,10 @@ describe('parseIso', function () {
 	it('correct parse Zulu timezone', function() {
 		const d = parseIso('2017-06-01T12:34:56.789Z');
 		assert.equal(d && d.toISOString(), '2017-06-01T12:34:56.789Z');
+	});
+
+	it('correct throw if not parsed', function () {
+		assert.throws(() => parseIsoOrThrow('2017-02-30'));
+		assert.deepEqual(parseIsoOrThrow('2017-12-21'), new Date(2017, Month.Dec, 21));
 	});
 });
