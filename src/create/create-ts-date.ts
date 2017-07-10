@@ -1,7 +1,7 @@
 import {ValidDate} from '../utils/basic-types';
 
-export function fromDate(date: Date | number): ValidDate | null {
-	const d = new Date(+date);
+export function fromDate(date: Date | number | undefined): ValidDate | null {
+	const d = new Date(+(date as number));
 	return asValidDateOrNull(d);
 }
 
