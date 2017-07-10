@@ -1,4 +1,4 @@
-import {ValidDate, ParserObj} from '../utils/basic-types';
+import {ValidDate, ParserObj, ParseByTemplateFn, ParseByTemplateOrThrowFn} from '../utils/basic-types';
 import {tokensRx} from '../utils/tokens-rx';
 import {asValidDateOrNull} from '../create/create-ts-date';
 
@@ -8,7 +8,7 @@ function escapeRegExp(text: string) {
 	return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
 
-export function createParse(parsers: ParserObj) {
+export function createParse(parsers: ParserObj): ParseByTemplateFn {
 	const RX_TOKENS = tokensRx(Object.keys(parsers));
 
 	return function parse(dateStr: string, template: string): ValidDate | null {
@@ -38,5 +38,13 @@ export function createParse(parsers: ParserObj) {
 			parserFn(date, value);
 		});
 		return asValidDateOrNull(date);
+	}
+}
+
+export function parseOrThrowWrapper(fn: ParseByTemplateFn): ParseByTemplateOrThrowFn {
+	return function parseOrThrow(dateStr: string, template: string): ValidDate {
+		const result = fn(dateStr, template);
+		if (!result) throw new Error(`Cant parse date: "${dateStr}"`);
+		return result;
 	}
 }

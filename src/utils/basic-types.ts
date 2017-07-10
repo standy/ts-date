@@ -79,6 +79,10 @@ export interface ParseByTemplateFn {
 	(dateStr: string, template: string): ValidDate | null;
 }
 
+export interface ParseByTemplateOrThrowFn {
+	(dateStr: string, template: string): ValidDate | null;
+}
+
 
 export type Parser = (date: Date, value: string) => void;
 export type ParserData = [string, Parser];

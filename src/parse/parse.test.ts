@@ -1,8 +1,8 @@
 import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
-import {fromDate} from '../create/create-ts-date';
 import {
-	parse
+	parse,
+	parseOrThrow
 } from './parse'
 
 const MAX_DATE = 8640000000000000;
@@ -72,5 +72,10 @@ describe('parse', function () {
 			const result = parse(dateStr, template);
 			assert.deepEqual(result, correctResult, `parse "${dateStr}" for "${template}"`);
 		}
+	});
+
+	it('correct throw if not parsed', function () {
+		assert.throws(() => parseOrThrow('21.12.2017', 'YYYY-MM-DD'));
+		assert.deepEqual(parseOrThrow('2017-12-21', 'YYYY-MM-DD'), new Date(2017, Month.Dec, 21));
 	});
 });
