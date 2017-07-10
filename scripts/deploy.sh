@@ -9,4 +9,4 @@ else
     npm publish ./npm --tag next;
 fi
 
-npm run github-release;
+npm run github-release || true;
