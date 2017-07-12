@@ -3,7 +3,7 @@ import {createParse, parseOrThrowWrapper} from '../../src/parse/create-parse';
 import defaultFormatters from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
 import {FormatterObj} from '../../src/format/default-formatters';
-import {ParserObj, FormatByTemplateFn, ParseByTemplateFn, ParseByTemplateOrThrowFn} from '../../src/utils/basic-types';
+import {ParserObj, FormatByTemplateFn, ParseByTemplateFn, ParseByTemplateOrThrowFn, ParserData} from '../../src/utils/basic-types';
 export * from '../../src/default-exports';
 
 // http://new.gramota.ru/spravka/buro/search-answer?s=242637
@@ -82,7 +82,22 @@ const parsers: ParserObj = {
 		if (index < 0) index = monthsGenitive.indexOf(value);
 		date.setMonth(index);
 	}],
+
+	// Generate ordinal version of parsers by cutting the suffix
+	'Do': ordinalParser('D', '-е'),
+	'Wo': ordinalParser('W', '-й'),
+	'Mo': ordinalParser('M', '-й'),
+	'DDDo': ordinalParser('DDD', '-й'),
+	'do': ordinalParser('d', '-й'),
+	'Qo': ordinalParser('Q', '-й'),
+
 };
+
+function ordinalParser(key: string, suffix: string): ParserData {
+	return ['\\d+' + suffix, (date, value) => {
+		defaultParsers[key][1](date, value.slice(0, -suffix.length));
+	}];
+}
 
 export const format: FormatByTemplateFn = createFormat(Object.assign({}, defaultFormatters, formatters));
 export const parse: ParseByTemplateFn = createParse(Object.assign({}, defaultParsers, parsers));

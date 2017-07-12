@@ -57,8 +57,8 @@ describe('ru locale', function () {
 	it('correct parsing', function () {
 		const FORMATS = [
 			{
-				template: 'D MMMM YY [года]',
-				dateStr: '1 августа 17 года',
+				template: 'Do MMMM YY [года]',
+				dateStr: '1-е августа 17 года',
 				correctResult: newValidDate(2017, Month.Aug, 1),
 			},
 			{

@@ -80,8 +80,8 @@ describe('ru locale', function () {
 				correctResult: null,
 			},
 			{
-				template: 'D MMM YY',
-				dateStr: '1 Aug 17',
+				template: 'Do MMM YY',
+				dateStr: '1st Aug 17',
 				correctResult: newValidDate(2017, Month.Aug, 1),
 			},
 			{

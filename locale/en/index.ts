@@ -86,6 +86,11 @@ const parsers: ParserObj = {
 	}],
 };
 
+ordinalFormatters.forEach(formatterToken => {
+	parsers[formatterToken + 'o'] = ['\\d+(?:st|nd|rd)', (date, value) => {
+		defaultParsers[formatterToken][1](date, value.slice(0, -2));
+	}];
+});
 
 export const format: FormatByTemplateFn = createFormat(Object.assign({}, defaultFormatters, formatters));
 export const parse: ParseByTemplateFn = createParse(Object.assign({}, defaultParsers, parsers));

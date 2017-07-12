@@ -20,14 +20,14 @@ All this is possible thanks to `ValidDate` type (not a class) – the immutable 
 ```js
 import { parseIso, format } from 'ts-date/locale/en';
 const d = parseIso('2021-12-21'); // ValidDate | null
-format(d, 'D MMMM YYYY'); // Type is 'string | null'
+format(d, 'Do MMMM YYYY'); // Type is 'string | null'
 if (d) {
     d; // ValidDate
-    format(d, 'D MMMM YYYY'); // Type is 'string'
+    format(d, 'Do MMMM YYYY'); // Type is 'string'
     // no "Invalid Date" option here
 } else {
     d; // null
-    format(null, 'D MMMM YYYY'); // Type is 'null'
+    format(null, 'Do MMMM YYYY'); // Type is 'null'
 }
 ```
 Since `ValidDate` is `Date`, you can use some `Date` methods:  
@@ -81,8 +81,8 @@ For now there is only 2 locales: `en`, `ru`
 
 ```js
 import { parse, format, addMonth } from 'ts-date/locale/en';
-const d = parse('1 August 2017', 'D MMMM YYYY');
-const f = format(addMonth(d, 1), 'D MMMM YYYY'); // 1 September 2017
+const d = parse('1st August 2017', 'Do MMMM YYYY');
+const f = format(addMonth(d, 1), 'Do MMMM YYYY'); // 1st September 2017
 ```
 
 :warning: Directly `ts-date` exports without any locale 
