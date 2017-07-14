@@ -5,7 +5,6 @@ import {
 	newValidDateOrThrow,
 	fromDate,
 	fromDateOrThrow,
-	asDate,
 } from './create-ts-date'
 
 
@@ -24,10 +23,8 @@ describe('create', function () {
 	});
 
 	it('correct turn ValidDate to Date ', function () {
-		const d = newValidDateOrThrow(2017, Month.Jul, 1);
-		const date = asDate(d);
+		const date = newValidDateOrThrow(2017, Month.Jul, 1) as Date;
 		date.setDate(2);
 		assert.deepEqual(date, new Date(2017, Month.Jul, 2));
-		assert.deepEqual(d, new Date(2017, Month.Jul, 1));
 	});
 });

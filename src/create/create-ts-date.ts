@@ -41,11 +41,6 @@ export const newValidDateOrThrow = function(...args: Array<number | string>) {
 } as NewValidDateOrThrowFn;
 
 
-export function asDate(d: ValidDate): Date {
-	return new Date(+d);
-}
-
-
 export function isValidDate(d: Date | null): d is ValidDate {
 	return d !== null && d instanceof Date && isFinite(d.getTime());
 }
