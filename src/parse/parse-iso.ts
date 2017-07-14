@@ -1,6 +1,3 @@
-import {ValidDate} from '../utils/basic-types';
-
-
 function toNumber(value: string | undefined, defaultValue: number) {
 	return typeof value === 'undefined' ? defaultValue : +value;
 }

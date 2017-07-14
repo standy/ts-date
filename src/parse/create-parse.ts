@@ -1,4 +1,4 @@
-import {ValidDate, ParserObj, ParseByTemplateFn, ParseByTemplateOrThrowFn} from '../utils/basic-types';
+import {ParserObj, ParseByTemplateFn, ParseByTemplateOrThrowFn} from '../utils/basic-types';
 import {tokensRx} from '../utils/tokens-rx';
 import {asValidDateOrNull} from '../create/create-ts-date';
 

@@ -1,4 +1,4 @@
-import {Month, ValidDate} from '../utils/basic-types';
+import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
 import {newValidDate, newValidDateOrThrow} from '../create/create-ts-date';
 import {

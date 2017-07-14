@@ -1,4 +1,4 @@
-import {ValidDate, FormatByTemplateFn} from '../utils/basic-types';
+import {FormatByTemplateFn} from '../utils/basic-types';
 import {tokensRx} from '../utils/tokens-rx';
 import {FormatterObj} from './default-formatters';
 import {isValidDate} from '../default-exports';

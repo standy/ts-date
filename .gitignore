@@ -5,5 +5,3 @@ coverage
 npm
 src/**/*.js
 locale/**/*.js
-src/**/*.d.ts
-locale/**/*.d.ts

@@ -1,4 +1,3 @@
-import {ValidDate} from '../utils/basic-types';
 import {leadZero} from '../utils/utils';
 import {diffCalendarDate} from '../diff/diff-calendar-unit';
 import {newValidDateOrThrow} from '../create/create-ts-date';
