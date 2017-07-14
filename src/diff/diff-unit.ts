@@ -14,7 +14,7 @@ function absFloor(num: number) {
 function diffByUnits(unitsInMs: number): DiffUnitFn {
 	return (d1: Date | null, d2: Date | null): any => {
 		if (!isValidDate(d1) || !isValidDate(d2)) return null;
-		return absFloor((+d1 - +d2) / unitsInMs)
+		return absFloor((d1.getTime() - d2.getTime()) / unitsInMs)
 	};
 }
 export const diffMilliseconds = diffByUnits(MS.Milliseconds);

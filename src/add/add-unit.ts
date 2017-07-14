@@ -1,9 +1,9 @@
 import {AddUnitFn} from '../utils/basic-types';
 function addFn(keyGet: keyof Date, keySet: keyof Date): AddUnitFn {
 	return (d: Date | null, n: number): /*ValidDate | Date | null*/ any => {
-		if (!d) return null;
+		if (d === null) return null;
 		if (!isFinite(n)) return d;
-		const result = new Date(+d);
+		const result = new Date(d.getTime());
 		result[keySet as 'setDate'](result[keyGet as 'getDate']() + n);
 		return result;
 	};

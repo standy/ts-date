@@ -1,10 +1,8 @@
 import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
 import {newValidDate, newValidDateOrThrow} from '../create/create-ts-date';
-import {
-	format,
-} from './format'
-
+import {format} from './format'
+import formatters from './default-formatters';
 
 describe('format', function () {
 	it('correct formatting', function () {
@@ -103,12 +101,12 @@ describe('format', function () {
 			},
 		} as ValidDate);
 
-		assert.equal(format(dateTimezoneMock(180), 'Z'), '-03:00');
-		assert.equal(format(dateTimezoneMock(180), 'ZZ'), '-0300');
-		assert.equal(format(dateTimezoneMock(-600), 'Z'), '+10:00');
-		assert.equal(format(dateTimezoneMock(-180), 'ZZ'), '+0300');
-		assert.equal(format(dateTimezoneMock(0), 'Z'), '+00:00');
-		assert.equal(format(dateTimezoneMock(0), 'ZZ'), '+0000');
+		assert.equal(formatters.Z(dateTimezoneMock(180)), '-03:00');
+		assert.equal(formatters.ZZ(dateTimezoneMock(180)), '-0300');
+		assert.equal(formatters.Z(dateTimezoneMock(-600)), '+10:00');
+		assert.equal(formatters.ZZ(dateTimezoneMock(-180)), '+0300');
+		assert.equal(formatters.Z(dateTimezoneMock(0)), '+00:00');
+		assert.equal(formatters.ZZ(dateTimezoneMock(0)), '+0000');
 	});
 
 	it('correct format iso weeks', function() {

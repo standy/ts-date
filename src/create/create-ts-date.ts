@@ -4,7 +4,7 @@ export function fromDate(date: Date | number | undefined): ValidDate | null {
 }
 
 export function fromDateOrThrow(date: Date | number | undefined): ValidDate {
-	const d = new Date(+(date as Date));
+	const d = new Date(date instanceof Date ? date.getTime() : date as number);
 	return asValidDateOrThrow(d, date);
 }
 
@@ -47,5 +47,5 @@ export function asDate(d: ValidDate): Date {
 
 
 export function isValidDate(d: Date | null): d is ValidDate {
-	return d != null && isFinite(+d);
+	return d !== null && d instanceof Date && isFinite(d.getTime());
 }

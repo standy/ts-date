@@ -6,7 +6,7 @@ import {isValidDate} from '../create/create-ts-date';
 function diffPreciseByUnits(unitsInMs: number): DiffUnitFn {
 	return ((d1: Date | null, d2: Date | null): any => {
 		if (!isValidDate(d1) || !isValidDate(d2)) return null;
-		return (+d1 - +d2) / unitsInMs;
+		return (d1.getTime() - d2.getTime()) / unitsInMs;
 	});
 }
 export const diffPreciseSeconds = diffPreciseByUnits(MS.Seconds);
@@ -26,8 +26,8 @@ export const diffPreciseMonth: DiffUnitFn = (d1: Date | null, d2: Date | null): 
 	const m1 = startOfNextMonth1 - startOfMonth1;
 	const m2 = startOfNextMonth2 - startOfMonth2;
 
-	const t1 = +d1 - startOfMonth1;
-	const t2 = +d2 - startOfMonth2;
+	const t1 = d1.getTime() - startOfMonth1;
+	const t2 = d2.getTime() - startOfMonth2;
 
 	/**
 	 * that formula was made to avoid "1 - 0.9" calculations
@@ -49,8 +49,8 @@ export const diffPreciseYear: DiffUnitFn = (d1: Date | null, d2: Date | null): a
 	const y1 = startOfNextYear1  - startOfYear1;
 	const y2 = startOfNextYear2  - startOfYear2;
 
-	const t1 = +d1 - startOfYear1;
-	const t2 = +d2 - startOfYear2;
+	const t1 = d1.getTime() - startOfYear1;
+	const t2 = d2.getTime() - startOfYear2;
 
 	return (diffCalendarYear(d1, d2) * y1 * y2 + t1 * y2 - t2 * y1) / (y1 * y2);
 };

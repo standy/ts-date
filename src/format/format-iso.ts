@@ -7,7 +7,7 @@ import {isValidDate} from '../create/create-ts-date';
 function createFormatIso(len: number): FormatFn {
 	return (d: Date | null): /*string | null*/ any => {
 		if (!isValidDate(d)) return null;
-		const date = new Date(+d);
+		const date = new Date(d.getTime());
 		date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
 		return date.toISOString().substring(0, len);
 	};
