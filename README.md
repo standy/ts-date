@@ -9,8 +9,8 @@
 **ts-date** is a `Date` library which shine in Typescript enviroment  
 
 Main difference from most javascript `Date` libraries is:
-   * avoiding `"Invalid Date"`  
-   * literally no overhead under native `Date`
+   * if you strictly follow types, you will never get `"Invalid Date"`  
+   * literally no overhead under native `Date`, take a look at [benchmarks](https://github.com/standy/ts-date/tree/master/benchmark)  
    * forcing to do essential checks  
    
 ## How?

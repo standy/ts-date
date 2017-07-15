@@ -1,11 +1,11 @@
 Performance test compared to `momentjs` and `date-fns`
  
-```bash
+```
 >node -v
 v8.1.4
 ```
 
-```bash
+```
 Adding fixed amount of days
 -------------------------------------------------------
 moment             114,945 op/s  ± 1.37%   (83 samples)
