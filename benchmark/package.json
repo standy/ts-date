@@ -1,0 +1,17 @@
+{
+  "name": "ts-date-bench",
+  "version": "1.0.0",
+  "description": "Perfomance test for ts-date",
+  "author": "mostovoyav@gmail.com",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "date-fns": "^1.28.5",
+    "moment": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./index.js"
+  }
+}
