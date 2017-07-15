@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/standy/ts-date/compare/v2.0.3...v2.1.0) (2017-07-15)
+
+
+### Features
+
+* added performance test ([f5eeec6](https://github.com/standy/ts-date/commit/f5eeec6))
+* removed method "asDate", use just "as Date" ([07e8666](https://github.com/standy/ts-date/commit/07e8666))
+* ValidDate as global type when importing lib ([4ff1056](https://github.com/standy/ts-date/commit/4ff1056))
+
+
+### Performance Improvements
+
+* caching in format method ([19c0c8f](https://github.com/standy/ts-date/commit/19c0c8f))
+* strict compare to null and getTime instead of "+" ([d9291c7](https://github.com/standy/ts-date/commit/d9291c7))
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/standy/ts-date/compare/v2.0.2...v2.0.3) (2017-07-12)
 
