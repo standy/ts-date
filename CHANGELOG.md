@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/standy/ts-date/compare/v2.1.0...v2.1.1) (2017-07-17)
+
+
+### Bug Fixes
+
+* adding right amount of time across dst for addUnit methods ([b439f6f](https://github.com/standy/ts-date/commit/b439f6f))
+* calculating correct diffDate across dst ([2c9a3d2](https://github.com/standy/ts-date/commit/2c9a3d2))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/standy/ts-date/compare/v2.0.3...v2.1.0) (2017-07-15)
 
