@@ -67,8 +67,14 @@ describe('diffUnit', function () {
 		it('diffDate', function () {
 			const tsDate1 = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
 			const tsDate2 = newValidDate(2017, Month.Jul, 1, 12, 30, 59, 100);
+			assert.deepEqual(diffDate(tsDate2, tsDate1), 2);
+			assert.deepEqual(diffDate(tsDate1, tsDate2), -2);
+		});
+
+		it('diffDate negative', function () {
+			const tsDate1 = newValidDate(2017, Month.Jul, 1, 12, 30, 59, 100);
+			const tsDate2 = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
 			const result = diffDate(tsDate2, tsDate1);
-			assert.deepEqual(result, 2);
 		});
 
 		it('diffMonth', function () {
@@ -83,6 +89,15 @@ describe('diffUnit', function () {
 			const tsDate2 = newValidDate(2019, Month.Jun, 29);
 			const result = diffYear(tsDate2, tsDate1);
 			assert.deepEqual(result, 2);
+		});
+	});
+
+	describe('diffHours edge cases', function () {
+		it('less then a hour', function () {
+			const d1 = newValidDate(2017, Month.Jun, 29, 4, 0, 0, 1);
+			const d2 = newValidDate(2017, Month.Jun, 29, 5);
+			assert.deepEqual(diffHours(d2, d1), 0);
+			assert.deepEqual(diffHours(d1, d2), 0);
 		});
 	});
 

@@ -1,5 +1,6 @@
 import {DiffUnitFn, MS} from '../utils/basic-types';
 import {isValidDate} from '../create/create-ts-date';
+import {absFloor} from '../utils/utils';
 
 export const diffCalendarYear: DiffUnitFn = (d1: Date | null, d2: Date | null): any => {
 	if (!isValidDate(d1) || !isValidDate(d2)) return null;
@@ -17,6 +18,6 @@ export const diffCalendarDate: DiffUnitFn = (d1: Date | null, d2: Date | null): 
 	if (!isValidDate(d1) || !isValidDate(d2)) return null;
 	const u1 = Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate());
 	const u2 = Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate());
-	return ((u1 - u2) / MS.Date) | 0;
+	return absFloor((u1 - u2) / MS.Date);
 };
 
