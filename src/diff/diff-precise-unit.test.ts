@@ -48,10 +48,10 @@ describe('diffPreciseUnit', function () {
 		});
 
 		it('diffPreciseYear', function () {
-			const tsDate1 = newValidDate(2017, Month.Feb, 28);
-			const tsDate2 = newValidDate(2019, Month.Aug, 29, 12);
-			assert.deepEqual(diffPreciseYear(tsDate2, tsDate1), 2.5);
-			assert.deepEqual(diffPreciseYear(tsDate1, tsDate2), -2.5);
+			const tsDate1 = newValidDate(2017, Month.Apr, 3);
+			const tsDate2 = newValidDate(2019, Month.Jun, 15);
+			assert.deepEqual(diffPreciseYear(tsDate2, tsDate1), 2.2);
+			assert.deepEqual(diffPreciseYear(tsDate1, tsDate2), -2.2);
 		});
 	});
 
