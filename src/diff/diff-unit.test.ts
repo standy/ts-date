@@ -10,7 +10,7 @@ import {
 	diffMonth,
 	diffYear,
 } from './diff-unit'
-import {addUTCHours} from '../add/add-unit';
+import {addHours} from '../add/add-unit';
 
 function dstForYear(year: number) {
     const start = new Date(year, 0, 1);
@@ -164,7 +164,7 @@ describe('diffUnit', function () {
 			if (!dst) return;
 
 			const tsDstDate = newValidDate(+dst);
-			const tsDstDate2HoursUTC = addUTCHours(tsDstDate, 2);
+			const tsDstDate2HoursUTC = addHours(tsDstDate, 2);
 			assert.equal(diffHours(tsDstDate2HoursUTC, tsDstDate), 2);
 		});
 	});

@@ -61,18 +61,24 @@ describe('addUnits', function () {
 		it('falls to null with invalid date', function () {
 			const result = addYear(null, 2);
 			assert.deepEqual(result, null);
+			const resultHours = addHours(null, 2);
+			assert.deepEqual(resultHours, null);
 		});
 
 		it('no changes with "Infinity" value', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29);
 			const result = addYear(tsDate, Infinity);
 			assert.deepEqual(result, tsDate);
+			const resultHours = addHours(tsDate, Infinity);
+			assert.deepEqual(resultHours, tsDate);
 		});
 
 		it('no changes with "NaN" value', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29);
 			const result = addYear(tsDate, NaN);
 			assert.deepEqual(result, tsDate);
+			const resultHours = addHours(tsDate, NaN);
+			assert.deepEqual(resultHours, tsDate);
 		});
 	});
 

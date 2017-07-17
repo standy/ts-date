@@ -1,4 +1,14 @@
-import {AddUnitFn} from '../utils/basic-types';
+import {AddUnitFn, MS} from '../utils/basic-types';
+
+
+function addTimeFn(ms: number): AddUnitFn {
+	return (d: Date | null, n: number): /*ValidDate | Date | null*/ any => {
+		if (d === null) return null;
+		if (!isFinite(n)) return d;
+		return new Date(d.getTime() + ms * n);
+	};
+}
+
 function addFn(keyGet: keyof Date, keySet: keyof Date): AddUnitFn {
 	return (d: Date | null, n: number): /*ValidDate | Date | null*/ any => {
 		if (d === null) return null;
@@ -9,31 +19,20 @@ function addFn(keyGet: keyof Date, keySet: keyof Date): AddUnitFn {
 	};
 }
 
-export const addMilliseconds = addFn('getMilliseconds', 'setMilliseconds');
-
-export const addSeconds = addFn('getSeconds', 'setSeconds');
-
-export const addMinutes = addFn('getMinutes', 'setMinutes');
-
-export const addHours = addFn('getHours', 'setHours');
+export const addMilliseconds = addTimeFn(MS.Milliseconds);
+export const addSeconds = addTimeFn(MS.Seconds);
+export const addMinutes = addTimeFn(MS.Minutes);
+export const addHours = addTimeFn(MS.Hours);
 
 export const addDate = addFn('getDate', 'setDate');
-
 export const addMonth = addFn('getMonth', 'setMonth');
-
 export const addYear = addFn('getFullYear', 'setFullYear');
 
 
 export const addUTCMilliseconds = addFn('getUTCMilliseconds', 'setUTCMilliseconds');
-
 export const addUTCSeconds = addFn('getUTCSeconds', 'setUTCSeconds');
-
 export const addUTCMinutes = addFn('getUTCMinutes', 'setUTCMinutes');
-
 export const addUTCHours = addFn('getUTCHours', 'setUTCHours');
-
 export const addUTCDate = addFn('getUTCDate', 'setUTCDate');
-
 export const addUTCMonth = addFn('getUTCMonth', 'setUTCMonth');
-
 export const addUTCYear = addFn('getUTCFullYear', 'setUTCFullYear');
