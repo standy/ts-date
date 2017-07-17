@@ -4,7 +4,7 @@ const tsDate = require('../../npm/locale/en/index');
 const moment = require('moment');
 const dateFns = require('date-fns');
 
-const pattern = 'Do MMMM YYYY, dddd';
+const pattern = 'dddd, MMMM Do YYYY, [escaped], h:mm:ss a';
 const date = new Date();
 const dateMoment = moment(date);
 
