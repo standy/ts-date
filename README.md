@@ -193,13 +193,6 @@ addHours(ValidDate, number): ValidDate
 addDate(ValidDate, number): ValidDate
 addMonth(ValidDate, number): ValidDate
 addYear(ValidDate, number): ValidDate
-addUTCMilliseconds(ValidDate, number): ValidDate
-addUTCSeconds(ValidDate, number): ValidDate
-addUTCMinutes(ValidDate, number): ValidDate
-addUTCHours(ValidDate, number): ValidDate
-addUTCDate(ValidDate, number): ValidDate
-addUTCMonth(ValidDate, number): ValidDate
-addUTCYear(ValidDate, number): ValidDate
 ```
 
 ### Reset
