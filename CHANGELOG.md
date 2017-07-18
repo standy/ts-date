@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/standy/ts-date/compare/v2.1.1...v2.1.2) (2017-07-18)
+
+
+### Bug Fixes
+
+* removed Object.keys & Object.assign usage, so no polyfills required ([cc54414](https://github.com/standy/ts-date/commit/cc54414))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/standy/ts-date/compare/v2.1.0...v2.1.1) (2017-07-17)
 
