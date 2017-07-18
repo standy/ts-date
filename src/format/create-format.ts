@@ -1,12 +1,12 @@
 import {FormatByTemplateFn} from '../utils/basic-types';
-import {tokensRx} from '../utils/tokens-rx';
+import {tokensRx} from '../utils/utils';
 import {Formatter, FormatterObj} from './default-formatters';
 import {isValidDate} from '../default-exports';
 
 type Token = string | Formatter;
 
 function splitToTokens(template: string, formatters: FormatterObj): Token[] {
-	const RX_TOKENS = tokensRx(Object.keys(formatters));
+	const RX_TOKENS = tokensRx(formatters);
 	const tokens = template.match(RX_TOKENS) as string[];
 	// this regexp cant fail because of "|."
 

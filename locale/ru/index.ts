@@ -4,6 +4,7 @@ import defaultFormatters from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
 import {FormatterObj} from '../../src/format/default-formatters';
 import {ParserObj, FormatByTemplateFn, ParseByTemplateFn, ParseByTemplateOrThrowFn, ParserData} from '../../src/utils/basic-types';
+import {extend} from '../../src/utils/utils';
 export * from '../../src/default-exports';
 
 // http://new.gramota.ru/spravka/buro/search-answer?s=242637
@@ -99,6 +100,6 @@ function ordinalParser(key: string, suffix: string): ParserData {
 	}];
 }
 
-export const format: FormatByTemplateFn = createFormat(Object.assign({}, defaultFormatters, formatters));
-export const parse: ParseByTemplateFn = createParse(Object.assign({}, defaultParsers, parsers));
+export const format: FormatByTemplateFn = createFormat(extend(defaultFormatters, formatters));
+export const parse: ParseByTemplateFn = createParse(extend(defaultParsers, parsers));
 export const parseOrThrow: ParseByTemplateOrThrowFn = parseOrThrowWrapper(parse);

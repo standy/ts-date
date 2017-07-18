@@ -1,5 +1,5 @@
 import {ParserObj, ParseByTemplateFn, ParseByTemplateOrThrowFn} from '../utils/basic-types';
-import {tokensRx} from '../utils/tokens-rx';
+import {tokensRx} from '../utils/utils';
 import {asValidDateOrNull} from '../create/create-ts-date';
 
 type Parser = (date: Date, value: string) => void;
@@ -9,7 +9,7 @@ function escapeRegExp(text: string) {
 }
 
 export function createParse(parsers: ParserObj): ParseByTemplateFn {
-	const RX_TOKENS = tokensRx(Object.keys(parsers));
+	const RX_TOKENS = tokensRx(parsers);
 
 	return function parse(dateStr: string, template: string): ValidDate | null {
 		const tokens = template.match(RX_TOKENS) as string[];
