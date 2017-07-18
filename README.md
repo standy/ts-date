@@ -11,7 +11,7 @@
 Main difference from most javascript `Date` libraries is:
    * if you strictly follow types, you will never get `"Invalid Date"`  
    * literally no overhead under native `Date`, take a look at [benchmarks](https://github.com/standy/ts-date/tree/master/benchmark)  
-   * forcing to do essential checks  
+   * written in Typescript, provides tree-shakeable API
    
 ## How?
 All this is possible thanks to `ValidDate` type (not a class) – the immutable wrapper under `Date`, actually `ValidDate` becomes a `Date` after compile  
@@ -126,6 +126,11 @@ addMinutes(date, 5); // Type: Date
 addMinutes(null, 5); // Type: null
 ```
 
+
+
+## Browser support
+Should work fine without polyfills in every modern browser and IE9+  
+Chrome 5+, Edge, Firefox 4.0+, IE 9+, Opera 12+, Safari 5+
 
 
 ## Api
