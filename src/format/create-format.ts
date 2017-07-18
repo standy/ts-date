@@ -1,6 +1,5 @@
-import {FormatByTemplateFn} from '../utils/basic-types';
+import {FormatByTemplateFn, Formatter, FormatterObj} from '../utils/basic-types';
 import {tokensRx} from '../utils/utils';
-import {Formatter, FormatterObj} from './default-formatters';
 import {isValidDate} from '../default-exports';
 
 type Token = string | Formatter;

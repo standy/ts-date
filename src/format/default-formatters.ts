@@ -2,9 +2,7 @@ import {leadZero} from '../utils/utils';
 import {diffCalendarDate} from '../diff/diff-calendar-unit';
 import {newValidDateOrThrow} from '../create/create-ts-date';
 import {resetISOWeek, resetYear} from '../reset/reset-unit';
-
-export type Formatter = (date: ValidDate) => string | number;
-export type FormatterObj = { [key: string]: Formatter };
+import {FormatterObj} from '../utils/basic-types';
 
 const formatters: FormatterObj = {
 	// Month: 1, 2, ..., 12

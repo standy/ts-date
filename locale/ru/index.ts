@@ -2,8 +2,7 @@ import {createFormat} from '../../src/format/create-format';
 import {createParse, parseOrThrowWrapper} from '../../src/parse/create-parse';
 import defaultFormatters from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
-import {FormatterObj} from '../../src/format/default-formatters';
-import {ParserObj, FormatByTemplateFn, ParseByTemplateFn, ParseByTemplateOrThrowFn, ParserData} from '../../src/utils/basic-types';
+import {ParserObj, FormatterObj, FormatByTemplateFn, ParseByTemplateFn, ParseByTemplateOrThrowFn, ParserData} from '../../src/utils/basic-types';
 import {extend} from '../../src/utils/utils';
 export * from '../../src/default-exports';
 
