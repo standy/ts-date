@@ -5,6 +5,7 @@
 [![NPM Version](https://img.shields.io/npm/v/ts-date.svg)](https://www.npmjs.com/package/ts-date)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
+[![Build Status](https://saucelabs.com/browser-matrix/standy.svg)](https://saucelabs.com/beta/builds/5fe7f4ad4e9c4f87842ea80e0a497eb5)
  
 **ts-date** is a `Date` library which shine in Typescript enviroment  
 
