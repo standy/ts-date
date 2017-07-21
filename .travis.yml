@@ -1,15 +1,19 @@
 language: node_js
+
 cache:
   directories:
     - node_modules
     - browser-test/node_modules
+
 notifications:
   email: false
+
 node_js:
-  - '6'
+  - '8'
 
 before_install:
   - npm i npm -g
+
 install:
   - npm i
   - cd browser-test && npm i && cd ..
@@ -18,6 +22,7 @@ script:
   - npm run test
   - node scripts/prepare-for-npm
   - npm run test:sauce
+
 deploy:
   on:
     branch: master
