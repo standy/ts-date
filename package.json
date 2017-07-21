@@ -17,6 +17,8 @@
     "precommit": "npm test -- --reporter dot",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc npm test",
+    "test:browser": "cd browser-test && npm run browser && cd ..",
+    "test:sauce": "cd browser-test && npm run sauce && cd ..",
     "test": "mocha -r ts-node/register {src,locale}/**/*.test.ts"
   },
   "devDependencies": {
