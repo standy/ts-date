@@ -1,3 +1,5 @@
+import {ValidDate} from '../valid-date';
+
 export function fromDate(date: Date | number | undefined): ValidDate | null {
 	const d = new Date(+(date as Date));
 	return asValidDateOrNull(d);

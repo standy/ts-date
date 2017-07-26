@@ -1,5 +1,6 @@
 import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
+import {ValidDate} from '../valid-date';
 import {newValidDate, newValidDateOrThrow} from '../create/create-ts-date';
 import {format} from './format'
 import formatters from './default-formatters';

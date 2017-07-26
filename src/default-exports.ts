@@ -1,4 +1,4 @@
-///<reference path="valid-date.d.ts"/>
+export * from './valid-date';
 export * from './add/add-unit';
 export * from './reset/reset-unit';
 export * from './diff/diff-unit';

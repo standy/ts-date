@@ -1,3 +1,5 @@
+import {ValidDate} from '../valid-date';
+
 function toNumber(value: string | undefined, defaultValue: number) {
 	return typeof value === 'undefined' ? defaultValue : +value;
 }

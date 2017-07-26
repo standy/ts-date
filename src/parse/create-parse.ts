@@ -1,3 +1,4 @@
+import {ValidDate} from '../valid-date';
 import {ParserObj, ParseByTemplateFn, ParseByTemplateOrThrowFn} from '../utils/basic-types';
 import {tokensRx} from '../utils/utils';
 import {asValidDateOrNull} from '../create/create-ts-date';

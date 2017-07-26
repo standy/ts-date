@@ -1,3 +1,5 @@
+import {ValidDate} from '../valid-date';
+
 export const enum MS {
 	Milliseconds = 1, // 1000;
 	Seconds = 1e3, // 1000;

@@ -1,4 +1,4 @@
-declare interface ValidDate extends Date {
+export interface ValidDate extends Date {
 	setTime(time: never): never;
 	setMilliseconds(ms: never): never;
 	setUTCMilliseconds(ms: never): never;
