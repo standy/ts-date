@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.5"></a>
+## [2.1.5](https://github.com/standy/ts-date/compare/v2.1.4...v2.1.5) (2017-08-09)
+
+
+### Bug Fixes
+
+* simplify tokensRx ([86237a3](https://github.com/standy/ts-date/commit/86237a3))
+
+
+
 <a name="2.1.4"></a>
 ## [2.1.4](https://github.com/standy/ts-date/compare/v2.1.3...v2.1.4) (2017-07-26)
 
