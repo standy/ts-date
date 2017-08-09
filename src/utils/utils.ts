@@ -32,5 +32,5 @@ export function tokensRx(obj: any) {
 		keys.push(key);
 	}
 	keys.sort((a, b) => b.length - a.length);
-	return new RegExp('(\\[[^[]*\\])|(' + keys.join('|') + '|.)', 'g');
+	return new RegExp(keys.join('|') + '|\\[[^[]*\\]|.', 'g');
 }
