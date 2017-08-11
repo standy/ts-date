@@ -67,7 +67,7 @@ export interface ParseByTemplateOrThrowFn {
 	(dateStr: string, template: string): ValidDate | null;
 }
 
-export type Formatter = (date: ValidDate) => string | number;
+export type Formatter = (date: ValidDate, index?: number, tokens?: (string | Formatter)[]) => string | number;
 export type FormatterObj = { [key: string]: Formatter };
 
 export type Parser = (date: Date, value: string) => void;

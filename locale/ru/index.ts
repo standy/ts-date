@@ -20,7 +20,18 @@ const formatters: FormatterObj = {
 	'MMM': date => monthsShort[date.getMonth()],
 
 	// Month: январь, февраль, ..., декабрь
-	'MMMM': date => monthsFull[date.getMonth()],
+	'MMMM': (date, index, tokens) => {
+		const month = date.getMonth();
+		if (tokens === undefined || index === undefined || index < 2) return monthsFull[month];
+
+		const prevToken = tokens[index - 2];
+		if (typeof tokens[index - 1] === 'string' && prevToken === defaultFormatters.D || prevToken === defaultFormatters.DD) {
+			// Generate formatters like 'D[some string]MMMM',
+			// where month is in the genitive case: января, февраля, ..., декабря
+			return monthsGenitive[month];
+		}
+		return monthsFull[month];
+	},
 
 	// Day of week: вс, пн, ..., сб
 	'dd': date => weekdays2char[date.getDay()],
@@ -57,14 +68,6 @@ const formatters: FormatterObj = {
 };
 
 formatters['a'] = formatters['aa'] = formatters['A'];
-
-
-// Generate formatters like 'D MMMM',
-// where month is in the genitive case: января, февраля, ..., декабря
-const monthsGenitiveFormatters = ['D', 'DD'];
-monthsGenitiveFormatters.forEach(formatterToken => {
-	formatters[formatterToken + ' MMMM'] = (date) => defaultFormatters[formatterToken](date) + ' ' + monthsGenitive[date.getMonth()];
-});
 
 
 const parsers: ParserObj = {

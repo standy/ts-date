@@ -30,7 +30,7 @@ function formatByTokens(d: ValidDate, tokens: Token[]): string {
 	const result: (string | number)[] = [];
 	for (let i = 0; i < tokens.length; i++) {
 		const token = tokens[i];
-		result.push(typeof token === 'function' ? token(d) : token);
+		result.push(typeof token === 'function' ? token(d, i, tokens) : token);
 	}
 	return result.join('');
 }
