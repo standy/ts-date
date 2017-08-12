@@ -24,6 +24,10 @@ describe('ru locale', function () {
 				'1&nbsp;августа',
 			],
 			[
+				'YYYY MMMM',
+				'2017 август',
+			],
+			[
 				'Do MMMM, dddd',
 				'1-е августа, вторник',
 			],
