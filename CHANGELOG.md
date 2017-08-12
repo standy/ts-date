@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.6"></a>
+## [2.1.6](https://github.com/standy/ts-date/compare/v2.1.5...v2.1.6) (2017-08-12)
+
+
+### Bug Fixes
+
+* added sibling tokens into formatter function, apply proper declension for "D[&nbsp;]MMMM" ([f7ef80a](https://github.com/standy/ts-date/commit/f7ef80a))
+
+
+
 <a name="2.1.5"></a>
 ## [2.1.5](https://github.com/standy/ts-date/compare/v2.1.4...v2.1.5) (2017-08-09)
 
