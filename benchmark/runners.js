@@ -6,9 +6,11 @@ function runSuite(suite, isDebug) {
 		.on('complete', logComplete)
 		.run();
 }
+let firstCycle = null;
 
 function logResults(e) {
 	const t = e.target;
+	if (!firstCycle) firstCycle = t;
 
 	if (t.failure) {
 		console.error(padl(18, t.name) + 'FAILED: ' + e.target.failure);
@@ -18,7 +20,8 @@ function logResults(e) {
 		const result = padl(15, t.name)
 			+ padr(16, `${formatNumber(hz.toFixed(hz < 100 ? 2 : 0))} op/s`)
 			+ padr(9, ` \xb1\ ${stats.rme.toFixed(2)}%`)
-			+ padr(15, ` (${t.stats.sample.length} samples)`);
+			+ padr(15, ` (${t.stats.sample.length} samples)`)
+			+ padr(8, ' ' + (hz / firstCycle.hz).toFixed(2) + 'x');
 
 		console.log(result);
 	}
@@ -26,7 +29,8 @@ function logResults(e) {
 
 function logStart() {
 	console.log(this.name);
-	console.log('-------------------------------------------------------');
+	console.log('---------------------------------------------------------------');
+	firstCycle = null;
 }
 
 function logMethodResults(isDebug) {
@@ -40,7 +44,7 @@ function logMethodResults(isDebug) {
 
 function logComplete() {
 	console.log('Fastest is ' + this.filter('fastest').map('name'));
-	console.log('-------------------------------------------------------');
+	console.log('---------------------------------------------------------------');
 }
 
 

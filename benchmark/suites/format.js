@@ -8,7 +8,7 @@ const pattern = 'dddd, MMMM Do YYYY, [escaped], h:mm:ss a';
 const date = new Date();
 const dateMoment = moment(date);
 
-const suite = new Benchmark.Suite(`Format by custom pattern "${pattern}"`);
+const suite = new Benchmark.Suite(`Format by pattern "${pattern}"`);
 suite
 	.add('moment', function() {
 		return moment(date).format(pattern);
