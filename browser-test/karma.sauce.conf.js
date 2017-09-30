@@ -23,7 +23,6 @@ const platforms = {
 	},
 	'Windows 7': {
 		'internet explorer': ['9'],
-		'safari': ['5'],
 		'chrome': ['26'],
 		'firefox': ['16'],
 	},
@@ -35,6 +34,7 @@ const platforms = {
 	},
 	'Mac 10.10': {
 		'iphone': ['8.1'],
+		'safari': ['8'],
 	},
 	'macOS 10.12': {
 		'iphone': ['latest'],
