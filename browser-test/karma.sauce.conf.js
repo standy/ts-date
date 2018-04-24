@@ -33,10 +33,10 @@ const platforms = {
 		'android': ['4.4'],
 	},
 	'Mac 10.10': {
-		'iphone': ['8.1'],
+		'iphone': ['10.0'],
 		'safari': ['8'],
 	},
-	'macOS 10.12': {
+	'Mac 10.13': {
 		'iphone': ['latest'],
 		'safari': ['latest'],
 	},
