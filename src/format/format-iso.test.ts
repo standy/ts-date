@@ -20,6 +20,10 @@ describe('format-predefined', function () {
 		it('"Invalid Date" handling', function () {
 			assert.equal(formatLocalIso(new Date(NaN)), null);
 		});
+		it('correct formatting with timezone changes', function () {
+			const date = newValidDate(2014, Month.Oct, 26, 1, 21, 10, 107);
+			assert.equal(formatLocalIso(date), '2014-10-26T01:21:10.107');
+		});
 	});
 
 	describe('formatDateTimeIso', function () {
@@ -33,6 +37,10 @@ describe('format-predefined', function () {
 		it('"Invalid Date" handling', function () {
 			assert.equal(formatDateTimeIso(new Date(NaN)), null);
 		});
+		it('correct formatting with timezone changes', function () {
+			const date = newValidDate(2014, Month.Oct, 26, 1, 21, 10, 107);
+			assert.equal(formatDateTimeIso(date), '2014-10-26T01:21');
+		});
 	});
 
 	describe('formatDateIso', function () {
@@ -45,6 +53,10 @@ describe('format-predefined', function () {
 		});
 		it('"Invalid Date" handling', function () {
 			assert.equal(formatDateIso(new Date(NaN)), null);
+		});
+		it('correct formatting with timezone changes', function () {
+			const date = newValidDate(2014, Month.Oct, 26, 1, 21, 10, 107);
+			assert.equal(formatDateIso(date), '2014-10-26');
 		});
 	});
 });

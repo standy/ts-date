@@ -1,24 +1,24 @@
 import {FormatFn} from '../utils/basic-types';
+import {format} from './format';
 import {isValidDate} from '../create/create-ts-date';
+import {leadZero} from '../utils/utils';
 
-/**
- * Makes function that return part of ISO 8610 formatted string
- */
-function createFormatIso(len: number): FormatFn {
-	return (d: Date | null): /*string | null*/ any => {
-		if (!isValidDate(d)) return null;
-		const date = new Date(d.getTime());
-		date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-		return date.toISOString().substring(0, len);
-	};
-}
 
 // YYYY-MM-DD
-export const formatDateIso = createFormatIso(10);
+export const formatDateIso: FormatFn = (date: Date | null): any => {
+	if (!isValidDate(date)) return null;
+	return leadZero(date.getFullYear(), 4) + '-' + leadZero(date.getMonth() + 1) + '-' + leadZero(date.getDate());
+};
 
 // YYYY-MM-DDTHH:mm
-export const formatDateTimeIso = createFormatIso(16);
+export const formatDateTimeIso: FormatFn = (date: Date | null): any => {
+	if (!isValidDate(date)) return null;
+	return formatDateIso(date) + 'T' + leadZero(date.getHours()) + ':' + leadZero(date.getMinutes());
+};
 
 // YYYY-MM-DDTHH:mm:ss.SSS
-export const formatLocalIso = createFormatIso(23);
+export const formatLocalIso: FormatFn = (date: Date | null): any => {
+	if (!isValidDate(date)) return null;
+	return formatDateTimeIso(date) + ':' + leadZero(date.getSeconds()) + '.' + leadZero(date.getMilliseconds(), 3);
+};
 
