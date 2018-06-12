@@ -22,7 +22,7 @@ const platforms = {
 		'internet explorer': ['11'],
 	},
 	'Windows 7': {
-		'internet explorer': ['9'],
+		'internet explorer': ['10'],
 		'chrome': ['26'],
 		'firefox': ['16'],
 	},
