@@ -36,7 +36,7 @@ const platforms = {
 		'iphone': ['10.0'],
 		'safari': ['8'],
 	},
-	'Mac 10.13': {
+	'Mac 10.12': {
 		'iphone': ['latest'],
 		'safari': ['latest'],
 	},
