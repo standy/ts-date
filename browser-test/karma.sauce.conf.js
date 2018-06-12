@@ -12,53 +12,101 @@ const {
 } = process.env;
 
 // Available browsers and platforms: https://saucelabs.com/rest/v1/info/platforms/webdriver
-const platforms = {
-	'Windows 10': {
-		'chrome': ['latest'],
-		'firefox': ['latest'],
-		'microsoftEdge': ['latest', '13'],
+const sl_launchers = {
+	sl_chrome_latest_Windows10: {
+		base: 'SauceLabs',
+		browserName: 'chrome',
+		version: 'latest',
+		platform: 'Windows 10'
 	},
-	'Windows 8.1': {
-		'internet explorer': ['11'],
+	sl_chrome_26_Windows7: {
+		base: 'SauceLabs',
+		browserName: 'chrome',
+		version: '26',
+		platform: 'Windows 7'
 	},
-	'Windows 7': {
-		'internet explorer': ['10'],
-		'chrome': ['26'],
-		'firefox': ['16'],
+	sl_firefox_latest_Windows10: {
+		base: 'SauceLabs',
+		browserName: 'firefox',
+		version: 'latest',
+		platform: 'Windows 10'
 	},
-	'Android 6': {
-		'android': ['latest'],
+	sl_firefox_16_Windows7: {
+		base: 'SauceLabs',
+		browserName: 'firefox',
+		version: '16',
+		platform: 'Windows 7'
 	},
-	'Android 4': {
-		'android': ['4.4'],
+	sl_edge_latest_Windows10: {
+		base: 'SauceLabs',
+		browserName: 'microsoftEdge',
+		version: 'latest',
+		platform: 'Windows 10'
 	},
-	'Mac 10.10': {
-		'iphone': ['10.0'],
-		'safari': ['8'],
+	sl_edge_13_Windows10: {
+		base: 'SauceLabs',
+		browserName: 'microsoftEdge',
+		version: '13',
+		platform: 'Windows 10'
 	},
-	'Mac 10.12': {
-		'iphone': ['latest'],
-		'safari': ['latest'],
+	sl_ie_11_Windows8_1: {
+		base: 'SauceLabs',
+		browserName: 'internet explorer',
+		version: '11',
+		platform: 'Windows 8.1'
+	},
+	sl_ie_10_Windows7: {
+		base: 'SauceLabs',
+		browserName: 'internet explorer',
+		version: '10',
+		platform: 'Windows 7'
+	},
+	sl_android_latest: {
+		base: 'SauceLabs',
+		browserName: 'android',
+		version: 'latest',
+	},
+	sl_android_4_4: {
+		base: 'SauceLabs',
+		browserName: 'android',
+		version: '4.4',
+	},
+	sl_safari_latest: {
+		base: 'SauceLabs',
+		browserName: 'safari',
+		version: 'latest',
+		platform: 'OS X 10.12'
+	},
+	sl_safari_8_Mac10_10: {
+		base: 'SauceLabs',
+		browserName: 'safari',
+		version: '8.0',
+		platform: 'OS X 10.10'
+	},
+	sl_iphone_11_2: {
+		base: 'SauceLabs',
+		browserName: 'iphone',
+		version: '11.2',
+	},
+	sl_iphone_9_3: {
+		base: 'SauceLabs',
+		browserName: 'iphone',
+		version: '9.3',
+	},
+	sl_ipad_10_3: {
+		base: 'SauceLabs',
+		browserName: 'ipad',
+		version: '10.3'
+	},
+	sl_ipad_11_2: {
+		base: 'SauceLabs',
+		browserName: 'ipad',
+		version: '11.2'
 	},
 };
 
-const sl_launchers = {};
-for (const platform in platforms) {
-	for (const browserName in platforms[platform]) if (platforms[platform].hasOwnProperty(browserName)) {
-		const versions = platforms[platform][browserName];
-		versions.forEach(version => {
-			const key = ['sl', browserName, version, platform.replace(/\s+/g, '')].join('_');
-			sl_launchers[key] = {
-				base: 'SauceLabs',
-				browserName,
-				version,
-				platform,
-			};
-		})
-	}
-}
 
-module.exports = function (config) {
+module.exports = function(config) {
 
 	// turn off coverage for sauce
 	base.karmaTypescriptConfig.coverageOptions.instrumentation = false;
