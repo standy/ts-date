@@ -1,3 +1,4 @@
+require('./log-versions');
 require('./suites/add-days');
 require('./suites/add-hours');
 require('./suites/diff-days');
