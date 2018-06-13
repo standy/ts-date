@@ -1,5 +1,4 @@
 import {FormatFn} from '../utils/basic-types';
-import {format} from './format';
 import {isValidDate} from '../create/create-ts-date';
 import {leadZero} from '../utils/utils';
 
