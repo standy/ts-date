@@ -6,15 +6,15 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 
-**ts-date** is a `Date` library written in Typescript for Typescript   
+**ts-date** is a `Date` library written in Typescript for Typescript
 
 Main difference from most javascript `Date` libraries is:
-* you will never get `"Invalid Date"`, if you follow types  
-* literally no overhead under native `Date`, take a look at [benchmarks](https://github.com/standy/ts-date/tree/master/benchmark)  
+* you will never get `"Invalid Date"`, if you follow types
+* literally no overhead under native `Date`, take a look at [benchmarks](https://github.com/standy/ts-date/tree/master/benchmark)
 * provides tree-shakeable pure functions
 
 
-   
+
 ## Usage
 
 ```js
@@ -24,49 +24,49 @@ const result = format(addMonth(date, 1), 'Do MMMM YYYY'); // 1st September 2017
 ```
 
 
- 
+
 ## ES6 modules and CommonJS
-To get full benefit from [tree shaking](https://webpack.js.org/guides/tree-shaking/) you may import from `ts-date/esm/*`  
+To get full benefit from [tree shaking](https://webpack.js.org/guides/tree-shaking/) you can import from `ts-date/esm/*`  
 See [resolve.alias](https://webpack.js.org/configuration/resolve/#resolve-alias) for Webpack, 
 or [rollup-plugin-alias](https://github.com/rollup/rollup-plugin-alias) for Rollup 
 
-   
- 
+
+
 ## Locales
 
 There is different import for each locale: `ts-date/locale/*`  
 For now there is `en` and `ru`
 
-:warning: Directly `ts-date` exports without any locale 
+:warning: Directly `ts-date` exports without any locale  
 
 
 
 
-## Compare with `momentjs`
+## Compare type system with `momentjs`
 With `momentjs` you have no warnings here:  
 ```js
 import * as moment from 'moment';
 function someDateProcessing(isoDate: string): string {
-  const m = moment(isoDate);  
+  const m = moment(isoDate);
   return m.format('YYYY-MM-DD'); // "Invalid date"
 }
 someDateProcessing('The Day After Tomorrow');
 ```
 
-With **ts-date** you forced to make checks or add a `null` as posible result 
+With **ts-date** you forced to make checks or add a `null` as posible result  
 ```js
 import { format, parseIso } from 'ts-date';
 function dateProcessingWithSafetyBelt(pleaseIsoDate: string): string {
   const d = parseIso(pleaseIsoDate); // Type is 'ValidDate | null'
-  
-  // Warning here:   
+
+  // Warning here:
   return format(d, 'YYYY-MM-DD'); // Type is 'string | null'
   // TS2322:Type 'string | null' is not assignable to type 'string'.
-  
-  // To avoid warning do what you should to do:
-  // change function type to 'string | null', 
-  // throw error,
-  // or return another magic string explicitly
+
+  // To avoid warning should:
+  // - change function type to 'string | null'
+  // - throw error
+  // - or return another magic string explicitly
   if (d === null) {
     throw new TypeError(`ISO 8601 format expected`);
   }
@@ -79,9 +79,9 @@ function dateProcessingWithSafetyBelt(pleaseIsoDate: string): string {
 
 
 ## ValidDate type
-`ValidDate` type – the immutable wrapper type under `Date`, actually `ValidDate` becomes a `Date` after compile  
+`ValidDate` type – the immutable wrapper type under `Date`, actually `ValidDate` becomes a `Date` after compile
 
-`ValidDate` creation occurs through methods which will return `null` instead of `Date("Invalid Date")`, and `null` is a valid argument for every method where required `ValidDate`  
+`ValidDate` creation occurs through methods which will return `null` instead of `Date("Invalid Date")`
 ```js
 import { parseIso, format } from 'ts-date/locale/en';
 const d = parseIso('2021-12-21'); // ValidDate | null
@@ -95,7 +95,7 @@ if (d) {
     format(null, 'Do MMMM YYYY'); // Type is 'null'
 }
 ```
-Since `ValidDate` is `Date`, you can use some `Date` methods:  
+Since `ValidDate` is `Date`, you can use some `Date` methods:
 ```js
 const d = parseIso('2021-12-21');
 if (d) {
@@ -106,22 +106,24 @@ To make `ValidDate` immutable, all methods for `Date` mutation are banned in typ
 ```js
 d.setDate(0) // Typescript will warn here
 ```
- 
+
 
 
 ## Browser support
 
 [![Build Status](https://saucelabs.com/browser-matrix/standy.svg)](https://saucelabs.com/beta/builds/5fe7f4ad4e9c4f87842ea80e0a497eb5)
 
-Should work fine without polyfills in every modern browser and IE9+  
+Should work fine without polyfills in every modern browser and IE9+
 Chrome 5+, Edge, Firefox 4.0+, IE 9+, Opera 12+, Safari 5+
+
 
 
 # Api
 
-Mostly methods will return null for null or invalid input
+**NOTE**: Mostly methods will return null for null or invalid input
 
 #### Tokens
+This tokens can be used for parsing and formatting dates:
 
 | token        | meaning              | example           |
 |:-------------|:---------------------|:------------------|
@@ -145,13 +147,16 @@ Mostly methods will return null for null or invalid input
 | Z            | timezone             | -1200..+1200      |
 | ZZ           | timezone             | -12:00..+12:00    |
 
+
 ## Date parsing and creation
 
-#### parse(date: string, template: string): ValidDate | null  
+
+#### parse(date: string, template: string): ValidDate | null
 Parse date by template using tokens
 ```js
 parse('2018 July 12', 'YYYY MMMM D'); // = Date(2018-07-12)
 ```
+
 
 #### parseIso(dateIso: string): ValidDate | null
 Parse most of ISO 8601 formats
@@ -159,19 +164,25 @@ Parse most of ISO 8601 formats
 parseIso('2018-06-12T19:30'); // = Date(2018-06-12T19:30)
 ```
 
+
 #### fromDate(date: Date | number): ValidDate | null
-Creates `ValidDate` from `Date` object  
-Similar to `isValidDate, but returns new valid date or null
+Creates `ValidDate` from `Date` object
+Similar to `isValidDate`, but returns new valid date or null
 
 
 #### newValidDate(...args): ValidDate
 Create `ValidDate`, same signature as `new Date(...)`
 
 
+#### isValidDate(date: Date): boolean
+Type guard for `ValidDate`, returns `true` if date is valid
+
+
 
 ## Date formatting
 
-#### format(ValidDate, template: string): string
+
+#### format(date: ValidDate, template: string): string
 Format by template using tokens
 ```js
 format(new Date('2018-07-12'), 'YYYY MMMM D'); // = '2018 July 12'
@@ -181,8 +192,10 @@ format(new Date('2018-07-12'), 'YYYY MMMM D'); // = '2018 July 12'
 #### formatDateIso(ValidDate): string
 Format as `YYYY-MM-DD`
 
+
 #### formatDateTimeIso(ValidDate): string
 Format as `YYYY-MM-DD[T]HH:MM`
+
 
 #### formatLocalIso(ValidDate): string
 Format as `YYYY-MM-DD[T]HH:MM:SS.sss`
@@ -191,60 +204,64 @@ Format as `YYYY-MM-DD[T]HH:MM:SS.sss`
 
 ## Date manipulations
 
-#### add\[Units](ValidDate, number): ValidDate 
-Adding fixed amount of units.  
-First argument should be `ValidDate`, `null` or either. Result will be same type as input 
+
+#### add\[Units](date: ValidDate, amount: number): ValidDate
+Adding fixed amount of units.
+First argument should be `ValidDate`, `null` or either. Result will be same type as input
 
 ```js
-addMilliseconds(ValidDate, number): ValidDate 
-addSeconds(ValidDate, number): ValidDate
-addMinutes(ValidDate, number): ValidDate
-addHours(ValidDate, number): ValidDate
-addDate(ValidDate, number): ValidDate
-addMonth(ValidDate, number): ValidDate
-addYear(ValidDate, number): ValidDate
+addMilliseconds
+addSeconds
+addMinutes
+addHours
+addDate
+addMonth
+addYear
 ```
 
-### reset\[Units](ValidDate): ValidDate
+
+#### reset\[Units](date: ValidDate): ValidDate
 Reset to default all units after method's name unit
 ```js
-resetYear(ValidDate): ValidDate
-resetMonth(ValidDate): ValidDate
-resetISOWeek(ValidDate): ValidDate
-resetDate(ValidDate): ValidDate
-resetHours(ValidDate): ValidDate
-resetMinutes(ValidDate): ValidDate
-resetSeconds(ValidDate): ValidDate
+resetYear
+resetMonth
+resetISOWeek
+resetDate
+resetHours
+resetMinutes
+resetSeconds
 ```
-Example: 
+Example:
 ```js
 resetYear(newValidDate(2017, 5, 30, 12, 30)) // = Date(2017-01-01)
 ```
 
-### diff\[Units](ValidDate, ValidDate): number
-Return whole amount of [units] between first and second date, same as you expect from `arg1 - arg2`  
+
+#### diff\[Units](d1: ValidDate, d2: ValidDate): number
+Return whole amount of [units] between first and second date, same as you expect from `d1 - d2`  
 In case one of arguments is `null` or `Date("Invalid Date")`, result is `null`
 ```js
-diffMilliseconds(ValidDate, ValidDate): number
-diffSeconds(ValidDate, ValidDate): number
-diffMinutes(ValidDate, ValidDate): number
-diffHours(ValidDate, ValidDate): number
-diffDate(ValidDate, ValidDate): number
-diffMonth(ValidDate, ValidDate): number
-diffYear(ValidDate, ValidDate): number
+diffMilliseconds
+diffSeconds
+diffMinutes
+diffHours
+diffDate
+diffMonth
+diffYear
 ```
-Example: 
+Example:
 ```js
 diffDate(new Date(2018, 5, 10, 18), new Date(2018, 5, 1, 12)) // = 9
 diffDate(new Date(2018, 5, 10, 18), new Date(2018, 5, 1, 20)) // = 8
 ```
 
-### diffCalendar[Units](ValidDate, ValidDate): number
+
+#### diffCalendar[Units](d1: ValidDate, d2: ValidDate): number
 Enumerate units between dates
 ```js
-diffCalendarDate(ValidDate, ValidDate): number
-diffCalendarMonth(ValidDate, ValidDate): number
-diffCalendarYear(ValidDate, ValidDate): number
+diffCalendarDate
+diffCalendarMonth
+diffCalendarYear
 ```
 Example:
 ```js
@@ -256,5 +273,3 @@ function isToday(d: ValidDate) {
 }
 ```
 
-#### isValidDate(Date): boolean
-Type guard for `ValidDate`, returns `true` if date is valid 
