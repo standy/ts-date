@@ -120,9 +120,9 @@ Chrome 5+, Edge, Firefox 4.0+, IE 9+, Opera 12+, Safari 5+
 
 # Api
 
-**NOTE**: Mostly methods will return null for null or invalid input
+**NOTE**: Mostly methods will return `null` for `null` or invalid input
 
-#### Tokens
+### Tokens
 This tokens can be used for parsing and formatting dates:
 
 | token        | meaning              | example           |
@@ -151,30 +151,30 @@ This tokens can be used for parsing and formatting dates:
 ## Date parsing and creation
 
 
-#### parse(date: string, template: string): ValidDate | null
+### parse(date: string, template: string): ValidDate | null
 Parse date by template using tokens
 ```js
 parse('2018 July 12', 'YYYY MMMM D'); // = Date(2018-07-12)
 ```
 
 
-#### parseIso(dateIso: string): ValidDate | null
+### parseIso(dateIso: string): ValidDate | null
 Parse most of ISO 8601 formats
 ```js
 parseIso('2018-06-12T19:30'); // = Date(2018-06-12T19:30)
 ```
 
 
-#### fromDate(date: Date | number): ValidDate | null
+### fromDate(date: Date | number): ValidDate | null
 Creates `ValidDate` from `Date` object
 Similar to `isValidDate`, but returns new valid date or null
 
 
-#### newValidDate(...args): ValidDate
+### newValidDate(...args): ValidDate
 Create `ValidDate`, same signature as `new Date(...)`
 
 
-#### isValidDate(date: Date): boolean
+### isValidDate(date: Date): boolean
 Type guard for `ValidDate`, returns `true` if date is valid
 
 
@@ -182,30 +182,30 @@ Type guard for `ValidDate`, returns `true` if date is valid
 ## Date formatting
 
 
-#### format(date: ValidDate, template: string): string
+### format(date: ValidDate, template: string): string
 Format by template using tokens
 ```js
 format(new Date('2018-07-12'), 'YYYY MMMM D'); // = '2018 July 12'
 ```
 
 
-#### formatDateIso(ValidDate): string
-Format as `YYYY-MM-DD`
+### formatDateIso(ValidDate): string
+Format as `YYYY-MM-DD` ISO string
 
 
-#### formatDateTimeIso(ValidDate): string
-Format as `YYYY-MM-DD[T]HH:MM`
+### formatDateTimeIso(ValidDate): string
+Format as `YYYY-MM-DD[T]HH:MM` ISO string
 
 
-#### formatLocalIso(ValidDate): string
-Format as `YYYY-MM-DD[T]HH:MM:SS.sss`
+### formatLocalIso(ValidDate): string
+Format as `YYYY-MM-DD[T]HH:MM:SS.sss` ISO string
 
 
 
 ## Date manipulations
 
 
-#### add\[Units](date: ValidDate, amount: number): ValidDate
+### add\[Units](date: ValidDate, amount: number): ValidDate
 Adding fixed amount of units.
 First argument should be `ValidDate`, `null` or either. Result will be same type as input
 
@@ -220,7 +220,7 @@ addYear
 ```
 
 
-#### reset\[Units](date: ValidDate): ValidDate
+### reset\[Units](date: ValidDate): ValidDate
 Reset to default all units after method's name unit
 ```js
 resetYear
@@ -237,7 +237,7 @@ resetYear(newValidDate(2017, 5, 30, 12, 30)) // = Date(2017-01-01)
 ```
 
 
-#### diff\[Units](d1: ValidDate, d2: ValidDate): number
+### diff\[Units](d1: ValidDate, d2: ValidDate): number
 Return whole amount of [units] between first and second date, same as you expect from `d1 - d2`  
 In case one of arguments is `null` or `Date("Invalid Date")`, result is `null`
 ```js
@@ -256,7 +256,7 @@ diffDate(new Date(2018, 5, 10, 18), new Date(2018, 5, 1, 20)) // = 8
 ```
 
 
-#### diffCalendar[Units](d1: ValidDate, d2: ValidDate): number
+### diffCalendar[Units](d1: ValidDate, d2: ValidDate): number
 Enumerate units between dates
 ```js
 diffCalendarDate
