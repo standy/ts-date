@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.7"></a>
+## [2.1.7](https://github.com/standy/ts-date/compare/v2.1.6...v2.1.7) (2018-06-13)
+
+
+### Bug Fixes
+
+* correct formatDateIso on particular dates with timezone changes ([21b9ab1](https://github.com/standy/ts-date/commit/21b9ab1)), closes [#4](https://github.com/standy/ts-date/issues/4)
+
+
+
 <a name="2.1.6"></a>
 ## [2.1.6](https://github.com/standy/ts-date/compare/v2.1.5...v2.1.6) (2017-08-12)
 
