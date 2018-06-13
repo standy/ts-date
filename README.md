@@ -144,8 +144,8 @@ This tokens can be used for parsing and formatting dates:
 | mm, m        | minute               | 0..59             |
 | ss, s        | second               | 0..59             |
 | SSS, SS, S   | millisecond          | 0..999            |
-| Z            | timezone             | -1200..+1200      |
-| ZZ           | timezone             | -12:00..+12:00    |
+| Z            | timezone             | -12:00..+12:00    |
+| ZZ           | timezone             | -1200..+1200      |
 
 
 ## Date parsing and creation
