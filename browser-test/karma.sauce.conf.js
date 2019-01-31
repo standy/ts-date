@@ -61,15 +61,15 @@ const sl_launchers = {
 		version: '10',
 		platform: 'Windows 7'
 	},
-	sl_android_latest: {
+	sl_android_5: {
 		base: 'SauceLabs',
 		browserName: 'android',
-		version: 'latest',
+		version: '5.1'
 	},
-	sl_android_4_4: {
+	sl_android_7: {
 		base: 'SauceLabs',
 		browserName: 'android',
-		version: '4.4',
+		version: '6.0'
 	},
 	sl_safari_latest: {
 		base: 'SauceLabs',
