@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.8"></a>
+## [2.1.8](https://github.com/standy/ts-date/compare/v2.1.7...v2.1.8) (2019-01-31)
+
+
+### Bug Fixes
+
+* updated packages, fixes security vulnerabilities in devDependencies ([dc86f09](https://github.com/standy/ts-date/commit/dc86f09))
+
+
+
 <a name="2.1.7"></a>
 ## [2.1.7](https://github.com/standy/ts-date/compare/v2.1.6...v2.1.7) (2018-06-13)
 
