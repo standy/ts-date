@@ -3,6 +3,7 @@ node_modules
 coverage
 .cache
 .npmrc
+.nyc_output
 npm
 src/**/*.js
 locale/**/*.js
