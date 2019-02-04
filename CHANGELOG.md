@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/standy/ts-date/compare/v2.1.8...v2.2.0) (2019-02-04)
+
+
+### Features
+
+* new method - createCustomFormat ([2149307](https://github.com/standy/ts-date/commit/2149307))
+
+
+
 <a name="2.1.8"></a>
 ## [2.1.8](https://github.com/standy/ts-date/compare/v2.1.7...v2.1.8) (2019-01-31)
 
