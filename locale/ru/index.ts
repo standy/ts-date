@@ -1,6 +1,6 @@
 import {createFormat} from '../../src/format/create-format';
 import {createParse, parseOrThrowWrapper} from '../../src/parse/create-parse';
-import defaultFormatters from '../../src/format/default-formatters';
+import {defaultFormatters} from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
 import {ParserObj, FormatterObj, FormatByTemplateFn, ParseByTemplateFn, ParseByTemplateOrThrowFn, ParserData} from '../../src/utils/basic-types';
 import {extend} from '../../src/utils/utils';

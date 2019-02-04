@@ -3,7 +3,7 @@ import * as assert from 'power-assert';
 import {ValidDate} from '../valid-date';
 import {newValidDate, newValidDateOrThrow} from '../create/create-ts-date';
 import {format} from './format'
-import formatters from './default-formatters';
+import {defaultFormatters} from './default-formatters';
 
 describe('format', function () {
 	it('correct formatting', function () {
@@ -102,12 +102,12 @@ describe('format', function () {
 			},
 		} as ValidDate);
 
-		assert.equal(formatters.Z(dateTimezoneMock(180)), '-03:00');
-		assert.equal(formatters.ZZ(dateTimezoneMock(180)), '-0300');
-		assert.equal(formatters.Z(dateTimezoneMock(-600)), '+10:00');
-		assert.equal(formatters.ZZ(dateTimezoneMock(-180)), '+0300');
-		assert.equal(formatters.Z(dateTimezoneMock(0)), '+00:00');
-		assert.equal(formatters.ZZ(dateTimezoneMock(0)), '+0000');
+		assert.equal(defaultFormatters.Z(dateTimezoneMock(180)), '-03:00');
+		assert.equal(defaultFormatters.ZZ(dateTimezoneMock(180)), '-0300');
+		assert.equal(defaultFormatters.Z(dateTimezoneMock(-600)), '+10:00');
+		assert.equal(defaultFormatters.ZZ(dateTimezoneMock(-180)), '+0300');
+		assert.equal(defaultFormatters.Z(dateTimezoneMock(0)), '+00:00');
+		assert.equal(defaultFormatters.ZZ(dateTimezoneMock(0)), '+0000');
 	});
 
 	it('correct format iso weeks', function() {

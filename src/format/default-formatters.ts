@@ -4,7 +4,7 @@ import {newValidDateOrThrow} from '../create/create-ts-date';
 import {resetISOWeek, resetYear} from '../reset/reset-unit';
 import {FormatterObj} from '../utils/basic-types';
 
-const formatters: FormatterObj = {
+export const defaultFormatters: Readonly<FormatterObj> = {
 	// Month: 1, 2, ..., 12
 	'M': date => date.getMonth() + 1,
 
@@ -24,7 +24,7 @@ const formatters: FormatterObj = {
 	'DDD': date => diffCalendarDate(date, resetYear(date)) + 1,
 
 	// Day of year: 001, 002, ..., 366
-	'DDDD': date => leadZero(formatters['DDD'](date), 3),
+	'DDDD': date => leadZero(defaultFormatters['DDD'](date), 3),
 
 	// Day of week: 0, 1, ..., 6
 	'd': date => date.getDay(),
@@ -34,13 +34,13 @@ const formatters: FormatterObj = {
 
 	// ISO week: 1, 2, ..., 53
 	'W': date => {
-		const isoYear = +formatters['GGGG'](date);
+		const isoYear = +defaultFormatters['GGGG'](date);
 		const start = resetISOWeek(newValidDateOrThrow(isoYear, 0, 4));
 		return Math.floor(diffCalendarDate(date, start) / 7) + 1;
 	},
 
 	// ISO week: 01, 02, ..., 53
-	'WW': date => leadZero(formatters['W'](date)),
+	'WW': date => leadZero(defaultFormatters['W'](date)),
 
 	// Year: 00, 01, ..., 99
 	'YY': date => date.getFullYear().toString().slice(-2),
@@ -49,7 +49,7 @@ const formatters: FormatterObj = {
 	'YYYY': date => leadZero(date.getFullYear(), 4),
 
 	// ISO week-numbering year: 00, 01, ..., 99
-	'GG': date => formatters['GGGG'](date).toString().slice(-2),
+	'GG': date => defaultFormatters['GGGG'](date).toString().slice(-2),
 
 	// ISO week-numbering year: 1900, 1901, ..., 2099
 	'GGGG': date => {
@@ -72,7 +72,7 @@ const formatters: FormatterObj = {
 	'h': date => (date.getHours() % 12) || 12,
 
 	// Hour: 01, 02, ..., 12
-	'hh': date => leadZero(formatters['h'](date)),
+	'hh': date => leadZero(defaultFormatters['h'](date)),
 
 	// Minute: 0, 1, ..., 59
 	'm': date => date.getMinutes(),
@@ -116,5 +116,3 @@ function formatTimezone(offset: number, delimeter = '') {
 	return sign + leadZero(hours) + delimeter + leadZero(minutes);
 }
 
-
-export default formatters;
