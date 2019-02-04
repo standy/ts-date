@@ -1,9 +1,11 @@
 import {Month} from '../../src/utils/basic-types';
 import * as assert from 'power-assert';
-import {newValidDate} from '../../src/create/create-ts-date';
+import {newValidDate, newValidDateOrThrow} from '../../src/create/create-ts-date';
 import {
 	format,
 	parse,
+	createCustomFormat,
+	formatters, ValidDate,
 } from './index';
 
 
@@ -49,6 +51,50 @@ describe('ru locale', function () {
 			const [template, correctResult] = FORMATS[i];
 			const result = format(date, template);
 			assert.equal(result, correctResult, `format "${template}"`);
+		}
+	});
+	it('correct createCustomFormat', function () {
+		const customFormat = createCustomFormat({
+			MMM: (d, index, tokens) => {
+				const m: string = formatters['MMMM'](d, index, tokens) + '';
+				if (m.length <= 4) return m;
+				return m.substring(0, 3);
+			}
+		});
+		const FORMAT_BY_DATE: Array<[ValidDate, string, string]> = [
+			[newValidDateOrThrow(2019, Month.Jan, 4), 'D MMM YYYY', '4 янв 2019'],
+			[newValidDateOrThrow(2019, Month.Feb, 4), 'D MMM YYYY', '4 фев 2019'],
+			[newValidDateOrThrow(2019, Month.Mar, 4), 'D MMM YYYY', '4 мар 2019'],
+			[newValidDateOrThrow(2019, Month.Apr, 4), 'D MMM YYYY', '4 апр 2019'],
+			[newValidDateOrThrow(2019, Month.May, 4), 'D MMM YYYY', '4 мая 2019'],
+			[newValidDateOrThrow(2019, Month.Jun, 4), 'D MMM YYYY', '4 июня 2019'],
+			[newValidDateOrThrow(2019, Month.Jul, 4), 'D MMM YYYY', '4 июля 2019'],
+			[newValidDateOrThrow(2019, Month.Aug, 4), 'D MMM YYYY', '4 авг 2019'],
+			[newValidDateOrThrow(2019, Month.Sep, 4), 'D MMM YYYY', '4 сен 2019'],
+			[newValidDateOrThrow(2019, Month.Oct, 4), 'D MMM YYYY', '4 окт 2019'],
+			[newValidDateOrThrow(2019, Month.Nov, 4), 'D MMM YYYY', '4 ноя 2019'],
+			[newValidDateOrThrow(2019, Month.Dec, 4), 'D MMM YYYY', '4 дек 2019'],
+
+			[newValidDateOrThrow(2019, Month.Jan, 4), 'MMM YYYY', 'янв 2019'],
+			[newValidDateOrThrow(2019, Month.Feb, 4), 'MMM YYYY', 'фев 2019'],
+			[newValidDateOrThrow(2019, Month.Mar, 4), 'MMM YYYY', 'март 2019'],
+			[newValidDateOrThrow(2019, Month.Apr, 4), 'MMM YYYY', 'апр 2019'],
+			[newValidDateOrThrow(2019, Month.May, 4), 'MMM YYYY', 'май 2019'],
+			[newValidDateOrThrow(2019, Month.Jun, 4), 'MMM YYYY', 'июнь 2019'],
+			[newValidDateOrThrow(2019, Month.Jul, 4), 'MMM YYYY', 'июль 2019'],
+			[newValidDateOrThrow(2019, Month.Aug, 4), 'MMM YYYY', 'авг 2019'],
+			[newValidDateOrThrow(2019, Month.Sep, 4), 'MMM YYYY', 'сен 2019'],
+			[newValidDateOrThrow(2019, Month.Oct, 4), 'MMM YYYY', 'окт 2019'],
+			[newValidDateOrThrow(2019, Month.Nov, 4), 'MMM YYYY', 'ноя 2019'],
+			[newValidDateOrThrow(2019, Month.Dec, 4), 'MMM YYYY', 'дек 2019'],
+
+			[newValidDateOrThrow(2019, Month.Jan, 1), 'MMM, D MMM, MMMM, D MMMM', 'янв, 1 янв, январь, 1 января'],
+			[newValidDateOrThrow(2019, Month.Jul, 1), 'MMM, D MMM, MMMM, D MMMM', 'июль, 1 июля, июль, 1 июля'],
+		];
+		for (let i = 0; i < FORMAT_BY_DATE.length; i++) {
+			const [date, format, correctResult] = FORMAT_BY_DATE[i];
+			const result = customFormat(date, format);
+			assert.equal(result, correctResult, `customFormat "${format}" "${date}"`);
 		}
 	});
 	it('correct day part format', function () {

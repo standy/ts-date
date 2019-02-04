@@ -1,4 +1,4 @@
-import {createFormat} from '../../src/format/create-format';
+import {createCustomFormatFn, createFormat} from '../../src/format/create-format';
 import {createParse, parseOrThrowWrapper} from '../../src/parse/create-parse';
 import {defaultFormatters} from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
@@ -15,7 +15,7 @@ const weekdays3char = ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн
 const weekdaysFull = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
 const meridiem = ['ночи', 'утра', 'дня', 'вечера'];
 
-const formatters: FormatterObj = {
+export const formatters: FormatterObj = {
 	// Month: янв., фев., ..., дек.
 	'MMM': date => monthsShort[date.getMonth()],
 
@@ -103,5 +103,6 @@ function ordinalParser(key: string, suffix: string): ParserData {
 }
 
 export const format: FormatByTemplateFn = createFormat(extend(defaultFormatters, formatters));
+export const createCustomFormat = createCustomFormatFn(extend(defaultFormatters, formatters));
 export const parse: ParseByTemplateFn = createParse(extend(defaultParsers, parsers));
 export const parseOrThrow: ParseByTemplateOrThrowFn = parseOrThrowWrapper(parse);

@@ -1,6 +1,6 @@
 import {ValidDate} from '../valid-date';
 import {FormatByTemplateFn, Formatter, FormatterObj} from '../utils/basic-types';
-import {tokensRx} from '../utils/utils';
+import {extend, tokensRx} from '../utils/utils';
 import {isValidDate} from '../default-exports';
 
 type Token = string | Formatter;
@@ -46,4 +46,10 @@ export function createFormat(formatters: FormatterObj): FormatByTemplateFn {
 		}
 		return formatByTokens(d, tokens);
 	};
+}
+
+export function createCustomFormatFn(formatters: FormatterObj) {
+	return function (customFormatters: FormatterObj): FormatByTemplateFn {
+		return createFormat(extend(formatters, customFormatters));
+	}
 }
