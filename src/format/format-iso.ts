@@ -2,7 +2,6 @@ import {FormatFn} from '../utils/basic-types';
 import {isValidDate} from '../create/create-ts-date';
 import {leadZero} from '../utils/utils';
 
-
 // YYYY-MM-DD
 export const formatDateIso: FormatFn = (date: Date | null): any => {
 	if (!isValidDate(date)) return null;
@@ -20,4 +19,3 @@ export const formatLocalIso: FormatFn = (date: Date | null): any => {
 	if (!isValidDate(date)) return null;
 	return formatDateTimeIso(date) + ':' + leadZero(date.getSeconds()) + '.' + leadZero(date.getMilliseconds(), 3);
 };
-

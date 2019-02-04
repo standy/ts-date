@@ -17,17 +17,20 @@ export function createParse(parsers: ParserObj): ParseByTemplateFn {
 		// this regexp cant fail because of "|."
 
 		const parsersFn: Array<Parser> = [];
-		const rxStr = tokens.map(token => {
-			const parser = parsers[token];
-			if (parser) {
-				parsersFn.push(parser[1]);
-				const regexpPart = parser[0];
-				return `(${regexpPart})`;
-			}
+		const rxStr = tokens
+			.map(token => {
+				const parser = parsers[token];
+				if (parser) {
+					parsersFn.push(parser[1]);
+					const regexpPart = parser[0];
+					return `(${regexpPart})`;
+				}
 
-			if (token.charAt(0) === '[' && token.charAt(token.length - 1) === ']') token = token.substring(1, token.length - 1);
-			return escapeRegExp(token);
-		}).join('');
+				if (token.charAt(0) === '[' && token.charAt(token.length - 1) === ']')
+					token = token.substring(1, token.length - 1);
+				return escapeRegExp(token);
+			})
+			.join('');
 		const rx = new RegExp('^' + rxStr + '$', 'i');
 
 		const values = dateStr.match(rx);
@@ -39,7 +42,7 @@ export function createParse(parsers: ParserObj): ParseByTemplateFn {
 			parserFn(date, value);
 		});
 		return asValidDateOrNull(date);
-	}
+	};
 }
 
 export function parseOrThrowWrapper(fn: ParseByTemplateFn): ParseByTemplateOrThrowFn {
@@ -47,5 +50,5 @@ export function parseOrThrowWrapper(fn: ParseByTemplateFn): ParseByTemplateOrThr
 		const result = fn(dateStr, template);
 		if (result === null) throw new Error(`Failed to parse date "${dateStr}" by template "${template}"`);
 		return result;
-	}
+	};
 }

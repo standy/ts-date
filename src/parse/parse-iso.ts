@@ -15,11 +15,7 @@ export function parseIso(dateStr: string): ValidDate | null {
 	const D = toNumber(timeList[3], 1);
 
 	const maybeResult = new Date(Y, M, D);
-	const isDateOk = (
-		maybeResult.getDate() === D &&
-		maybeResult.getMonth() === M &&
-		maybeResult.getFullYear() === Y
-	);
+	const isDateOk = maybeResult.getDate() === D && maybeResult.getMonth() === M && maybeResult.getFullYear() === Y;
 	if (!isDateOk) return null;
 	if (!timeList[4]) return maybeResult as ValidDate;
 
@@ -28,11 +24,7 @@ export function parseIso(dateStr: string): ValidDate | null {
 	const s = toNumber(timeList[6], 0);
 	const ms = toNumber(timeList[7], 0) * 1000;
 
-	const isTimeOk = (
-		H < 24 &&
-		m < 60 &&
-		s < 60
-	);
+	const isTimeOk = H < 24 && m < 60 && s < 60;
 	if (!isTimeOk) return null;
 	const tzd = timeList[8];
 
@@ -43,11 +35,7 @@ export function parseIso(dateStr: string): ValidDate | null {
 			const tzH = toNumber(tzdList[0], 0);
 			const tzM = toNumber(tzdList[1], 0);
 
-			const isTzOk = (
-				tzH >= -12 &&
-				tzH <= 12 &&
-				tzM < 60
-			);
+			const isTzOk = tzH >= -12 && tzH <= 12 && tzM < 60;
 			if (!isTzOk) return null;
 
 			tzOffset = tzH * 60 + tzM;
@@ -55,7 +43,7 @@ export function parseIso(dateStr: string): ValidDate | null {
 		tzOffset += maybeResult.getTimezoneOffset();
 	}
 	maybeResult.setHours(H, m - tzOffset, s, ms);
-	return maybeResult as ValidDate
+	return maybeResult as ValidDate;
 }
 
 export function parseIsoOrThrow(dateStr: string): ValidDate {

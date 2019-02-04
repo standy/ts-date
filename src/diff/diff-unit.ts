@@ -2,11 +2,10 @@ import {MS, DiffUnitFn} from '../utils/basic-types';
 import {isValidDate} from '../create/create-ts-date';
 import {absFloor} from '../utils/utils';
 
-
 function diffByUnits(unitsInMs: number): DiffUnitFn {
 	return (d1: Date | null, d2: Date | null): any => {
 		if (!isValidDate(d1) || !isValidDate(d2)) return null;
-		return absFloor((d1.getTime() - d2.getTime()) / unitsInMs)
+		return absFloor((d1.getTime() - d2.getTime()) / unitsInMs);
 	};
 }
 export const diffMilliseconds = diffByUnits(MS.Milliseconds);
@@ -15,7 +14,15 @@ export const diffMinutes = diffByUnits(MS.Minutes);
 export const diffHours = diffByUnits(MS.Hours);
 
 function dateToArray(d: Date): [number, number, number, number, number, number, number] {
-	return [d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds()];
+	return [
+		d.getFullYear(),
+		d.getMonth(),
+		d.getDate(),
+		d.getHours(),
+		d.getMinutes(),
+		d.getSeconds(),
+		d.getMilliseconds(),
+	];
 }
 
 function compareArrays(list1: number[], list2: number[], fromPosition: number) {
@@ -54,4 +61,3 @@ export const diffYear: DiffUnitFn = (d1: Date | null, d2: Date | null): any => {
 	if (!diffTail || diff > 0 === diffTail > 0) return diff;
 	return diff + diffTail;
 };
-

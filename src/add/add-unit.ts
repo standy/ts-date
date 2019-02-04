@@ -1,6 +1,5 @@
 import {AddUnitFn, MS} from '../utils/basic-types';
 
-
 function addTimeFn(ms: number): AddUnitFn {
 	return (d: Date | null, n: number): /*ValidDate | Date | null*/ any => {
 		if (d === null) return null;
@@ -27,7 +26,6 @@ export const addHours = addTimeFn(MS.Hours);
 export const addDate = addFn('getDate', 'setDate');
 export const addMonth = addFn('getMonth', 'setMonth');
 export const addYear = addFn('getFullYear', 'setFullYear');
-
 
 export const addUTCMilliseconds = addFn('getUTCMilliseconds', 'setUTCMilliseconds');
 export const addUTCSeconds = addFn('getUTCSeconds', 'setUTCSeconds');

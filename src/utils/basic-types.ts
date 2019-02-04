@@ -20,9 +20,8 @@ export const enum Month {
 	Sep,
 	Oct,
 	Nov,
-	Dec
+	Dec,
 }
-
 
 export interface DiffUnitFn {
 	(d1: ValidDate, d2: ValidDate): number;
@@ -31,16 +30,13 @@ export interface DiffUnitFn {
 	(d1: Date | null, d2: Date | null): number | null;
 }
 
-
 export interface ResetUnitFn {
 	<T extends ValidDate | Date | null>(d: T): T;
 }
 
-
 export interface AddUnitFn {
 	<T extends ValidDate | Date | null>(d: T, arg: number): T;
 }
-
 
 export interface FormatFn {
 	(d: ValidDate): string;
@@ -53,7 +49,6 @@ export interface FormatByTemplateFn {
 	(d: null, template: string): null;
 	(d: Date | null, template: string): string | null;
 }
-
 
 export interface ParseFn {
 	(dateStr: string): ValidDate | null;
@@ -68,7 +63,7 @@ export interface ParseByTemplateOrThrowFn {
 }
 
 export type Formatter = (date: ValidDate, index?: number, tokens?: (string | Formatter)[]) => string | number;
-export type FormatterObj = { [key: string]: Formatter };
+export type FormatterObj = {[key: string]: Formatter};
 
 export type Parser = (date: Date, value: string) => void;
 export type ParserData = [string, Parser];

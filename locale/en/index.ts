@@ -2,17 +2,35 @@ import {createCustomFormatFn, createFormat} from '../../src/format/create-format
 import {createParse, parseOrThrowWrapper} from '../../src/parse/create-parse';
 import {defaultFormatters} from '../../src/format/default-formatters';
 import defaultParsers from '../../src/parse/default-parsers';
-import {ParserObj, FormatterObj, FormatByTemplateFn, ParseByTemplateFn, ParseByTemplateOrThrowFn} from '../../src/utils/basic-types';
+import {
+	ParserObj,
+	FormatterObj,
+	FormatByTemplateFn,
+	ParseByTemplateFn,
+	ParseByTemplateOrThrowFn,
+} from '../../src/utils/basic-types';
 import {extend} from '../../src/utils/utils';
 export * from '../../src/default-exports';
-
 
 // Note: in English, the names of days of the week and months are capitalized.
 // If you are making a new locale based on this one, check if the same is true for the language you're working on.
 // Generally, formatted dates should look like they are in the middle of a sentence,
 // e.g. in Spanish language the weekdays and months should be in the lowercase.
 const months3char = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const monthsFull = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const monthsFull = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December',
+];
 const weekdays2char = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 const weekdays3char = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const weekdaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -22,29 +40,28 @@ const meridiemFull = ['a.m.', 'p.m.'];
 
 export const formatters: FormatterObj = {
 	// Month: Jan, Feb, ..., Dec
-	'MMM': date => months3char[date.getMonth()],
+	MMM: date => months3char[date.getMonth()],
 
 	// Month: January, February, ..., December
-	'MMMM': date => monthsFull[date.getMonth()],
+	MMMM: date => monthsFull[date.getMonth()],
 
 	// Day of week: Su, Mo, ..., Sa
-	'dd': date => weekdays2char[date.getDay()],
+	dd: date => weekdays2char[date.getDay()],
 
 	// Day of week: Sun, Mon, ..., Sat
-	'ddd': date => weekdays3char[date.getDay()],
+	ddd: date => weekdays3char[date.getDay()],
 
 	// Day of week: Sunday, Monday, ..., Saturday
-	'dddd': date => weekdaysFull[date.getDay()],
+	dddd: date => weekdaysFull[date.getDay()],
 
 	// AM, PM
-	'A': date => meridiemUppercase[date.getHours() < 12 ? 0 : 1],
+	A: date => meridiemUppercase[date.getHours() < 12 ? 0 : 1],
 
 	// am, pm
-	'a': date => meridiemLowercase[date.getHours() < 12 ? 0 : 1],
+	a: date => meridiemLowercase[date.getHours() < 12 ? 0 : 1],
 
 	// a.m., p.m.
-	'aa': date => meridiemFull[date.getHours() < 12 ? 0 : 1],
-
+	aa: date => meridiemFull[date.getHours() < 12 ? 0 : 1],
 };
 
 // Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
@@ -62,38 +79,48 @@ function ordinal(number: number) {
 			case 2:
 				return number + 'nd';
 			case 3:
-				return number + 'rd'
+				return number + 'rd';
 		}
 	}
-	return number + 'th'
+	return number + 'th';
 }
 
-function toLower(s: string) { return s.toLowerCase(); }
+function toLower(s: string) {
+	return s.toLowerCase();
+}
 const months3charLower = months3char.map(toLower);
 const monthsFullLower = monthsFull.map(toLower);
 const parsers: ParserObj = {
 	// Month: Jan, Feb, ..., Dec
-	'MMM': [months3charLower.join('|'), (date, value) => {
-		const index = months3charLower.indexOf(value.toLowerCase());
-		date.setMonth(index);
-	}],
+	MMM: [
+		months3charLower.join('|'),
+		(date, value) => {
+			const index = months3charLower.indexOf(value.toLowerCase());
+			date.setMonth(index);
+		},
+	],
 
 	// Month: January, February, ..., December
-	'MMMM': [monthsFullLower.join('|'), (date, value) => {
-		value = value.toLowerCase();
-		let index = monthsFullLower.indexOf(value);
-		date.setMonth(index);
-	}],
+	MMMM: [
+		monthsFullLower.join('|'),
+		(date, value) => {
+			value = value.toLowerCase();
+			let index = monthsFullLower.indexOf(value);
+			date.setMonth(index);
+		},
+	],
 };
 
 ordinalFormatters.forEach(formatterToken => {
-	parsers[formatterToken + 'o'] = ['\\d+(?:st|nd|rd)', (date, value) => {
-		defaultParsers[formatterToken][1](date, value.slice(0, -2));
-	}];
+	parsers[formatterToken + 'o'] = [
+		'\\d+(?:st|nd|rd)',
+		(date, value) => {
+			defaultParsers[formatterToken][1](date, value.slice(0, -2));
+		},
+	];
 });
 
 export const format: FormatByTemplateFn = createFormat(extend(defaultFormatters, formatters));
 export const createCustomFormat = createCustomFormatFn(extend(defaultFormatters, formatters));
 export const parse: ParseByTemplateFn = createParse(extend(defaultParsers, parsers));
 export const parseOrThrow: ParseByTemplateOrThrowFn = parseOrThrowWrapper(parse);
-

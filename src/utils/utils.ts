@@ -7,12 +7,12 @@ export function leadZero(n: number | string, targetLength = 2) {
 }
 
 export function absFloor(num: number) {
-    if (num < 0) {
-        // -0 -> 0
-        return Math.ceil(num) || 0;
-    } else {
-        return Math.floor(num);
-    }
+	if (num < 0) {
+		// -0 -> 0
+		return Math.ceil(num) || 0;
+	} else {
+		return Math.floor(num);
+	}
 }
 
 export function extend<T, U>(obj1: T, obj2: U): T & U {

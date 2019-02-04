@@ -6,7 +6,7 @@ export function fromDate(date: Date | number | undefined): ValidDate | null {
 }
 
 export function fromDateOrThrow(date: Date | number | undefined): ValidDate {
-	const d = new Date(date instanceof Date ? date.getTime() : date as number);
+	const d = new Date(date instanceof Date ? date.getTime() : (date as number));
 	return asValidDateOrThrow(d, date);
 }
 
@@ -20,10 +20,18 @@ export function asValidDateOrThrow(date: Date, origin: any): ValidDate {
 }
 
 export interface NewValidDateFn {
-   (): ValidDate;
-   (value: number): ValidDate | null;
-   (value: string): ValidDate | null;
-   (year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): ValidDate | null;
+	(): ValidDate;
+	(value: number): ValidDate | null;
+	(value: string): ValidDate | null;
+	(
+		year: number,
+		month: number,
+		date?: number,
+		hours?: number,
+		minutes?: number,
+		seconds?: number,
+		ms?: number,
+	): ValidDate | null;
 }
 export const newValidDate = function(...args: Array<number | string>) {
 	const result = new (Date as any)(...args);
@@ -31,17 +39,24 @@ export const newValidDate = function(...args: Array<number | string>) {
 } as NewValidDateFn;
 
 export interface NewValidDateOrThrowFn {
-   (): ValidDate;
-   (value: number): ValidDate;
-   (value: string): ValidDate;
-   (year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number): ValidDate;
+	(): ValidDate;
+	(value: number): ValidDate;
+	(value: string): ValidDate;
+	(
+		year: number,
+		month: number,
+		date?: number,
+		hours?: number,
+		minutes?: number,
+		seconds?: number,
+		ms?: number,
+	): ValidDate;
 }
 
 export const newValidDateOrThrow = function(...args: Array<number | string>) {
 	const result = new (Date as any)(...args);
 	return asValidDateOrThrow(result, args);
 } as NewValidDateOrThrowFn;
-
 
 export function isValidDate(d: Date | null): d is ValidDate {
 	return d !== null && d instanceof Date && isFinite(d.getTime());
