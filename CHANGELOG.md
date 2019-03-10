@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.2.1"></a>
+## [2.2.1](https://github.com/standy/ts-date/compare/v2.2.0...v2.2.1) (2019-03-10)
+
+
+### Bug Fixes
+
+* parser issue with leap year ([2baf168](https://github.com/standy/ts-date/commit/2baf168)), closes [#5](https://github.com/standy/ts-date/issues/5)
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/standy/ts-date/compare/v2.1.8...v2.2.0) (2019-02-04)
 
