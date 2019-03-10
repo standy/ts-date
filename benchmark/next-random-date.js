@@ -1,5 +1,5 @@
 const dates = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 1000; i++) {
 	dates.push(new Date(Math.random() * Date.now() * 2));
 }
 let i = 0;
