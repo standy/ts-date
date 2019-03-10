@@ -36,7 +36,7 @@ export function createParse(parsers: ParserObj): ParseByTemplateFn {
 		const values = dateStr.match(rx);
 		if (!values) return null;
 		/* NOTE second zero needed to set current timezone */
-		const date = new Date(0, 0);
+		const date = new Date(2000, 0);
 		values.slice(1).forEach((value, index) => {
 			const parserFn = parsersFn[index];
 			parserFn(date, value);

@@ -62,6 +62,11 @@ describe('parse', function() {
 				dateStr: '1.6.17 2:3:4.5',
 				correctResult: new Date(2017, Month.Jun, 1, 2, 3, 4, 500),
 			},
+			{
+				template: 'DDMMYY',
+				dateStr: '290220',
+				correctResult: new Date(2020, Month.Feb, 29),
+			},
 		];
 
 		for (let i = 0; i < FORMATS.length; i++) {
