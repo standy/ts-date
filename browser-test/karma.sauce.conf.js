@@ -31,10 +31,10 @@ const sl_launchers = {
 		version: 'latest',
 		platform: 'Windows 10'
 	},
-	sl_firefox_16_Windows7: {
+	sl_firefox_24_Windows7: {
 		base: 'SauceLabs',
 		browserName: 'firefox',
-		version: '16',
+		version: '24',
 		platform: 'Windows 7'
 	},
 	sl_edge_latest_Windows10: {
@@ -87,11 +87,6 @@ const sl_launchers = {
 		base: 'SauceLabs',
 		browserName: 'iphone',
 		version: '11.2',
-	},
-	sl_iphone_9_3: {
-		base: 'SauceLabs',
-		browserName: 'iphone',
-		version: '9.3',
 	},
 	sl_ipad_10_3: {
 		base: 'SauceLabs',
