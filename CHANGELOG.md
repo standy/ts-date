@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/standy/ts-date/compare/v2.2.2...v2.3.0) (2019-07-27)
+
+
+### Features
+
+* da locale ([8b0d7fa](https://github.com/standy/ts-date/commit/8b0d7fa))
+
+
+
 ### [2.2.2](https://github.com/standy/ts-date/compare/v2.2.1...v2.2.2) (2019-06-06)
 
 
