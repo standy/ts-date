@@ -94,8 +94,10 @@ describe('parseIso', function() {
 	});
 
 	it('correct parse Zulu timezone', function() {
-		const d = parseIso('2017-06-01T12:34:56.789Z');
-		assert.equal(d && d.toISOString(), '2017-06-01T12:34:56.789Z');
+		['2017-06-01T12:34:56.789Z', '2038-10-31T12:10:20.672Z'].forEach(date => {
+			const d = parseIso(date);
+			assert.equal(d && d.toISOString(), date);
+		});
 	});
 
 	it('correct throw if not parsed', function() {
