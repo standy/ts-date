@@ -1,35 +1,42 @@
 language: node_js
 
-cache:
-  directories:
-    - node_modules
-    - browser-test/node_modules
-
 notifications:
   email: false
 
 node_js:
-  - '8'
-  - '9'
-  - '10'
-  - '11'
+  - '12'
 
-before_install:
-  - export TZ=Europe/Paris
+jobs:
+  include:
+    - name: "Sauce test"
+      script: |
+        node scripts/prepare-for-npm
+        cd browser-test
+        npm ci
+        npm run sauce
 
-install:
-  - npm i
-  - cd browser-test && npm i && cd ..
+    - env: TZ=Asia/Tehran
+      script: npm run test
 
-script:
-  - npm run test
-  - node scripts/prepare-for-npm
-  - npm run test:sauce || exit 0
+    - env: TZ=Europe/Paris
+      script: npm run test
 
-deploy:
-  on:
-    branch: master
-    tags: true
-  provider: script
-  skip_cleanup: true
-  script: sh scripts/deploy.sh $TRAVIS_TAG
+    - env: TZ=Australia/Canberra
+      script: npm run test
+
+    - env: TZ=America/Tijuana
+      script: npm run test
+
+    - stage: deploy
+      deploy:
+        on:
+          branch: master
+          tags: true
+        provider: script
+        skip_cleanup: true
+        script: |
+          echo "Deploying to npm (node $(node -v), TZ $TZ)"
+          date +'%D %T %:z (%Z)'
+          node scripts/prepare-for-npm
+          sh scripts/deploy.sh $TRAVIS_TAG
+
