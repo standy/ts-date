@@ -41,10 +41,11 @@ describe('diffPreciseUnit', function() {
 		});
 
 		it('diffPreciseMonth', function() {
-			const tsDate1 = newValidDate(2017, Month.Apr, 14, 12, 30, 59, 100);
-			const tsDate2 = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
-			assert.deepEqual(diffPreciseMonth(tsDate2, tsDate1), 2.5);
-			assert.deepEqual(diffPreciseMonth(tsDate1, tsDate2), -2.5);
+			const tsDate1 = newValidDate(2017, Month.Jun, 28, 12, 30, 59, 100);
+			const tsDate2 = newValidDate(2018, Month.Jun, 1, 12, 30, 59, 100);
+			/* NOTE to get precise number, should avoid month with DST Transition */
+			assert.deepEqual(diffPreciseMonth(tsDate2, tsDate1), 11.1);
+			assert.deepEqual(diffPreciseMonth(tsDate1, tsDate2), -11.1);
 		});
 
 		it('diffPreciseYear', function() {
