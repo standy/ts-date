@@ -34,9 +34,5 @@ jobs:
           tags: true
         provider: script
         skip_cleanup: true
-        script: |
-          echo "Deploying to npm (node $(node -v), TZ $TZ)"
-          date +'%D %T %:z (%Z)'
-          node scripts/prepare-for-npm
-          sh scripts/deploy.sh $TRAVIS_TAG
+        script: sh scripts/deploy.sh $TRAVIS_TAG
 
