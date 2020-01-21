@@ -26,6 +26,9 @@ export function parseIso(dateStr: string): ValidDate | null {
 
 	const isTimeOk = H < 24 && m < 60 && s < 60;
 	if (!isTimeOk) return null;
+
+	maybeResult.setHours(H);
+
 	const tzd = timeList[8];
 
 	let tzOffset = 0;
@@ -42,7 +45,8 @@ export function parseIso(dateStr: string): ValidDate | null {
 		}
 		tzOffset += maybeResult.getTimezoneOffset();
 	}
-	maybeResult.setHours(H, m - tzOffset, s, ms);
+
+	maybeResult.setMinutes(m - tzOffset, s, ms);
 	return maybeResult as ValidDate;
 }
 

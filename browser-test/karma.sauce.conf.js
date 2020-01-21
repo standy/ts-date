@@ -19,10 +19,10 @@ const sl_launchers = {
 		version: 'latest',
 		platform: 'Windows 10'
 	},
-	sl_chrome_26_Windows7: {
+	sl_chrome_old_Windows7: {
 		base: 'SauceLabs',
 		browserName: 'chrome',
-		version: '26',
+		version: '38',
 		platform: 'Windows 7'
 	},
 	sl_firefox_latest_Windows10: {
@@ -31,10 +31,10 @@ const sl_launchers = {
 		version: 'latest',
 		platform: 'Windows 10'
 	},
-	sl_firefox_24_Windows7: {
+	sl_firefox_old_Windows7: {
 		base: 'SauceLabs',
 		browserName: 'firefox',
-		version: '24',
+		version: '44',
 		platform: 'Windows 7'
 	},
 	sl_edge_latest_Windows10: {
@@ -55,10 +55,10 @@ const sl_launchers = {
 		version: '11',
 		platform: 'Windows 8.1'
 	},
-	sl_ie_10_Windows7: {
+	sl_ie_old_Windows7: {
 		base: 'SauceLabs',
 		browserName: 'internet explorer',
-		version: '10',
+		version: '11',
 		platform: 'Windows 7'
 	},
 	sl_android_5: {
@@ -126,7 +126,5 @@ module.exports = function(config) {
 			'dots',
 			'saucelabs',
 		]),
-
-		concurrency: 3,
 	}));
 };
