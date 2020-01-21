@@ -14,8 +14,6 @@
     "release": "standard-version",
     "prepare-for-npm": "node scripts/prepare-for-npm",
     "github-release": "conventional-github-releaser",
-    "commitmsg": "validate-commit-msg",
-    "precommit": "npm test -- --reporter dot",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc npm test",
     "test:browser": "cd browser-test && npm run browser && cd ..",
@@ -38,6 +36,12 @@
     "ts-node": "^8.0.2",
     "typescript": "^3.2.4",
     "validate-commit-msg": "^2.12.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test -- --reporter dot",
+      "commit-msg": "validate-commit-msg"
+    }
   },
   "nyc": {
     "include": [
