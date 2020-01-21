@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.1](https://github.com/standy/ts-date/compare/v2.3.0...v2.3.1) (2020-01-21)
+
+
+### Bug Fixes
+
+* incorrect parsing date at DST ([8f7c516](https://github.com/standy/ts-date/commit/8f7c5163da178b56fa776cbc6760f4d9cf28dfdf))
+
 ## [2.3.0](https://github.com/standy/ts-date/compare/v2.2.2...v2.3.0) (2019-07-27)
 
 
