@@ -9,6 +9,7 @@
     "sauce": "karma start karma.sauce.conf.js"
   },
   "devDependencies": {
+    "assert": "^2.0.0",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-detect-browsers": "^2.3.3",

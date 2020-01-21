@@ -31,6 +31,18 @@ module.exports = {
 			allowJs: false,
 			strict: true,
 		},
+		bundlerOptions: {
+			addNodeGlobals: false,
+			constants: {
+				process: {env: {}},
+			},
+			resolve: {
+				alias: {
+					/* replace 'power-assert' with 'assert' */
+					'power-assert': 'node_modules/assert/build/assert.js',
+				},
+			},
+		},
 		include: [
 			'./src/**/*.ts',
 			'./locale/**/*.ts',
