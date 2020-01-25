@@ -2,6 +2,7 @@ import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
 import {newValidDate} from '../create/create-ts-date';
 import {parseIso, parseIsoOrThrow} from './parse-iso';
+import {randomTimezone, rnd} from '../utils/test-utils';
 
 describe('parseIso', function() {
 	it('correct parsing', function() {
@@ -76,7 +77,7 @@ describe('parseIso', function() {
 			},
 			{
 				/* NOTE Invalid TZ */
-				dateStr: '2017-06-01T09:00+13:00',
+				dateStr: '2017-06-01T09:00+13:60',
 				correctResult: null,
 			},
 		];
@@ -103,5 +104,23 @@ describe('parseIso', function() {
 	it('correct throw if not parsed', function() {
 		assert.throws(() => parseIsoOrThrow('2017-02-30'));
 		assert.deepEqual(parseIsoOrThrow('2017-12-21'), new Date(2017, Month.Dec, 21));
+	});
+
+	/**
+	 * Test skipped because `new Date(iso8601)` fails on old browsers
+	 * */
+	it.skip('random test', function() {
+		this.timeout(600000);
+		const TEST_TIME = 1000;
+		const TEST_START = Date.now();
+		const YEAR_MS = 365 * 864e5;
+
+		do {
+			const ts = rnd(TEST_START - 1000 * YEAR_MS, TEST_START + 1000 * YEAR_MS);
+			const dateIso = new Date(ts).toISOString().substring(0, 23) + randomTimezone();
+			const native = new Date(dateIso);
+			const parsed = parseIso(dateIso);
+			assert.equal(parsed!.toISOString(), native.toISOString());
+		} while (Date.now() - TEST_START < TEST_TIME);
 	});
 });

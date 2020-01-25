@@ -4,7 +4,7 @@ function toNumber(value: string | undefined, defaultValue: number) {
 	return typeof value === 'undefined' ? defaultValue : +value;
 }
 
-//               ( HH )  ( MM )     ( SS )(    MS   )   (      TZD            )
+//                  (  YYYY  )     ( MM )       ( DD )      ( HH )  ( MM )     ( SS )(    MS   )   (      TZD            )
 const ISO_RX = /^\s*(\d{4,6}?)(?:-?(\d\d))?(?:-?(\d\d))?(?:T(\d\d):?(\d\d):?(?:(\d\d)(\.\d{1,3})?)?([+-]\d\d?(?::\d\d)?|Z)?)?\s*$/;
 export function parseIso(dateStr: string): ValidDate | null {
 	if (!dateStr) return null;
@@ -27,26 +27,23 @@ export function parseIso(dateStr: string): ValidDate | null {
 	const isTimeOk = H < 24 && m < 60 && s < 60;
 	if (!isTimeOk) return null;
 
-	maybeResult.setHours(H);
-
 	const tzd = timeList[8];
 
-	let tzOffset = 0;
-	if (tzd) {
-		if (tzd !== 'Z') {
-			const tzdList = tzd.split(':');
-			const tzH = toNumber(tzdList[0], 0);
-			const tzM = toNumber(tzdList[1], 0);
-
-			const isTzOk = tzH >= -12 && tzH <= 12 && tzM < 60;
-			if (!isTzOk) return null;
-
-			tzOffset = tzH * 60 + tzM;
-		}
-		tzOffset += maybeResult.getTimezoneOffset();
+	if (tzd === 'Z') {
+		maybeResult.setUTCFullYear(Y, M, D);
+		maybeResult.setUTCHours(H, m, s, ms);
+	} else if (tzd) {
+		const tzdList = tzd.split(':');
+		const tzH = toNumber(tzdList[0], 0);
+		const tzM = (tzd[0] === '-' ? -1 : 1) * toNumber(tzdList[1], 0);
+		const isTzOk = tzH > -24 && tzH < 24 && tzM < 60;
+		if (!isTzOk) return null;
+		maybeResult.setUTCFullYear(Y, M, D);
+		maybeResult.setUTCHours(H - tzH, m - tzM, s, ms);
+	} else {
+		maybeResult.setHours(H, m, s, ms);
 	}
 
-	maybeResult.setMinutes(m - tzOffset, s, ms);
 	return maybeResult as ValidDate;
 }
 
