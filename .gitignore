@@ -8,3 +8,4 @@ npm
 src/**/*.js
 locale/**/*.js
 tmp
+dist
