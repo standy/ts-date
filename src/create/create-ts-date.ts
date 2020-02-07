@@ -34,7 +34,11 @@ export interface NewValidDateFn {
 	): ValidDate | null;
 }
 export const newValidDate = function(...args: Array<number | string>) {
-	const result = new (Date as any)(...args);
+	const dateArgs: [any, ...any[]] = [undefined];
+	for (let i = 0; i < arguments.length; i++) {
+		dateArgs[i + 1] = arguments[i];
+	}
+	const result = new (Date.bind.apply(Date, dateArgs) as any)();
 	return asValidDateOrNull(result);
 } as NewValidDateFn;
 
@@ -54,8 +58,12 @@ export interface NewValidDateOrThrowFn {
 }
 
 export const newValidDateOrThrow = function(...args: Array<number | string>) {
-	const result = new (Date as any)(...args);
-	return asValidDateOrThrow(result, args);
+	const dateArgs: [any, ...any[]] = [undefined];
+	for (let i = 0; i < arguments.length; i++) {
+		dateArgs[i + 1] = arguments[i];
+	}
+	const result = new (Date.bind.apply(Date, dateArgs) as any)();
+	return asValidDateOrThrow(result, dateArgs);
 } as NewValidDateOrThrowFn;
 
 export function isValidDate(d: Date | null): d is ValidDate {
