@@ -14,7 +14,6 @@
     "dev": "rollup -c -w",
     "prettify": "prettier --write \"**/*.ts\"",
     "release": "standard-version",
-    "prepare-for-npm": "node scripts/prepare-for-npm",
     "github-release": "conventional-github-releaser",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc npm test",

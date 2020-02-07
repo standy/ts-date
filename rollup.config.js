@@ -5,7 +5,7 @@ import {emptyDirSync, copySync, writeFileSync} from 'fs-extra';
 import * as ts from 'typescript';
 import * as glob from 'glob';
 
-const OUT_DIR = 'npm';
+const OUT_DIR = 'dist';
 
 /**
  * Setup Npm token
