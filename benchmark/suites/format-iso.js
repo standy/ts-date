@@ -1,6 +1,6 @@
 const Benchmark = require('benchmark');
 const nextRandomDate = require('../next-random-date');
-const tsDate = require('../../npm/locale/en/index');
+const tsDate = require('../../dist/locale/en/index');
 const moment = require('moment');
 const dateFns = require('date-fns');
 

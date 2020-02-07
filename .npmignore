@@ -1,9 +1,0 @@
-.idea
-.nyc_output
-.gitignore
-.travis.yml
-compile
-coverage
-src
-tsconfig.json
-package-lock.json

@@ -2,14 +2,14 @@
 
 echo "Deploy for tag: '$1'";
 date +'%D %T %:z (%Z)'
-node scripts/prepare-for-npm
+npm run build
 
 if echo "$1" | grep -Eq "^v[0-9]+\.[0-9]+\.[0-9]+$"
 then
-    npm publish ./npm;
+    npm publish ./dist;
     npm run coveralls;
 else
-    npm publish ./npm --tag next;
+    npm publish ./dist --tag next;
 fi
 
 npm run github-release || true;

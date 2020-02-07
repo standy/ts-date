@@ -10,7 +10,6 @@ jobs:
   include:
     - name: "Sauce test"
       script: |
-        node scripts/prepare-for-npm
         cd browser-test
         npm ci
         npm run sauce
