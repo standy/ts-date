@@ -12,6 +12,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "update-readme": "node ./index.js > README.md",
     "start": "node ./index.js"
   }
 }
