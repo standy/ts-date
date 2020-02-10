@@ -1,6 +1,6 @@
 {
   "name": "ts-date",
-  "version": "2.3.3",
+  "version": "3.0.0-canary.0",
   "description": "Typescript Date library",
   "author": {
     "name": "Andrey Mostovoy",
