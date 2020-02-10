@@ -8,11 +8,14 @@
   "dependencies": {
     "benchmark": "^2.1.4",
     "date-fns": "^2.9.0",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "ts-date": "^2.3.3"
   },
   "devDependencies": {},
   "scripts": {
     "update-readme": "node ./index.js > README.md",
+    "compare-with-previous": "node ./index.js --compare-with-previous",
+    "debug": "node ./index.js --compare-with-previous --debug",
     "start": "node ./index.js"
   }
 }

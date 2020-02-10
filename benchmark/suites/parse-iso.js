@@ -1,6 +1,8 @@
 const Benchmark = require('benchmark');
 const nextRandomDate = require('../next-random-date');
+const names = require('../names');
 const tsDate = require('../../dist/locale/en/index');
+const tsDatePrev = require('ts-date');
 const moment = require('moment');
 const dateFns = require('date-fns');
 
@@ -14,13 +16,16 @@ onCycle();
 
 const suite = new Benchmark.Suite('Parse from ISO 8601 string');
 suite
-	.add('moment', function() {
+	.add(names.moment, function() {
 		return moment(dateStr);
 	}, {onCycle})
-	.add('date-fns', function() {
+	.add(names.dateFns, function() {
 		return dateFns.parse(dateStr);
 	}, {onCycle})
-	.add('ts-date', function() {
+	.add(names.tsDatePrev, function() {
+		return tsDatePrev.parseIso(dateStr);
+	}, {onCycle})
+	.add(names.tsDate, function() {
 		return tsDate.parseIso(dateStr);
 	}, {onCycle})
 ;

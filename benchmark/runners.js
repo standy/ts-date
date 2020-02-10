@@ -1,10 +1,24 @@
-function runSuite(suite, isDebug) {
+const options = require('./options');
+const names = require('./names');
+
+function runSuite(suiteOrig) {
+	const suite = suiteOrig.filter(s => {
+		if (options.compareWithPrevious) {
+			return s.name === names.tsDatePrev || s.name === names.tsDate;
+		} else {
+			return s.name !== names.tsDatePrev;
+		}
+	});
+	suite.name = suiteOrig.name;
+
+	suite.on('start', logStart);
+	if (options.isDebug) {
+		suite.on('start', logMethodResults);
+	}
+	suite.on('cycle', logResults);
+	suite.on('complete', logComplete);
+	suite.run();
 	return suite
-		.on('start', logStart)
-		.on('start', logMethodResults(isDebug))
-		.on('cycle', logResults)
-		.on('complete', logComplete)
-		.run();
 }
 let firstCycle = null;
 
@@ -33,13 +47,10 @@ function logStart() {
 	firstCycle = null;
 }
 
-function logMethodResults(isDebug) {
-	return function() {
-		if (!isDebug) return;
-		this.forEach(s => {
-			console.log(padl(32, `result for "${s.name}" is:`), s.fn());
-		});
-	};
+function logMethodResults() {
+	this.forEach(s => {
+		console.log(padl(32, `result for "${s.name}" is:`), s.fn());
+	});
 }
 
 function logComplete() {

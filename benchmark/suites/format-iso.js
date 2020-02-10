@@ -1,6 +1,8 @@
 const Benchmark = require('benchmark');
 const nextRandomDate = require('../next-random-date');
+const names = require('../names');
 const tsDate = require('../../dist/locale/en/index');
+const tsDatePrev = require('ts-date');
 const moment = require('moment');
 const dateFns = require('date-fns');
 
@@ -16,16 +18,19 @@ onCycle();
 
 const suite = new Benchmark.Suite(`Format as ISO 8601 string`);
 suite
-	.add('moment', function() {
+	.add(names.moment, function() {
 		return moment(date).format();
 	}, {onCycle})
-	.add('moment cached', function() {
+	.add(names.momentCached, function() {
 		return dateMoment.format();
 	}, {onCycle})
-	.add('date-fns', function() {
+	.add(names.dateFns, function() {
 		return dateFns.format(date);
 	}, {onCycle})
-	.add('ts-date', function() {
+	.add(names.tsDatePrev, function() {
+		return tsDatePrev.formatLocalIso(date);
+	}, {onCycle})
+	.add(names.tsDate, function() {
 		return tsDate.formatLocalIso(date);
 	}, {onCycle})
 ;

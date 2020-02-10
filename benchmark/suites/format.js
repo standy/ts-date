@@ -1,6 +1,8 @@
 const Benchmark = require('benchmark');
 const nextRandomDate = require('../next-random-date');
+const names = require('../names');
 const tsDate = require('../../dist/locale/en/index');
+const tsDatePrev = require('ts-date');
 const moment = require('moment');
 const dateFns = require('date-fns');
 
@@ -17,16 +19,19 @@ onCycle();
 
 const suite = new Benchmark.Suite(`Format by pattern "${pattern}"`);
 suite
-	.add('moment', function() {
+	.add(names.moment, function() {
 		return moment(date).format(pattern);
 	}, {onCycle})
-	.add('moment cached', function() {
+	.add(names.momentCached, function() {
 		return dateMoment.format(pattern);
 	}, {onCycle})
-	.add('date-fns', function() {
+	.add(names.dateFns, function() {
 		return dateFns.format(date, pattern);
 	}, {onCycle})
-	.add('ts-date', function() {
+	.add(names.tsDatePrev, function() {
+		return tsDatePrev.format(date, pattern);
+	}, {onCycle})
+	.add(names.tsDate, function() {
 		return tsDate.format(date, pattern);
 	}, {onCycle})
 ;

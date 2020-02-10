@@ -1,6 +1,8 @@
 const Benchmark = require('benchmark');
 const nextRandomDate = require('../next-random-date');
+const names = require('../names');
 const tsDate = require('../../dist/locale/en/index');
+const tsDatePrev = require('ts-date');
 const moment = require('moment');
 const dateFns = require('date-fns');
 
@@ -20,16 +22,19 @@ onCycle();
 
 const suite = new Benchmark.Suite('Difference in days between two dates');
 suite
-	.add('moment', function() {
+	.add(names.moment, function() {
 		return moment(d1).diff(d2, 'd')
 	}, {onCycle})
-	.add('moment cached', function() {
+	.add(names.momentCached, function() {
 		return d1Moment.diff(d2, 'd')
 	}, {onCycle})
-	.add('date-fns', function() {
+	.add(names.dateFns, function() {
 		return dateFns.differenceInDays(d1, d2)
 	}, {onCycle})
-	.add('ts-date', function() {
+	.add(names.tsDatePrev, function() {
+		return tsDatePrev.diffDate(d1, d2)
+	}, {onCycle})
+	.add(names.tsDate, function() {
 		return tsDate.diffDate(d1, d2)
 	}, {onCycle})
 ;
