@@ -154,7 +154,11 @@ describe('parseIso', function() {
 			const dateIso = new Date(ts).toISOString().slice(0, -1) + randomTimezone();
 			const native = new Date(dateIso);
 			const parsed = parseIso(dateIso);
-			assert.equal(parsed!.toISOString(), native.toISOString());
+			if (parsed) {
+				assert.deepEqual(parsed, native, dateIso);
+			} else {
+				assert.strictEqual(NaN, native.getTime(), dateIso);
+			}
 		} while (Date.now() - TEST_START < TEST_TIME);
 	});
 });
