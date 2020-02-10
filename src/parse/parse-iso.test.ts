@@ -57,6 +57,11 @@ describe('parseIso', function() {
 				correctResult: null,
 			},
 			{
+				/* NOTE too much seconds */
+				dateStr: '2017-06-01T12:34:567',
+				correctResult: null,
+			},
+			{
 				dateStr: '',
 				correctResult: null,
 			},
@@ -79,6 +84,16 @@ describe('parseIso', function() {
 				/* NOTE Invalid TZ */
 				dateStr: '2017-06-01T09:00+13:60',
 				correctResult: null,
+			},
+			{
+				/* NOTE there is no fractional milliseconds in Date object */
+				dateStr: '2017-06-01T12:34:56.78999999999999999',
+				correctResult: newValidDate(2017, Month.Jun, 1, 12, 34, 56, 789),
+			},
+			{
+				/* NOTE there is no fractional milliseconds in Date object */
+				dateStr: '2017-06-01T12:34:56.7890123456789-03:00',
+				correctResult: newValidDate('2017-06-01T15:34:56.789Z'),
 			},
 		];
 

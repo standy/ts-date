@@ -3,9 +3,12 @@ import {ValidDate} from '../valid-date';
 function toNumber(value: string | undefined, defaultValue: number) {
 	return typeof value === 'undefined' ? defaultValue : +value;
 }
+function toNumberMs(value: string | undefined) {
+	return typeof value === 'undefined' ? 0 : +value.substring(0, 4) * 1000;
+}
 
-//                  (  YYYY  )     ( MM )       ( DD )      ( HH )  ( MM )     ( SS )(    MS   )   (      TZD            )
-const ISO_RX = /^\s*(\d{4,6}?)(?:-?(\d\d))?(?:-?(\d\d))?(?:T(\d\d):?(\d\d):?(?:(\d\d)(\.\d{1,3})?)?([+-]\d\d?(?::\d\d)?|Z)?)?\s*$/;
+//                  (  YYYY  )     ( MM )       ( DD )      ( HH )  ( MM )     ( SS )(  MS )   (      TZD            )
+const ISO_RX = /^\s*(\d{4,6}?)(?:-?(\d\d))?(?:-?(\d\d))?(?:T(\d\d):?(\d\d):?(?:(\d\d)(\.\d+)?)?([+-]\d\d?(?::\d\d)?|Z)?)?\s*$/;
 export function parseIso(dateStr: string): ValidDate | null {
 	if (!dateStr) return null;
 	const timeList = dateStr.match(ISO_RX);
@@ -22,7 +25,7 @@ export function parseIso(dateStr: string): ValidDate | null {
 	const H = toNumber(timeList[4], 0);
 	const m = toNumber(timeList[5], 0);
 	const s = toNumber(timeList[6], 0);
-	const ms = toNumber(timeList[7], 0) * 1000;
+	const ms = toNumberMs(timeList[7]);
 
 	const isTimeOk = H < 24 && m < 60 && s < 60;
 	if (!isTimeOk) return null;
