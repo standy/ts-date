@@ -2,7 +2,7 @@ import {Month} from '../utils/basic-types';
 import * as assert from 'power-assert';
 import {ValidDate} from '../valid-date';
 import {newValidDate, newValidDateOrThrow} from '../create/create-ts-date';
-import {format} from './format';
+import {extendFormat, format} from './format';
 import {defaultFormatters} from './default-formatters';
 
 describe('format', function() {
@@ -74,5 +74,33 @@ describe('format', function() {
 		assert.equal(format(d2, template), '2016-W52-7');
 		const d3 = newValidDateOrThrow(2012, Month.Dec, 31); /* Monday */
 		assert.equal(format(d3, template), '2013-W01-1');
+	});
+
+	it('correct extending format', function() {
+		extendFormat({
+			season: date => {
+				const index = Math.floor((date.getMonth() + 1) % 12 / 3);
+				return ['winter', 'spring', 'summer', 'autumn'][index];
+			},
+		});
+		const template = '[season] season YY';
+		const checks: [ValidDate | null, string][] = [
+			[newValidDate(2017, Month.Jan, 1), 'season winter 17'],
+			[newValidDate(2017, Month.Feb, 1), 'season winter 17'],
+			[newValidDate(2017, Month.Mar, 1), 'season spring 17'],
+			[newValidDate(2017, Month.Apr, 1), 'season spring 17'],
+			[newValidDate(2017, Month.May, 1), 'season spring 17'],
+			[newValidDate(2017, Month.Jun, 1), 'season summer 17'],
+			[newValidDate(2017, Month.Jul, 1), 'season summer 17'],
+			[newValidDate(2017, Month.Aug, 1), 'season summer 17'],
+			[newValidDate(2017, Month.Sep, 1), 'season autumn 17'],
+			[newValidDate(2017, Month.Oct, 1), 'season autumn 17'],
+			[newValidDate(2017, Month.Nov, 1), 'season autumn 17'],
+			[newValidDate(2017, Month.Dec, 1), 'season winter 17'],
+		];
+		for (let i = 0; i < checks.length; i++) {
+			const [date, correctResult] = checks[i];
+			assert.equal(format(date, template), correctResult)
+		}
 	});
 });
