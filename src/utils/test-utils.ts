@@ -1,9 +1,11 @@
 import {leadZero} from './utils';
 
+/* istanbul ignore next */
 export function rnd(min: number, max: number): number {
 	return min + Math.floor(Math.random() * (max - min + 1));
 }
 
+/* istanbul ignore next */
 export function randomTimezone(): string {
 	const r = Math.random();
 	if (r < 0.6) {
