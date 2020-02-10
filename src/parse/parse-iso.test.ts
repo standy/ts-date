@@ -95,6 +95,26 @@ describe('parseIso', function() {
 				dateStr: '2017-06-01T12:34:56.7890123456789-03:00',
 				correctResult: newValidDate('2017-06-01T15:34:56.789Z'),
 			},
+			{
+				/* NOTE 6-digit years */
+				dateStr: '+202017-06-01T12:34:56.789',
+				correctResult: newValidDate(202017, Month.Jun, 1, 12, 34, 56, 789),
+			},
+			{
+				/* NOTE 6-digit years BC */
+				dateStr: '-202017-06-01T12:34:56.789',
+				correctResult: newValidDate(-202017, Month.Jun, 1, 12, 34, 56, 789),
+			},
+			{
+				/* NOTE first century */
+				dateStr: '0017-06-01T12:34:56.789Z',
+				correctResult: newValidDate('0017-06-01T12:34:56.789Z'),
+			},
+			{
+				/* NOTE 2-digit years */
+				dateStr: '17-06-01T12:34:56.789Z',
+				correctResult: null,
+			},
 		];
 
 		for (let i = 0; i < FORMATS.length; i++) {
@@ -128,11 +148,10 @@ describe('parseIso', function() {
 		this.timeout(600000);
 		const TEST_TIME = 1000;
 		const TEST_START = Date.now();
-		const YEAR_MS = 365 * 864e5;
 
 		do {
-			const ts = rnd(TEST_START - 1000 * YEAR_MS, TEST_START + 1000 * YEAR_MS);
-			const dateIso = new Date(ts).toISOString().substring(0, 23) + randomTimezone();
+			const ts = rnd(-8e15, 8e15);
+			const dateIso = new Date(ts).toISOString().slice(0, -1) + randomTimezone();
 			const native = new Date(dateIso);
 			const parsed = parseIso(dateIso);
 			assert.equal(parsed!.toISOString(), native.toISOString());

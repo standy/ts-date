@@ -7,8 +7,8 @@ function toNumberMs(value: string | undefined) {
 	return typeof value === 'undefined' ? 0 : +value.substring(0, 4) * 1000;
 }
 
-//                  (  YYYY  )     ( MM )       ( DD )      ( HH )  ( MM )     ( SS )(  MS )   (      TZD            )
-const ISO_RX = /^\s*(\d{4,6}?)(?:-?(\d\d))?(?:-?(\d\d))?(?:T(\d\d):?(\d\d):?(?:(\d\d)(\.\d+)?)?([+-]\d\d?(?::\d\d)?|Z)?)?\s*$/;
+//                  (    YYYY     )     ( MM )       ( DD )      ( HH )  ( MM )     ( SS )(  MS )   (      TZD            )
+const ISO_RX = /^\s*([+-]?\d{4,6}?)(?:-?(\d\d))?(?:-?(\d\d))?(?:T(\d\d):?(\d\d):?(?:(\d\d)(\.\d+)?)?([+-]\d\d?(?::\d\d)?|Z)?)?\s*$/;
 export function parseIso(dateStr: string): ValidDate | null {
 	if (!dateStr) return null;
 	const timeList = dateStr.match(ISO_RX);
@@ -18,6 +18,9 @@ export function parseIso(dateStr: string): ValidDate | null {
 	const D = toNumber(timeList[3], 1);
 
 	const maybeResult = new Date(Y, M, D);
+	if (Y <= 99 && Y >= 0) {
+		maybeResult.setFullYear(Y);
+	}
 	const isDateOk = maybeResult.getDate() === D && maybeResult.getMonth() === M && maybeResult.getFullYear() === Y;
 	if (!isDateOk) return null;
 	if (!timeList[4]) return maybeResult as ValidDate;
