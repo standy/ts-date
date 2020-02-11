@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/standy/ts-date/compare/v2.3.3...v3.0.0) (2020-02-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* changed bundler, so there is a tiny chance of breaking
+
+### Features
+
+* allow to extend format method ([713cf93](https://github.com/standy/ts-date/commit/713cf9313e1cb1fb96d5e493d4d324e4c098f0fd)), closes [#17](https://github.com/standy/ts-date/issues/17)
+* move to rollup ([b13576a](https://github.com/standy/ts-date/commit/b13576ac24ba269563718c211211a9fc5dd19a15)), closes [#13](https://github.com/standy/ts-date/issues/13)
+* parseIso with 6-digit years ([5d2b6da](https://github.com/standy/ts-date/commit/5d2b6da4bff56ebba35254bf54cffaf4ac3cf6dd))
+
+
+### Bug Fixes
+
+* correct handle fraction of a seconds in parseIso ([0f79334](https://github.com/standy/ts-date/commit/0f79334ca79b0398c1568419f1626447059618b9)), closes [#16](https://github.com/standy/ts-date/issues/16)
+
 ## [3.0.0-canary.0](https://github.com/standy/ts-date/compare/v2.3.3...v3.0.0-canary.0) (2020-02-10)
 
 
