@@ -31,16 +31,12 @@ export interface FormatByTemplateFn {
 	<T extends ValidDate | Date | null>(d: T, template: string): FormatFn<T>;
 }
 
-export interface ParseFn {
-	(dateStr: string): ValidDate | null;
-}
-
 export interface ParseByTemplateFn {
 	(dateStr: string, template: string): ValidDate | null;
 }
 
 export interface ParseByTemplateOrThrowFn {
-	(dateStr: string, template: string): ValidDate | null;
+	(dateStr: string, template: string): ValidDate;
 }
 
 export type Formatter = (date: ValidDate, index?: number, tokens?: (string | Formatter)[]) => string | number;
