@@ -1,7 +1,7 @@
 import {ValidDate} from '../valid-date';
 
 export const enum MS {
-	Milliseconds = 1, // 1000;
+	Milliseconds = 1, // 1;
 	Seconds = 1e3, // 1000;
 	Minutes = 6e4, // 1000 * 60;
 	Hours = 36e5, // 1000 * 60 * 60;
@@ -40,8 +40,8 @@ export interface ParseByTemplateOrThrowFn {
 }
 
 export type Formatter = (date: ValidDate, index?: number, tokens?: (string | Formatter)[]) => string | number;
-export type FormatterObj = {[key: string]: Formatter};
+export type FormatterObj = Readonly<Record<string, Formatter>>;
 
 export type Parser = (date: Date, value: string) => void;
 export type ParserData = [string, Parser];
-export type ParserObj = {[key: string]: ParserData};
+export type ParserObj = Readonly<Record<string, ParserData>>;

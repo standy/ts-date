@@ -8,6 +8,8 @@ import {
 	FormatByTemplateFn,
 	ParseByTemplateFn,
 	ParseByTemplateOrThrowFn,
+	Formatter,
+	ParserData,
 } from '../../src/utils/basic-types';
 import {extend} from '../../src/utils/utils';
 export * from '../../src/default-exports';
@@ -59,13 +61,19 @@ export const formatters: FormatterObj = {
 
 	// a.m., p.m.
 	aa: date => meridiemFull[date.getHours() < 12 ? 0 : 1],
+
+	Mo: ordinalFormatter('M'),
+	Do: ordinalFormatter('D'),
+	DDDo: ordinalFormatter('DDD'),
+	do: ordinalFormatter('d'),
+	Qo: ordinalFormatter('Q'),
+	Wo: ordinalFormatter('W'),
 };
 
 // Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
-const ordinalFormatters = ['M', 'D', 'DDD', 'd', 'Q', 'W'];
-ordinalFormatters.forEach(formatterToken => {
-	formatters[formatterToken + 'o'] = date => ordinal(defaultFormatters[formatterToken](date) as number);
-});
+function ordinalFormatter(formatterToken: string): Formatter {
+	return date => ordinal(defaultFormatters[formatterToken](date) as number);
+}
 
 function ordinal(number: number) {
 	return number + '.';
@@ -95,16 +103,24 @@ const parsers: ParserObj = {
 			date.setMonth(index);
 		},
 	],
+
+	Mo: ordinalParser('M'),
+	Do: ordinalParser('D'),
+	DDDo: ordinalParser('DDD'),
+	do: ordinalParser('d'),
+	Qo: ordinalParser('Q'),
+	Wo: ordinalParser('W'),
 };
 
-ordinalFormatters.forEach(formatterToken => {
-	parsers[formatterToken + 'o'] = [
+// Generate ordinal version of parsers: M -> Mo, D -> Do, etc.
+function ordinalParser(token: string): ParserData {
+	return [
 		'\\d+(?:[.])',
 		(date, value) => {
-			defaultParsers[formatterToken][1](date, value.slice(0, -1));
+			defaultParsers[token][1](date, value.slice(0, -1));
 		},
 	];
-});
+}
 
 export const format: FormatByTemplateFn = createFormat(extend(defaultFormatters, formatters));
 export const createCustomFormat = createCustomFormatFn(extend(defaultFormatters, formatters));

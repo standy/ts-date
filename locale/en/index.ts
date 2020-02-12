@@ -8,6 +8,8 @@ import {
 	FormatByTemplateFn,
 	ParseByTemplateFn,
 	ParseByTemplateOrThrowFn,
+	ParserData,
+	Formatter,
 } from '../../src/utils/basic-types';
 import {extend} from '../../src/utils/utils';
 export * from '../../src/default-exports';
@@ -62,13 +64,19 @@ export const formatters: FormatterObj = {
 
 	// a.m., p.m.
 	aa: date => meridiemFull[date.getHours() < 12 ? 0 : 1],
+
+	Mo: ordinalFormatter('M'),
+	Do: ordinalFormatter('D'),
+	DDDo: ordinalFormatter('DDD'),
+	do: ordinalFormatter('d'),
+	Qo: ordinalFormatter('Q'),
+	Wo: ordinalFormatter('W'),
 };
 
 // Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
-const ordinalFormatters = ['M', 'D', 'DDD', 'd', 'Q', 'W'];
-ordinalFormatters.forEach(formatterToken => {
-	formatters[formatterToken + 'o'] = date => ordinal(defaultFormatters[formatterToken](date) as number);
-});
+function ordinalFormatter(formatterToken: string): Formatter {
+	return date => ordinal(defaultFormatters[formatterToken](date) as number);
+}
 
 function ordinal(number: number) {
 	const rem100 = number % 100;
@@ -90,6 +98,7 @@ function toLower(s: string) {
 }
 const months3charLower = months3char.map(toLower);
 const monthsFullLower = monthsFull.map(toLower);
+
 const parsers: ParserObj = {
 	// Month: Jan, Feb, ..., Dec
 	MMM: [
@@ -109,18 +118,26 @@ const parsers: ParserObj = {
 			date.setMonth(index);
 		},
 	],
+
+	Mo: ordinalParser('M'),
+	Do: ordinalParser('D'),
+	DDDo: ordinalParser('DDD'),
+	do: ordinalParser('d'),
+	Qo: ordinalParser('Q'),
+	Wo: ordinalParser('W'),
 };
 
-ordinalFormatters.forEach(formatterToken => {
-	parsers[formatterToken + 'o'] = [
+// Generate ordinal version of parsers: M -> Mo, D -> Do, etc.
+function ordinalParser(token: string): ParserData {
+	return [
 		'\\d+(?:st|nd|rd)',
 		(date, value) => {
-			defaultParsers[formatterToken][1](date, value.slice(0, -2));
+			defaultParsers[token][1](date, value.slice(0, -2));
 		},
 	];
-});
+}
 
-export const format: FormatByTemplateFn = createFormat(extend(defaultFormatters, formatters));
-export const createCustomFormat = createCustomFormatFn(extend(defaultFormatters, formatters));
-export const parse: ParseByTemplateFn = createParse(extend(defaultParsers, parsers));
+export const format: FormatByTemplateFn = createFormat(/*@__PURE__*/ extend(defaultFormatters, formatters));
+export const createCustomFormat = createCustomFormatFn(/*@__PURE__*/ extend(defaultFormatters, formatters));
+export const parse: ParseByTemplateFn = createParse(/*@__PURE__*/ extend(defaultParsers, parsers));
 export const parseOrThrow: ParseByTemplateOrThrowFn = parseOrThrowWrapper(parse);

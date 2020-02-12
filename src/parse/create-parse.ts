@@ -10,7 +10,7 @@ function escapeRegExp(text: string) {
 }
 
 export function createParse(parsers: ParserObj): ParseByTemplateFn {
-	const RX_TOKENS = tokensRx(parsers);
+	const RX_TOKENS = /*@__PURE__*/tokensRx(parsers);
 
 	return function parse(dateStr: string, template: string): ValidDate | null {
 		const tokens = template.match(RX_TOKENS) as string[];

@@ -15,6 +15,6 @@ export const format: FormatByTemplateFn = createFormat(commonFormatters);
  */
 export function extendFormat(formatters: FormatterObj) {
 	for (const key in formatters) {
-		commonFormatters[key] = formatters[key];
+		(commonFormatters as any)[key] = formatters[key];
 	}
 }

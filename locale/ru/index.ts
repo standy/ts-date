@@ -11,6 +11,7 @@ import {
 	ParserData,
 } from '../../src/utils/basic-types';
 import {extend} from '../../src/utils/utils';
+import {ValidDate} from '../../src/valid-date';
 export * from '../../src/default-exports';
 
 // http://new.gramota.ru/spravka/buro/search-answer?s=242637
@@ -48,6 +49,19 @@ const weekdays3char = ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн
 const weekdaysFull = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
 const meridiem = ['ночи', 'утра', 'дня', 'вечера'];
 
+function timeOfDay(date: ValidDate) {
+	const hours = date.getHours();
+	if (hours >= 17) {
+		return meridiem[3];
+	} else if (hours >= 12) {
+		return meridiem[2];
+	} else if (hours >= 4) {
+		return meridiem[1];
+	} else {
+		return meridiem[0];
+	}
+}
+
 export const formatters: FormatterObj = {
 	// Month: янв., фев., ..., дек.
 	MMM: date => monthsShort[date.getMonth()],
@@ -79,18 +93,9 @@ export const formatters: FormatterObj = {
 	dddd: date => weekdaysFull[date.getDay()],
 
 	// Time of day: ночи, утра, дня, вечера
-	A: date => {
-		const hours = date.getHours();
-		if (hours >= 17) {
-			return meridiem[3];
-		} else if (hours >= 12) {
-			return meridiem[2];
-		} else if (hours >= 4) {
-			return meridiem[1];
-		} else {
-			return meridiem[0];
-		}
-	},
+	A: timeOfDay,
+	a: timeOfDay,
+	aa: timeOfDay,
 
 	// Generate ordinal version of formatters: M -> Mo, DDD -> DDDo, etc.
 	Do: date => defaultFormatters['D'](date) + '-е',
@@ -102,8 +107,6 @@ export const formatters: FormatterObj = {
 
 	'Do MMMM': date => formatters['Do'](date) + ' ' + monthsGenitive[date.getMonth()],
 };
-
-formatters['a'] = formatters['aa'] = formatters['A'];
 
 const parsers: ParserObj = {
 	// Month: янв., фев., ..., дек.
@@ -136,11 +139,11 @@ const parsers: ParserObj = {
 	Qo: ordinalParser('Q', '-й'),
 };
 
-function ordinalParser(key: string, suffix: string): ParserData {
+function ordinalParser(token: string, suffix: string): ParserData {
 	return [
 		'\\d+' + suffix,
 		(date, value) => {
-			defaultParsers[key][1](date, value.slice(0, -suffix.length));
+			defaultParsers[token][1](date, value.slice(0, -suffix.length));
 		},
 	];
 }
