@@ -25,10 +25,6 @@ export const enum Month {
 
 export type DiffUnitFn<T> = number | (T extends ValidDate ? number : null);
 
-export interface AddUnitFn {
-	<T extends ValidDate | Date | null>(d: T, arg: number): T;
-}
-
 export interface FormatFn {
 	(d: ValidDate): string;
 	(d: null): null;

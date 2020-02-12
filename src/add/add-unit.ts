@@ -1,36 +1,50 @@
-import {AddUnitFn, MS} from '../utils/basic-types';
+import {MS} from '../utils/basic-types';
+import {ValidDate} from '../valid-date';
 
-function addTimeFn(ms: number): AddUnitFn {
-	return (d: Date | null, n: number): /*ValidDate | Date | null*/ any => {
-		if (d === null) return null;
-		if (!isFinite(n)) return d;
-		return new Date(d.getTime() + ms * n);
-	};
+export function addMilliseconds<T extends ValidDate | Date | null>(d: T, n: number): T {
+	if (d === null) return null as any;
+	if (!isFinite(n)) return d;
+	return new Date(d.getTime() + n) as T;
 }
 
-function addFn(keyGet: keyof Date, keySet: keyof Date): AddUnitFn {
-	return (d: Date | null, n: number): /*ValidDate | Date | null*/ any => {
-		if (d === null) return null;
-		if (!isFinite(n)) return d;
-		const result = new Date(d.getTime());
-		result[keySet as 'setDate'](result[keyGet as 'getDate']() + n);
-		return result;
-	};
+export function addSeconds<T extends ValidDate | Date | null>(d: T, n: number): T {
+	if (d === null) return null as any;
+	if (!isFinite(n)) return d;
+	return new Date(d.getTime() + MS.Seconds * n) as T;
 }
 
-export const addMilliseconds = addTimeFn(MS.Milliseconds);
-export const addSeconds = addTimeFn(MS.Seconds);
-export const addMinutes = addTimeFn(MS.Minutes);
-export const addHours = addTimeFn(MS.Hours);
+export function addMinutes<T extends ValidDate | Date | null>(d: T, n: number): T {
+	if (d === null) return null as any;
+	if (!isFinite(n)) return d;
+	return new Date(d.getTime() + MS.Minutes * n) as T;
+}
 
-export const addDate = addFn('getDate', 'setDate');
-export const addMonth = addFn('getMonth', 'setMonth');
-export const addYear = addFn('getFullYear', 'setFullYear');
+export function addHours<T extends ValidDate | Date | null>(d: T, n: number): T {
+	if (d === null) return null as any;
+	if (!isFinite(n)) return d;
+	return new Date(d.getTime() + MS.Hours * n) as T;
+}
 
-export const addUTCMilliseconds = addFn('getUTCMilliseconds', 'setUTCMilliseconds');
-export const addUTCSeconds = addFn('getUTCSeconds', 'setUTCSeconds');
-export const addUTCMinutes = addFn('getUTCMinutes', 'setUTCMinutes');
-export const addUTCHours = addFn('getUTCHours', 'setUTCHours');
-export const addUTCDate = addFn('getUTCDate', 'setUTCDate');
-export const addUTCMonth = addFn('getUTCMonth', 'setUTCMonth');
-export const addUTCYear = addFn('getUTCFullYear', 'setUTCFullYear');
+export function addDate<T extends ValidDate | Date | null>(d: T, n: number): T {
+	if (d === null) return null as any;
+	if (!isFinite(n)) return d;
+	const result = new Date(d.getTime());
+	result.setDate(result.getDate() + n);
+	return result as T;
+}
+
+export function addMonth<T extends ValidDate | Date | null>(d: T, n: number): T {
+	if (d === null) return null as any;
+	if (!isFinite(n)) return d;
+	const result = new Date(d.getTime());
+	result.setMonth(result.getMonth() + n);
+	return result as T;
+}
+
+export function addYear<T extends ValidDate | Date | null>(d: T, n: number): T {
+	if (d === null) return null as any;
+	if (!isFinite(n)) return d;
+	const result = new Date(d.getTime());
+	result.setFullYear(result.getFullYear() + n);
+	return result as T;
+}
