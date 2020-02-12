@@ -79,7 +79,7 @@ describe('format', function() {
 	it('correct extending format', function() {
 		extendFormat({
 			season: date => {
-				const index = Math.floor((date.getMonth() + 1) % 12 / 3);
+				const index = Math.floor(((date.getMonth() + 1) % 12) / 3);
 				return ['winter', 'spring', 'summer', 'autumn'][index];
 			},
 		});
@@ -100,7 +100,7 @@ describe('format', function() {
 		];
 		for (let i = 0; i < checks.length; i++) {
 			const [date, correctResult] = checks[i];
-			assert.equal(format(date, template), correctResult)
+			assert.equal(format(date, template), correctResult);
 		}
 	});
 });

@@ -18,4 +18,3 @@ export function randomTimezone(): string {
 	}
 	return '';
 }
-

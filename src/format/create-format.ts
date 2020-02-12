@@ -6,7 +6,7 @@ import {isValidDate} from '../default-exports';
 type Token = string | Formatter;
 
 function splitToTokens(template: string, formatters: FormatterObj): Token[] {
-	const RX_TOKENS = /*@__PURE__*/tokensRx(formatters);
+	const RX_TOKENS = /*@__PURE__*/ tokensRx(formatters);
 	const tokens = template.match(RX_TOKENS) as string[];
 	// this regexp cant fail because of "|."
 

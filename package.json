@@ -12,7 +12,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "prettify": "prettier --write \"**/*.ts\"",
+    "prettify": "prettier --write \"**/*.{ts,js,yml,md}\"",
     "release": "standard-version",
     "release-canary": "standard-version --prerelease canary",
     "github-release": "conventional-github-releaser",

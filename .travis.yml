@@ -4,7 +4,7 @@ notifications:
   email: false
 
 node_js:
-  - '12'
+  - "12"
 
 jobs:
   include:
@@ -34,4 +34,3 @@ jobs:
         provider: script
         skip_cleanup: true
         script: sh scripts/deploy.sh $TRAVIS_TAG
-
