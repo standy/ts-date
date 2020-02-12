@@ -1,46 +1,46 @@
-import {ResetUnitFn} from '../utils/basic-types';
+import {ValidDate} from '../valid-date';
 
 const START_OF_ISO_WEEK = 1;
 
-export const resetYear: ResetUnitFn = (d: Date | null): any => {
-	if (d === null) return null;
-	return new Date(d.getFullYear(), 0);
-};
+export function resetYear<T extends ValidDate | Date | null>(d: T): T {
+	if (d === null) return null as any;
+	return new Date(d.getFullYear(), 0) as T;
+}
 
-export const resetMonth: ResetUnitFn = (d: Date | null): any => {
-	if (d === null) return null;
-	return new Date(d.getFullYear(), d.getMonth(), 1);
-};
+export function resetMonth<T extends ValidDate | Date | null>(d: T): T {
+	if (d === null) return null as any;
+	return new Date(d.getFullYear(), d.getMonth(), 1) as T;
+}
 
-export const resetISOWeek: ResetUnitFn = (d: Date | null): any => {
-	if (d === null) return null;
+export function resetISOWeek<T extends ValidDate | Date | null>(d: T): T {
+	if (d === null) return null as any;
 	const day = d.getDay();
 	const diff = (day < START_OF_ISO_WEEK ? 7 : 0) + day - START_OF_ISO_WEEK;
-	return new Date(d.getFullYear(), d.getMonth(), d.getDate() - diff);
-};
+	return new Date(d.getFullYear(), d.getMonth(), d.getDate() - diff) as T;
+}
 
-export const resetDate: ResetUnitFn = (d: Date | null): any => {
-	if (d === null) return null;
-	return new Date(d.getFullYear(), d.getMonth(), d.getDate());
-};
+export function resetDate<T extends ValidDate | Date | null>(d: T): T {
+	if (d === null) return null as any;
+	return new Date(d.getFullYear(), d.getMonth(), d.getDate()) as T;
+}
 
-export const resetHours: ResetUnitFn = (d: Date | null): any => {
-	if (d === null) return null;
+export function resetHours<T extends ValidDate | Date | null>(d: T): T {
+	if (d === null) return null as any;
 	const result = new Date(d.getTime());
 	result.setMinutes(0, 0, 0);
-	return result;
-};
+	return result as T;
+}
 
-export const resetMinutes: ResetUnitFn = (d: Date | null): any => {
-	if (d === null) return null;
+export function resetMinutes<T extends ValidDate | Date | null>(d: T): T {
+	if (d === null) return null as any;
 	const result = new Date(d.getTime());
 	result.setSeconds(0, 0);
-	return result;
-};
+	return result as T;
+}
 
-export const resetSeconds: ResetUnitFn = (d: Date | null): any => {
-	if (d === null) return null;
+export function resetSeconds<T extends ValidDate | Date | null>(d: T): T {
+	if (d === null) return null as any;
 	const result = new Date(d.getTime());
 	result.setMilliseconds(0);
-	return result;
-};
+	return result as T;
+}
