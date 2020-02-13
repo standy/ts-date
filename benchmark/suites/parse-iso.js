@@ -20,7 +20,7 @@ suite
 		return moment(dateStr);
 	}, {onCycle})
 	.add(names.dateFns, function() {
-		return dateFns.parse(dateStr);
+		return dateFns.parseISO(dateStr);
 	}, {onCycle})
 	.add(names.tsDatePrev, function() {
 		return tsDatePrev.parseIso(dateStr);

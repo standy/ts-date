@@ -7,6 +7,7 @@ const moment = require('moment');
 const dateFns = require('date-fns');
 
 const pattern = 'dddd, MMMM Do YYYY, [escaped], h:mm:ss a';
+const patternUTS = `EEEE, MMMM Do yyyy, 'escaped', h:mm:ss a`;
 let date;
 let dateMoment;
 
@@ -26,7 +27,7 @@ suite
 		return dateMoment.format(pattern);
 	}, {onCycle})
 	.add(names.dateFns, function() {
-		return dateFns.format(date, pattern);
+		return dateFns.format(date, patternUTS);
 	}, {onCycle})
 	.add(names.tsDatePrev, function() {
 		return tsDatePrev.format(date, pattern);
