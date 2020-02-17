@@ -2,16 +2,32 @@ import {MS, DiffUnitFn} from '../utils/basic-types';
 import {isValidDate} from '../create/create-ts-date';
 import {absFloor} from '../utils/utils';
 
+/**
+ * The number of milliseconds between two dates
+ * @example
+ * diffMilliseconds(parseIso('2020-01-02'), parseIso('2020-01-01')) // 86400000 = milliseconds in one day
+ */
 export function diffMilliseconds<T extends Date | null>(d1: T, d2: T): DiffUnitFn<T> {
 	if (!isValidDate(d1) || !isValidDate(d2)) return null as any;
 	return absFloor(d1.getTime() - d2.getTime());
 }
 
+/**
+ * The number of seconds between two dates
+ * @example
+ * diffSeconds(parseIso('2020-01-02'), parseIso('2020-01-01')) // 86400 = seconds in one day
+ */
 export function diffSeconds<T extends Date | null>(d1: T, d2: T): DiffUnitFn<T> {
 	if (!isValidDate(d1) || !isValidDate(d2)) return null as any;
 	return absFloor((d1.getTime() - d2.getTime()) / MS.Seconds);
 }
 
+/**
+ * The number of minutes between two dates
+ * @example
+ * diffMinutes(parseIso('2020-01-02'), parseIso('2020-01-01')) // 1440 = minutes in one day
+ * diffMinutes(parseIso('2020-01-01T12:30:01'), parseIso('2020-01-01T12:31:00')) // 0 = only 59 seconds left
+ */
 export function diffMinutes<T extends Date | null>(d1: T, d2: T): DiffUnitFn<T> {
 	if (!isValidDate(d1) || !isValidDate(d2)) return null as any;
 	return absFloor((d1.getTime() - d2.getTime()) / MS.Minutes);
