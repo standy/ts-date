@@ -1,4 +1,4 @@
-import {leadZero} from '../utils/utils';
+import {formatTimezone, leadZero} from '../utils/utils';
 import {diffCalendarDate} from '../diff/diff-calendar-unit';
 import {newValidDateOrThrow} from '../create/create-ts-date';
 import {resetISOWeek, resetYear} from '../reset/reset-unit';
@@ -107,7 +107,7 @@ export const defaultFormatters: Readonly<FormatterObj> = {
 	Z: date => formatTimezone(date.getTimezoneOffset(), ':'),
 
 	// Timezone: -0100, +0000, ... +1200
-	ZZ: date => formatTimezone(date.getTimezoneOffset()),
+	ZZ: date => formatTimezone(date.getTimezoneOffset(), ''),
 
 	// Seconds timestamp: 512969520
 	X: date => Math.floor(date.getTime() / 1000),
@@ -115,11 +115,3 @@ export const defaultFormatters: Readonly<FormatterObj> = {
 	// Milliseconds timestamp: 512969520900
 	x: date => date.getTime(),
 };
-
-function formatTimezone(offset: number, delimeter = '') {
-	const sign = offset > 0 ? '-' : '+';
-	const absOffset = Math.abs(offset);
-	const hours = Math.floor(absOffset / 60);
-	const minutes = absOffset % 60;
-	return sign + leadZero(hours) + delimeter + leadZero(minutes);
-}

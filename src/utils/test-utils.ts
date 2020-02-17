@@ -1,4 +1,4 @@
-import {leadZero} from './utils';
+import {formatTimezone} from './utils';
 
 /* istanbul ignore next */
 export function rnd(min: number, max: number): number {
@@ -9,9 +9,9 @@ export function rnd(min: number, max: number): number {
 export function randomTimezone(): string {
 	const r = Math.random();
 	if (r < 0.6) {
-		const TZH = rnd(0, 23); /* 0..23 */
-		const TZM = rnd(0, 11) * 5; /* 0, 5, 10, ..., 55 */
-		return (Math.random() < 0.5 ? '-' : '+') + leadZero(TZH) + ':' + leadZero(TZM);
+		/* -24:00 to +24:00 with interval of 5 */
+		const offset = rnd((-24 * 60) / 5, (24 * 60) / 5) * 5;
+		return formatTimezone(offset, ':');
 	}
 	if (r < 0.8) {
 		return 'Z';

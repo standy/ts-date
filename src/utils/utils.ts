@@ -34,3 +34,11 @@ export function tokensRx(obj: any) {
 	keys.sort((a, b) => b.length - a.length);
 	return new RegExp(keys.join('|') + '|\\[[^[]*\\]|.', 'g');
 }
+
+export function formatTimezone(offset: number, delimiter: string) {
+	const sign = offset > 0 ? '-' : '+';
+	const absOffset = Math.abs(offset);
+	const hours = Math.floor(absOffset / 60);
+	const minutes = absOffset % 60;
+	return sign + leadZero(hours) + delimiter + leadZero(minutes);
+}
