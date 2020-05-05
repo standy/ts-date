@@ -64,7 +64,7 @@ function timeOfDay(date: ValidDate) {
 
 export const formatters: FormatterObj = {
 	// Month: янв., фев., ..., дек.
-	MMM: date => monthsShort[date.getMonth()],
+	MMM: (date) => monthsShort[date.getMonth()],
 
 	// Month: январь, февраль, ..., декабрь
 	MMMM: (date, index, tokens) => {
@@ -84,13 +84,13 @@ export const formatters: FormatterObj = {
 	},
 
 	// Day of week: вс, пн, ..., сб
-	dd: date => weekdays2char[date.getDay()],
+	dd: (date) => weekdays2char[date.getDay()],
 
 	// Day of week: вск, пнд, ..., суб
-	ddd: date => weekdays3char[date.getDay()],
+	ddd: (date) => weekdays3char[date.getDay()],
 
 	// Day of week: воскресенье, понедельник, ..., суббота
-	dddd: date => weekdaysFull[date.getDay()],
+	dddd: (date) => weekdaysFull[date.getDay()],
 
 	// Time of day: ночи, утра, дня, вечера
 	A: timeOfDay,
@@ -98,14 +98,14 @@ export const formatters: FormatterObj = {
 	aa: timeOfDay,
 
 	// Generate ordinal version of formatters: M -> Mo, DDD -> DDDo, etc.
-	Do: date => defaultFormatters['D'](date) + '-е',
-	Wo: date => defaultFormatters['W'](date) + '-й',
-	Mo: date => defaultFormatters['M'](date) + '-й',
-	DDDo: date => defaultFormatters['DDD'](date) + '-й',
-	do: date => defaultFormatters['d'](date) + '-й',
-	Qo: date => defaultFormatters['Q'](date) + '-й',
+	Do: (date) => defaultFormatters['D'](date) + '-е',
+	Wo: (date) => defaultFormatters['W'](date) + '-й',
+	Mo: (date) => defaultFormatters['M'](date) + '-й',
+	DDDo: (date) => defaultFormatters['DDD'](date) + '-й',
+	do: (date) => defaultFormatters['d'](date) + '-й',
+	Qo: (date) => defaultFormatters['Q'](date) + '-й',
 
-	'Do MMMM': date => formatters['Do'](date) + ' ' + monthsGenitive[date.getMonth()],
+	'Do MMMM': (date) => formatters['Do'](date) + ' ' + monthsGenitive[date.getMonth()],
 };
 
 const parsers: ParserObj = {

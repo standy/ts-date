@@ -4,8 +4,8 @@ import {parse, parseOrThrow} from './parse';
 
 const MAX_DATE = 8640000000000000;
 
-describe('parse', function() {
-	it('correct parsing', function() {
+describe('parse', function () {
+	it('correct parsing', function () {
 		const FORMATS = [
 			{
 				template: 'YYYY-MM-DD HH:mm:ss.SSS',
@@ -76,7 +76,7 @@ describe('parse', function() {
 		}
 	});
 
-	it('correct throw if not parsed', function() {
+	it('correct throw if not parsed', function () {
 		assert.throws(() => parseOrThrow('21.12.2017', 'YYYY-MM-DD'));
 		assert.deepEqual(parseOrThrow('2017-12-21', 'YYYY-MM-DD'), new Date(2017, Month.Dec, 21));
 	});

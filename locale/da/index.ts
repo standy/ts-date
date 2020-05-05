@@ -39,28 +39,28 @@ const meridiemFull = ['a.m.', 'p.m.'];
 
 export const formatters: FormatterObj = {
 	// Month: jan, feb, ..., dec
-	MMM: date => months3char[date.getMonth()],
+	MMM: (date) => months3char[date.getMonth()],
 
 	// Month: januar, februar, ..., december
-	MMMM: date => monthsFull[date.getMonth()],
+	MMMM: (date) => monthsFull[date.getMonth()],
 
 	// Day of week: sø, ma, ..., lø
-	dd: date => weekdays2char[date.getDay()],
+	dd: (date) => weekdays2char[date.getDay()],
 
 	// Day of week: søn, man, ..., lør
-	ddd: date => weekdays3char[date.getDay()],
+	ddd: (date) => weekdays3char[date.getDay()],
 
 	// Day of week: søndag, mandag, ..., lørdag
-	dddd: date => weekdaysFull[date.getDay()],
+	dddd: (date) => weekdaysFull[date.getDay()],
 
 	// AM, PM
-	A: date => meridiemUppercase[date.getHours() < 12 ? 0 : 1],
+	A: (date) => meridiemUppercase[date.getHours() < 12 ? 0 : 1],
 
 	// am, pm
-	a: date => meridiemLowercase[date.getHours() < 12 ? 0 : 1],
+	a: (date) => meridiemLowercase[date.getHours() < 12 ? 0 : 1],
 
 	// a.m., p.m.
-	aa: date => meridiemFull[date.getHours() < 12 ? 0 : 1],
+	aa: (date) => meridiemFull[date.getHours() < 12 ? 0 : 1],
 
 	Mo: ordinalFormatter('M'),
 	Do: ordinalFormatter('D'),
@@ -72,7 +72,7 @@ export const formatters: FormatterObj = {
 
 // Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
 function ordinalFormatter(formatterToken: string): Formatter {
-	return date => ordinal(defaultFormatters[formatterToken](date) as number);
+	return (date) => ordinal(defaultFormatters[formatterToken](date) as number);
 }
 
 function ordinal(number: number) {

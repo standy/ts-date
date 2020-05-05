@@ -5,8 +5,8 @@ import {newValidDate, newValidDateOrThrow} from '../create/create-ts-date';
 import {extendFormat, format} from './format';
 import {defaultFormatters} from './default-formatters';
 
-describe('format', function() {
-	it('correct formatting', function() {
+describe('format', function () {
+	it('correct formatting', function () {
 		const date = newValidDate(2017, Month.Jun, 1, 12, 34, 56, 789);
 		if (!date) throw new Error('Expected to be date');
 		const FORMATS = [
@@ -34,20 +34,20 @@ describe('format', function() {
 		}
 	});
 
-	it('null handling', function() {
+	it('null handling', function () {
 		assert.equal(format(null, '[test]'), null);
 	});
 
-	it('"Invalid Date" handling', function() {
+	it('"Invalid Date" handling', function () {
 		assert.equal(format(new Date(NaN), '[test]'), null);
 	});
 
-	it('7-th day of week', function() {
+	it('7-th day of week', function () {
 		const date = newValidDate(2017, Month.Jun, 4);
 		assert.equal(format(date, 'E'), '7');
 	});
 
-	it('correct format timezone', function() {
+	it('correct format timezone', function () {
 		const dateTimezoneMock = (offset: number) =>
 			({
 				getTimezoneOffset() {
@@ -66,7 +66,7 @@ describe('format', function() {
 		assert.equal(defaultFormatters.ZZ(dateTimezoneMock(0)), '+0000');
 	});
 
-	it('correct format iso weeks', function() {
+	it('correct format iso weeks', function () {
 		const template = 'GGGG-[W]WW-E';
 		const d1 = newValidDateOrThrow(2017, Month.Jan, 2); /* Monday */
 		assert.equal(format(d1, template), '2017-W01-1');
@@ -76,9 +76,9 @@ describe('format', function() {
 		assert.equal(format(d3, template), '2013-W01-1');
 	});
 
-	it('correct extending format', function() {
+	it('correct extending format', function () {
 		extendFormat({
-			season: date => {
+			season: (date) => {
 				const index = Math.floor(((date.getMonth() + 1) % 12) / 3);
 				return ['winter', 'spring', 'summer', 'autumn'][index];
 			},

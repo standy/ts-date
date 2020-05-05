@@ -3,67 +3,67 @@ import * as assert from 'power-assert';
 import {newValidDate} from '../create/create-ts-date';
 import {resetYear, resetMonth, resetISOWeek, resetDate, resetHours, resetMinutes, resetSeconds} from './reset-unit';
 
-describe('reset', function() {
-	describe('reset default amount of units', function() {
-		it('resetSeconds', function() {
+describe('reset', function () {
+	describe('reset default amount of units', function () {
+		it('resetSeconds', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
 			const result = resetSeconds(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jun, 29, 12, 30, 59));
 		});
 
-		it('resetMinutes', function() {
+		it('resetMinutes', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
 			const result = resetMinutes(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jun, 29, 12, 30));
 		});
 
-		it('resetHours', function() {
+		it('resetHours', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
 			const result = resetHours(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jun, 29, 12));
 		});
 
-		it('resetDate', function() {
+		it('resetDate', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
 			const result = resetDate(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jun, 29));
 		});
 
-		it('resetWeek', function() {
+		it('resetWeek', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
 			const result = resetISOWeek(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jun, 26));
 			assert.deepEqual(result && result.getDay(), 1);
 		});
 
-		it('resetWeek from sunday', function() {
+		it('resetWeek from sunday', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 25);
 			const result = resetISOWeek(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jun, 19));
 			assert.deepEqual(result && result.getDay(), 1);
 		});
 
-		it('resetWeek from monday', function() {
+		it('resetWeek from monday', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 26);
 			const result = resetISOWeek(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jun, 26));
 			assert.deepEqual(result && result.getDay(), 1);
 		});
 
-		it('resetMonth', function() {
+		it('resetMonth', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
 			const result = resetMonth(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jun, 1));
 		});
 
-		it('resetYear', function() {
+		it('resetYear', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29);
 			const result = resetYear(tsDate);
 			assert.deepEqual(result, new Date(2017, Month.Jan, 1));
 		});
 	});
 
-	it('correct null handling', function() {
+	it('correct null handling', function () {
 		assert.equal(resetYear(null), null);
 		assert.equal(resetMonth(null), null);
 		assert.equal(resetISOWeek(null), null);

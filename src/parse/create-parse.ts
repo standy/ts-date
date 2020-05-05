@@ -18,7 +18,7 @@ export function createParse(parsers: ParserObj): ParseByTemplateFn {
 
 		const parsersFn: Array<Parser> = [];
 		const rxStr = tokens
-			.map(token => {
+			.map((token) => {
 				const parser = parsers[token];
 				if (parser) {
 					parsersFn.push(parser[1]);

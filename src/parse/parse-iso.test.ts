@@ -4,8 +4,8 @@ import {newValidDate} from '../create/create-ts-date';
 import {parseIso, parseIsoOrThrow} from './parse-iso';
 import {randomTimezone, rnd} from '../utils/test-utils';
 
-describe('parseIso', function() {
-	it('correct parsing', function() {
+describe('parseIso', function () {
+	it('correct parsing', function () {
 		const FORMATS = [
 			{
 				dateStr: '2017-06-01T12:34:56.789',
@@ -124,19 +124,19 @@ describe('parseIso', function() {
 		}
 	});
 
-	it('correct parse timezones', function() {
+	it('correct parse timezones', function () {
 		const d = parseIso('2017-06-01T12:34:56.789+03:00');
 		assert.equal(d && d.toISOString(), '2017-06-01T09:34:56.789Z');
 	});
 
-	it('correct parse Zulu timezone', function() {
-		['2017-06-01T12:34:56.789Z', '2038-10-31T12:10:20.672Z'].forEach(date => {
+	it('correct parse Zulu timezone', function () {
+		['2017-06-01T12:34:56.789Z', '2038-10-31T12:10:20.672Z'].forEach((date) => {
 			const d = parseIso(date);
 			assert.equal(d && d.toISOString(), date);
 		});
 	});
 
-	it('correct throw if not parsed', function() {
+	it('correct throw if not parsed', function () {
 		assert.throws(() => parseIsoOrThrow('2017-02-30'));
 		assert.deepEqual(parseIsoOrThrow('2017-12-21'), new Date(2017, Month.Dec, 21));
 	});
@@ -144,7 +144,7 @@ describe('parseIso', function() {
 	/**
 	 * Test skipped because `new Date(iso8601)` fails on old browsers
 	 * */
-	it.skip('random test', function() {
+	it.skip('random test', function () {
 		this.timeout(600000);
 		const TEST_TIME = 1000;
 		const TEST_START = Date.now();

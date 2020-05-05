@@ -49,7 +49,7 @@ export function createFormat(formatters: FormatterObj): FormatByTemplateFn {
 }
 
 export function createCustomFormatFn(formatters: FormatterObj) {
-	return function(customFormatters: FormatterObj): FormatByTemplateFn {
+	return function (customFormatters: FormatterObj): FormatByTemplateFn {
 		return createFormat(extend(formatters, customFormatters));
 	};
 }

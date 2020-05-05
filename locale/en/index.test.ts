@@ -3,8 +3,8 @@ import * as assert from 'power-assert';
 import {newValidDate} from '../../src/create/create-ts-date';
 import {format, parse} from './index';
 
-describe('ru locale', function() {
-	it('correct formatting', function() {
+describe('ru locale', function () {
+	it('correct formatting', function () {
 		const date = newValidDate(2017, Month.Aug, 1, 12, 34, 56, 789);
 		const FORMATS = [
 			['MMMM MMM dd ddd dddd A Do Wo Mo DDDo do Qo', 'August Aug Tu Tue Tuesday PM 1st 31st 8th 213th 2nd 3rd'],
@@ -21,7 +21,7 @@ describe('ru locale', function() {
 			assert.equal(result, correctResult, `format "${template}"`);
 		}
 	});
-	it('correct ordinal', function() {
+	it('correct ordinal', function () {
 		const d1 = newValidDate(2017, Month.Aug, 12);
 		const d2 = newValidDate(2017, Month.Aug, 22);
 		const d3 = newValidDate(2017, Month.Aug, 23);
@@ -29,7 +29,7 @@ describe('ru locale', function() {
 		assert.equal(format(d2, 'Do MMMM'), '22nd August');
 		assert.equal(format(d3, 'Do MMMM'), '23rd August');
 	});
-	it('correct day part format', function() {
+	it('correct day part format', function () {
 		const d1 = newValidDate(2017, Month.Aug, 1, 0);
 		const d2 = newValidDate(2017, Month.Aug, 1, 18);
 		assert.equal(format(d1, 'h A'), '12 AM');
@@ -39,7 +39,7 @@ describe('ru locale', function() {
 		assert.equal(format(d1, 'h aa'), '12 a.m.');
 		assert.equal(format(d2, 'h aa'), '6 p.m.');
 	});
-	it('correct parsing', function() {
+	it('correct parsing', function () {
 		const FORMATS = [
 			{
 				template: 'D MMMM YY [Year]',

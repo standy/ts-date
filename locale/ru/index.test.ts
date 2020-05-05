@@ -3,8 +3,8 @@ import * as assert from 'power-assert';
 import {newValidDate, newValidDateOrThrow} from '../../src/create/create-ts-date';
 import {format, parse, createCustomFormat, formatters, ValidDate} from './index';
 
-describe('ru locale', function() {
-	it('correct formatting', function() {
+describe('ru locale', function () {
+	it('correct formatting', function () {
 		const date = newValidDate(2017, Month.Aug, 1, 12, 34, 56, 789);
 		const FORMATS = [
 			['MMMM MMM dd ddd dddd A Do Wo Mo DDDo do Qo', 'август авг. вт втр вторник дня 1-е 31-й 8-й 213-й 2-й 3-й'],
@@ -23,7 +23,7 @@ describe('ru locale', function() {
 			assert.equal(result, correctResult, `format "${template}"`);
 		}
 	});
-	it('correct createCustomFormat', function() {
+	it('correct createCustomFormat', function () {
 		const customFormat = createCustomFormat({
 			MMM: (d, index, tokens) => {
 				const m: string = formatters['MMMM'](d, index, tokens) + '';
@@ -67,7 +67,7 @@ describe('ru locale', function() {
 			assert.equal(result, correctResult, `customFormat "${format}" "${date}"`);
 		}
 	});
-	it('correct day part format', function() {
+	it('correct day part format', function () {
 		const d1 = newValidDate(2017, Month.Aug, 1, 0);
 		const d2 = newValidDate(2017, Month.Aug, 1, 6);
 		const d3 = newValidDate(2017, Month.Aug, 1, 12);
@@ -78,7 +78,7 @@ describe('ru locale', function() {
 		assert.equal(format(d3, template), '12 дня');
 		assert.equal(format(d4, template), '6 вечера');
 	});
-	it('correct parsing', function() {
+	it('correct parsing', function () {
 		const FORMATS = [
 			{
 				template: 'Do MMMM YY [года]',

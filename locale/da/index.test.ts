@@ -3,8 +3,8 @@ import * as assert from 'power-assert';
 import {newValidDate} from '../../src/create/create-ts-date';
 import {format, parse} from './index';
 
-describe('da locale', function() {
-	it('correct formatting', function() {
+describe('da locale', function () {
+	it('correct formatting', function () {
 		const date = newValidDate(2017, Month.Oct, 1, 12, 34, 56, 789);
 		const FORMATS = [
 			['MMMM MMM dd ddd dddd A Do Wo Mo DDDo do Qo', 'oktober okt sø søn søndag PM 1. 39. 10. 274. 0. 4.'],
@@ -21,7 +21,7 @@ describe('da locale', function() {
 			assert.equal(result, correctResult, `format "${template}"`);
 		}
 	});
-	it('correct ordinal', function() {
+	it('correct ordinal', function () {
 		const d1 = newValidDate(2017, Month.Oct, 12);
 		const d2 = newValidDate(2017, Month.Oct, 22);
 		const d3 = newValidDate(2017, Month.Oct, 23);
@@ -29,7 +29,7 @@ describe('da locale', function() {
 		assert.equal(format(d2, 'Do MMMM'), '22. oktober');
 		assert.equal(format(d3, 'Do MMMM'), '23. oktober');
 	});
-	it('correct day part format', function() {
+	it('correct day part format', function () {
 		const d1 = newValidDate(2017, Month.Oct, 1, 0, 42, 12);
 		const d2 = newValidDate(2017, Month.Oct, 1, 18, 42, 12);
 		assert.equal(format(d1, 'h A'), '12 AM');
@@ -41,7 +41,7 @@ describe('da locale', function() {
 		assert.equal(format(d1, 'HH:mm:ss'), '00:42:12');
 		assert.equal(format(d2, 'HH:mm:ss'), '18:42:12');
 	});
-	it('correct parsing', function() {
+	it('correct parsing', function () {
 		const FORMATS = [
 			{
 				template: 'D MMMM YY [Year]',
