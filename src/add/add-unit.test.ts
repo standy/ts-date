@@ -4,6 +4,8 @@ import {newValidDate} from '../create/create-ts-date';
 import {addMilliseconds, addSeconds, addMinutes, addHours, addDate, addMonth, addYear} from './add-unit';
 
 describe('addUnits', function () {
+	const addUnitList = [addMilliseconds, addSeconds, addMinutes, addHours, addDate, addMonth, addYear];
+
 	describe('add given amount of units', function () {
 		it('addMilliseconds', function () {
 			const tsDate = newValidDate(2017, Month.Jun, 29, 12, 30, 59, 100);
@@ -50,26 +52,26 @@ describe('addUnits', function () {
 
 	describe('edge cases', function () {
 		it('falls to null with invalid date', function () {
-			const result = addYear(null, 2);
-			assert.deepEqual(result, null);
-			const resultHours = addHours(null, 2);
-			assert.deepEqual(resultHours, null);
+			for (const addUnit of addUnitList) {
+				const result = addUnit(null, 2);
+				assert.deepEqual(result, null);
+			}
 		});
 
 		it('no changes with "Infinity" value', function () {
-			const tsDate = newValidDate(2017, Month.Jun, 29);
-			const result = addYear(tsDate, Infinity);
-			assert.deepEqual(result, tsDate);
-			const resultHours = addHours(tsDate, Infinity);
-			assert.deepEqual(resultHours, tsDate);
+			for (const addUnit of addUnitList) {
+				const tsDate = newValidDate(2017, Month.Jun, 29);
+				const result = addUnit(tsDate, Infinity);
+				assert.deepEqual(result, tsDate);
+			}
 		});
 
 		it('no changes with "NaN" value', function () {
-			const tsDate = newValidDate(2017, Month.Jun, 29);
-			const result = addYear(tsDate, NaN);
-			assert.deepEqual(result, tsDate);
-			const resultHours = addHours(tsDate, NaN);
-			assert.deepEqual(resultHours, tsDate);
+			for (const addUnit of addUnitList) {
+				const tsDate = newValidDate(2017, Month.Jun, 29);
+				const result = addUnit(tsDate, NaN);
+				assert.deepEqual(result, tsDate);
+			}
 		});
 	});
 
