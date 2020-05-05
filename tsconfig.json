@@ -9,6 +9,7 @@
     "strict": true
   },
   "include": [
+    "index.ts",
     "locale",
     "src"
   ]
