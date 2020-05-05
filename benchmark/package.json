@@ -9,7 +9,7 @@
     "benchmark": "^2.1.4",
     "date-fns": "^2.9.0",
     "moment": "^2.24.0",
-    "ts-date": "^2.3.3"
+    "ts-date": "^3.0.0"
   },
   "devDependencies": {},
   "scripts": {
