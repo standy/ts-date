@@ -10,7 +10,7 @@
   "module": "esm/index.js",
   "typings": "index.d.ts",
   "scripts": {
-    "build": "rollup -c",
+    "build": "ts-node scripts/build-static.ts && rollup -c",
     "dev": "rollup -c -w",
     "prettify": "prettier --write \"**/*.{ts,js,yml,md}\"",
     "release": "standard-version",
