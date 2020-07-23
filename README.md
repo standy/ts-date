@@ -30,7 +30,7 @@ or [rollup-plugin-alias](https://github.com/rollup/rollup-plugin-alias) for Roll
 ## Locales
 
 There is different import for each locale: `ts-date/locale/*`  
-For now there is `en` and `ru`
+For now there is `en`, `da` and `ru`
 
 :warning: Directly `ts-date` exports without any locale
 
@@ -47,7 +47,7 @@ function someDateProcessing(isoDate: string): string {
 someDateProcessing("The Day After Tomorrow");
 ```
 
-With **ts-date** you forced to make checks or add a `null` as posible result
+With **ts-date** you forced to make checks or add a `null` as possible result
 
 ```js
 import { format, parseIso } from "ts-date";
