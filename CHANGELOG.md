@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.2](https://github.com/standy/ts-date/compare/v3.0.1...v3.0.2) (2020-07-23)
+
+
+### Bug Fixes
+
+* type error with formatDateIso points to null for ValidDate ([baf40c9](https://github.com/standy/ts-date/commit/baf40c9ef4ed0de99af0a61a11d4b770a4d92f6b))
+
 ### [3.0.1](https://github.com/standy/ts-date/compare/v3.0.0...v3.0.1) (2020-05-07)
 
 ## [3.0.0](https://github.com/standy/ts-date/compare/v2.3.3...v3.0.0) (2020-02-11)
