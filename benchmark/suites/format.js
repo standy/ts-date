@@ -7,7 +7,7 @@ const moment = require('moment');
 const dateFns = require('date-fns');
 
 const pattern = 'dddd, MMMM Do YYYY, [escaped], h:mm:ss a';
-const patternUTS = `EEEE, MMMM Do yyyy, 'escaped', h:mm:ss a`;
+const patternUTS = `EEEE, MMMM do yyyy, 'escaped', h:mm:ss a`;
 let date;
 let dateMoment;
 

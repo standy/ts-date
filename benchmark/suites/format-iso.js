@@ -25,7 +25,7 @@ suite
 		return dateMoment.format();
 	}, {onCycle})
 	.add(names.dateFns, function() {
-		return dateFns.format(date);
+		return dateFns.formatISO(date);
 	}, {onCycle})
 	.add(names.tsDatePrev, function() {
 		return tsDatePrev.formatLocalIso(date);
