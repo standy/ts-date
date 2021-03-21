@@ -7,9 +7,9 @@
   "main": "index.js",
   "dependencies": {
     "benchmark": "^2.1.4",
-    "date-fns": "^2.9.0",
-    "moment": "^2.24.0",
-    "ts-date": "^3.0.0"
+    "date-fns": "^2.19.0",
+    "moment": "^2.29.1",
+    "ts-date": "^3.0.2"
   },
   "devDependencies": {},
   "scripts": {
