@@ -4,6 +4,7 @@ const names = require('../names');
 const tsDate = require('../../dist/locale/en/index');
 const tsDatePrev = require('ts-date');
 const moment = require('moment');
+const dayjs = require('dayjs');
 const dateFns = require('date-fns');
 
 
@@ -23,6 +24,9 @@ suite
 	}, {onCycle})
 	.add(names.momentCached, function() {
 		return dateMoment.add(2, 'hours')
+	}, {onCycle})
+	.add(names.dayjs, function() {
+		return dayjs(date).add(2, 'hours')
 	}, {onCycle})
 	.add(names.dateFns, function() {
 		return dateFns.addHours(date, 2)

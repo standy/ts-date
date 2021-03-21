@@ -6,6 +6,7 @@ const names = {
 	dateFns: 'date-fns',
 	tsDatePrev: 'ts-date@' + tsDatePrevPkg.version,
 	tsDate: 'ts-date',
+	dayjs: 'dayjs',
 };
 
 module.exports = names;
