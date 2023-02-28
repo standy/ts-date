@@ -7,8 +7,10 @@ function toNumberMs(value: string | undefined) {
 	return typeof value === 'undefined' ? 0 : +value.substring(0, 4) * 1000;
 }
 
-//                  (    YYYY     )     ( MM )       ( DD )      ( HH )  ( MM )     ( SS )(  MS )   (      TZD            )
-const ISO_RX = /^\s*([+-]?\d{4,6}?)(?:-?(\d\d))?(?:-?(\d\d))?(?:T(\d\d):?(\d\d):?(?:(\d\d)(\.\d+)?)?([+-]\d\d?(?::\d\d)?|Z)?)?\s*$/;
+const ISO_RX =
+	/^\s*([+-]?\d{4,6}?)(?:-?(\d\d))?(?:-?(\d\d))?(?:T(\d\d):?(\d\d):?(?:(\d\d)(\.\d+)?)?([+-]\d\d?(?::\d\d)?|Z)?)?\s*$/;
+//     (    YYYY     )     ( MM )       ( DD )      ( HH )  ( MM )     ( SS )(  MS )   (      TZD            )
+
 export function parseIso(dateStr: string): ValidDate | null {
 	if (!dateStr) return null;
 	const timeList = dateStr.match(ISO_RX);

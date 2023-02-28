@@ -1,74 +1,82 @@
 Performance test compared to `momentjs` and `date-fns`
  
 ```
-Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz x8
+Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz x12
 >node -v
-v13.12.0
+v16.19.0
 
-moment.js@2.25.3
-date-fns@2.13.0
+moment.js@2.29.4
+date-fns@2.29.3
 
 Adding fixed amount of days
 ---------------------------------------------------------------
-moment             708,409 op/s  ± 2.61%   (88 samples)   1.00x
-moment cached    1,257,014 op/s  ± 0.34%   (92 samples)   1.77x
-date-fns         2,053,457 op/s  ± 7.77%   (69 samples)   2.90x
-ts-date          2,262,575 op/s  ± 8.43%   (70 samples)   3.19x
+moment             870,685 op/s  ± 4.31%   (79 samples)   1.00x
+moment cached    1,569,374 op/s  ± 2.00%   (85 samples)   1.80x
+dayjs              393,550 op/s  ± 4.03%   (77 samples)   0.45x
+date-fns         2,982,718 op/s  ± 8.32%   (67 samples)   3.43x
+ts-date          3,202,196 op/s  ± 9.18%   (67 samples)   3.68x
 Fastest is ts-date
 ---------------------------------------------------------------
 Adding fixed amount of hours
 ---------------------------------------------------------------
-moment             915,369 op/s  ± 0.26%   (96 samples)   1.00x
-moment cached    1,821,309 op/s  ± 0.26%   (95 samples)   1.99x
-date-fns         3,950,846 op/s  ± 0.32%   (96 samples)   4.32x
-ts-date          8,292,591 op/s  ± 0.15%   (97 samples)   9.06x
+moment           1,335,744 op/s  ± 1.08%   (91 samples)   1.00x
+moment cached    2,364,756 op/s  ± 1.44%   (88 samples)   1.77x
+dayjs            1,046,463 op/s  ± 3.16%   (84 samples)   0.78x
+date-fns         5,381,880 op/s  ± 1.21%   (91 samples)   4.03x
+ts-date         11,672,889 op/s  ± 1.63%   (92 samples)   8.74x
 Fastest is ts-date
 ---------------------------------------------------------------
 Difference in days between two dates
 ---------------------------------------------------------------
-moment             747,606 op/s  ± 1.10%   (90 samples)   1.00x
-moment cached    1,078,447 op/s  ± 5.43%   (86 samples)   1.44x
-date-fns           340,563 op/s  ± 4.57%   (69 samples)   0.46x
-ts-date          1,779,987 op/s  ± 2.67%   (82 samples)   2.38x
+moment             927,327 op/s  ± 1.64%   (83 samples)   1.00x
+moment cached    1,375,893 op/s  ± 2.31%   (83 samples)   1.48x
+dayjs               74,494 op/s  ± 3.18%   (81 samples)   0.08x
+date-fns           529,217 op/s  ± 3.46%   (81 samples)   0.57x
+ts-date          3,296,565 op/s  ± 3.18%   (83 samples)   3.55x
 Fastest is ts-date
 ---------------------------------------------------------------
 Difference in hours between two dates
 ---------------------------------------------------------------
-moment             740,069 op/s  ± 2.58%   (91 samples)   1.00x
-moment cached    1,122,335 op/s  ± 1.63%   (91 samples)   1.52x
-date-fns         3,548,459 op/s  ± 0.38%   (92 samples)   4.79x
-ts-date        107,465,480 op/s  ± 0.24%   (89 samples) 145.21x
+moment             992,242 op/s  ± 1.61%   (88 samples)   1.00x
+moment cached    1,495,883 op/s  ± 2.12%   (85 samples)   1.51x
+dayjs               75,676 op/s  ± 3.04%   (84 samples)   0.08x
+date-fns         4,878,252 op/s  ± 1.59%   (86 samples)   4.92x
+ts-date         79,072,042 op/s  ± 1.00%   (92 samples)  79.69x
 Fastest is ts-date
 ---------------------------------------------------------------
 Difference in years between two dates
 ---------------------------------------------------------------
-moment             161,847 op/s  ± 1.44%   (85 samples)   1.00x
-moment cached      178,713 op/s  ± 1.39%   (91 samples)   1.10x
-date-fns           467,671 op/s  ± 1.44%   (91 samples)   2.89x
-ts-date          4,842,537 op/s ± 12.51%   (29 samples)  29.92x
+moment             193,655 op/s  ± 1.93%   (85 samples)   1.00x
+moment cached      212,704 op/s  ± 1.81%   (83 samples)   1.10x
+dayjs               69,001 op/s  ± 4.15%   (79 samples)   0.36x
+date-fns           648,102 op/s  ± 2.23%   (83 samples)   3.35x
+ts-date          5,643,710 op/s  ± 5.71%   (68 samples)  29.14x
 Fastest is ts-date
 ---------------------------------------------------------------
 Format by pattern "dddd, MMMM Do YYYY, [escaped], h:mm:ss a"
 ---------------------------------------------------------------
-moment             112,305 op/s  ± 0.40%   (95 samples)   1.00x
-moment cached      124,971 op/s  ± 0.20%   (92 samples)   1.11x
-date-fns           127,309 op/s  ± 0.49%   (93 samples)   1.13x
-ts-date          1,059,869 op/s  ± 0.60%   (92 samples)   9.44x
+moment             119,631 op/s  ± 3.75%   (83 samples)   1.00x
+moment cached      137,322 op/s  ± 1.63%   (89 samples)   1.15x
+dayjs              136,577 op/s  ± 1.77%   (85 samples)   1.14x
+date-fns           147,283 op/s  ± 1.31%   (90 samples)   1.23x
+ts-date          1,092,954 op/s  ± 1.61%   (89 samples)   9.14x
 Fastest is ts-date
 ---------------------------------------------------------------
 Format as ISO 8601 string
 ---------------------------------------------------------------
-moment             389,081 op/s  ± 0.68%   (95 samples)   1.00x
-moment cached      415,708 op/s  ± 0.56%   (80 samples)   1.07x
-date-fns              0.00 op/s  ± 0.00%    (0 samples)   0.00x
-ts-date          3,981,460 op/s  ± 5.33%   (77 samples)  10.23x
+moment             384,121 op/s  ± 1.65%   (83 samples)   1.00x
+moment cached      483,041 op/s  ± 3.00%   (83 samples)   1.26x
+dayjs            1,031,112 op/s  ± 2.61%   (78 samples)   2.68x
+date-fns         1,270,626 op/s  ± 2.97%   (80 samples)   3.31x
+ts-date          2,823,202 op/s ± 17.43%   (62 samples)   7.35x
 Fastest is ts-date
 ---------------------------------------------------------------
 Parse from ISO 8601 string
 ---------------------------------------------------------------
-moment              88,847 op/s  ± 0.23%   (94 samples)   1.00x
-date-fns           320,444 op/s  ± 0.99%   (92 samples)   3.61x
-ts-date            915,707 op/s  ± 3.99%   (83 samples)  10.31x
+moment              88,106 op/s  ± 6.25%   (85 samples)   1.00x
+date-fns           331,619 op/s  ± 1.81%   (83 samples)   3.76x
+dayjs              885,646 op/s  ± 3.54%   (79 samples)  10.05x
+ts-date          1,136,305 op/s  ± 4.73%   (80 samples)  12.90x
 Fastest is ts-date
 ---------------------------------------------------------------
 ```

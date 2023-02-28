@@ -7,15 +7,16 @@
   "main": "index.js",
   "dependencies": {
     "benchmark": "^2.1.4",
-    "date-fns": "^2.9.0",
-    "moment": "^2.24.0",
-    "ts-date": "^3.0.0"
+    "date-fns": "^2.19.0",
+    "dayjs": "^1.10.4",
+    "moment": "^2.29.1",
+    "ts-date": "^3.0.2"
   },
   "devDependencies": {},
   "scripts": {
     "update-readme": "node ./index.js > README.md",
     "compare-with-previous": "node ./index.js --compare-with-previous",
-    "debug": "node ./index.js --compare-with-previous --debug",
+    "debug": "node ./index.js --debug",
     "start": "node ./index.js"
   }
 }

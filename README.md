@@ -107,7 +107,8 @@ d.setDate(0); // Typescript will warn here
 
 ## Browser support
 
-[![Build Status](https://saucelabs.com/browser-matrix/standy.svg)](https://saucelabs.com/beta/builds/5fe7f4ad4e9c4f87842ea80e0a497eb5)
+[![Sauce Test Status](https://app.saucelabs.com/browser-matrix/standy.svg)](https://app.saucelabs.com/u/standy)
+
 
 Should work fine without polyfills in every modern browser and IE9+
 Chrome 5+, Edge, Firefox 4.0+, IE 9+, Opera 12+, Safari 5+

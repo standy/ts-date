@@ -83,6 +83,11 @@ const sl_launchers = {
 		version: '8.0',
 		platform: 'OS X 10.10'
 	},
+	sl_ios_iphone_14: {
+		base: 'SauceLabs',
+		browserName: 'iphone',
+		version: '14.3'
+	},
 	sl_iphone_11_2: {
 		base: 'SauceLabs',
 		browserName: 'iphone',

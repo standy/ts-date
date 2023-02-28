@@ -4,6 +4,7 @@ const names = require('../names');
 const tsDate = require('../../dist/locale/en/index');
 const tsDatePrev = require('ts-date');
 const moment = require('moment');
+const dayjs = require('dayjs');
 const dateFns = require('date-fns');
 
 
@@ -21,6 +22,9 @@ suite
 	}, {onCycle})
 	.add(names.dateFns, function() {
 		return dateFns.parseISO(dateStr);
+	}, {onCycle})
+	.add(names.dayjs, function() {
+		return dayjs(dateStr);
 	}, {onCycle})
 	.add(names.tsDatePrev, function() {
 		return tsDatePrev.parseIso(dateStr);

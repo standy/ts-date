@@ -4,10 +4,13 @@ const names = require('../names');
 const tsDate = require('../../dist/locale/en/index');
 const tsDatePrev = require('ts-date');
 const moment = require('moment');
+const dayjs = require('dayjs');
+const dayjsAdvancedFormat = require('dayjs/plugin/advancedFormat')
 const dateFns = require('date-fns');
 
+dayjs.extend(dayjsAdvancedFormat);
 const pattern = 'dddd, MMMM Do YYYY, [escaped], h:mm:ss a';
-const patternUTS = `EEEE, MMMM Do yyyy, 'escaped', h:mm:ss a`;
+const patternUTS = `EEEE, MMMM do yyyy, 'escaped', h:mm:ss a`;
 let date;
 let dateMoment;
 
@@ -25,6 +28,9 @@ suite
 	}, {onCycle})
 	.add(names.momentCached, function() {
 		return dateMoment.format(pattern);
+	}, {onCycle})
+	.add(names.dayjs, function() {
+		return dayjs(date).format('dddd, MMMM Do YYYY, [escaped], h:mm:ss a');
 	}, {onCycle})
 	.add(names.dateFns, function() {
 		return dateFns.format(date, patternUTS);
