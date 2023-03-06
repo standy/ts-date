@@ -16,7 +16,7 @@
     "release": "standard-version",
     "release-canary": "standard-version --prerelease canary",
     "github-release": "conventional-github-releaser",
-    "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "npm run coverage && nyc report --reporter=lcov",
     "coverage": "nyc npm test",
     "test:browser": "cd browser-test && npm run browser && cd ..",
     "test:sauce": "cd browser-test && npm run sauce && cd ..",

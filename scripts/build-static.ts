@@ -1,12 +1,8 @@
 import {join} from 'path';
-import {copySync, emptyDirSync, writeFileSync} from 'fs-extra';
+import {copySync, emptyDirSync} from 'fs-extra';
 import * as ts from 'typescript';
 import {OUT_DIR, buildFiles} from './build-files';
 
-/**
- * Setup Npm token
- */
-writeFileSync('.npmrc', `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`);
 
 /**
  * Cleanup build directory

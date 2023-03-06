@@ -1,0 +1,24 @@
+name: Test Timezones
+
+on: ["push", "pull_request"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        timezone: [Asia/Tehran,Europe/Paris,Australia/Canberra,America/Tijuana]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: szenius/set-timezone@v1.1
+        with:
+          timezoneLinux: ${{ matrix.timezone }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: date
+      - run: npm run test
