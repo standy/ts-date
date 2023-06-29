@@ -43,12 +43,12 @@ const monthsGenitive = [
 	'ноябр',
 	'декабр'
 ];
-const weekdays2char = ['як', 'ду', 'се', 'чо', 'па', 'жу', 'ша'];
-const weekdays3char = ['якш', 'душ', 'сеш', 'чор', 'пай', 'жум', 'шан'];
+
+const weekdays3char = ['Якш', 'Душ', 'Сеш', 'Чор', 'Пай', 'Жум', 'Шан'];
 const weekdaysFull = ['якшанба', 'душанба', 'сешанба', 'чоршанба', 'пайшанба', 'жума', 'шанба'];
-const meridiemUppercase = ['TO', 'TK'];
-const meridiemLowercase = ['to', 'tk'];
-const meridiemFull = ['t.o.', 't.k.'];
+const meridiemUppercase = ['ТО', 'ТК'];
+const meridiemLowercase = ['то', 'тк'];
+const meridiemFull = ['т.о.', 'т.к.'];
 
 export const formatters: FormatterObj = {
 	// Month: янв, фев, ..., дек
@@ -56,9 +56,6 @@ export const formatters: FormatterObj = {
 
 	// Month: 'январ', 'феврал', ..., декабр
 	MMMM: (date) => monthsFull[date.getMonth()],
-
-	// Day of week: як, ду, ..., ша
-	dd: (date) => weekdays2char[date.getDay()],
 
 	// Day of week: якш, душ, ..., шан
 	ddd: (date) => weekdays3char[date.getDay()],
@@ -69,10 +66,10 @@ export const formatters: FormatterObj = {
 	// TO, TK
 	A: (date) => meridiemUppercase[date.getHours() < 12 ? 0 : 1],
 
-	// to, tk
+	// то, тк
 	a: (date) => meridiemLowercase[date.getHours() < 12 ? 0 : 1],
 
-	// t.o., t.k.
+	// т.о., т.к.
 	aa: (date) => meridiemFull[date.getHours() < 12 ? 0 : 1],
 
 	Mo: ordinalFormatter('M'),

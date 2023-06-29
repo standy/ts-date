@@ -7,11 +7,11 @@ describe('uz-lt locale', function () {
 	it('correct formatting', function () {
 		const date = newValidDate(2017, Month.Aug, 1, 12, 34, 56, 789);
 		const FORMATS = [
-			['MMMM MMM dd ddd dddd A Do Wo Mo DDDo do Qo', 'avgust avg Se Ses seshanba TK 1 31 8 213 2 3'],
+			['MMMM MMM ddd dddd A Do Wo Mo DDDo do Qo', 'avgust avg Ses seshanba TK 1 31 8 213 2 3'],
 			['D MMMM hh A', '1 avgust 12 TK'],
 			['Do MMMM, dddd', '1 avgust, seshanba'],
-			['D MMM, dd', '1 avg, Se'],
 			['D MMMM, hh A, ddd', '1 avgust, 12 TK, Ses'],
+			['D MMMM, hh aa, ddd', '1 avgust, 12 t.k., Ses'],
 		];
 
 		for (let i = 0; i < FORMATS.length; i++) {

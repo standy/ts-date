@@ -7,11 +7,11 @@ describe('uz-cr locale', function () {
 	it('correct formatting', function () {
 		const date = newValidDate(2017, Month.Aug, 1, 12, 34, 56, 789);
 		const FORMATS = [
-			['MMMM MMM dd ddd dddd A Do Wo Mo DDDo do Qo', 'август авг се сеш сешанба TK 1 31 8 213 2 3'],
-			['D MMMM hh A', '1 август 12 TK'],
+			['MMMM MMM ddd dddd A Do Wo Mo DDDo do Qo', 'август авг Сеш сешанба ТК 1 31 8 213 2 3'],
+			['D MMMM hh A', '1 август 12 ТК'],
 			['Do MMMM, dddd', '1 август, сешанба'],
-			['D MMM, dd', '1 авг, се'],
-			['D MMMM, hh A, ddd', '1 август, 12 TK, сеш'],
+			['D MMMM, hh A, ddd', '1 август, 12 ТК, Сеш'],
+			['D MMMM, hh aa, ddd', '1 август, 12 т.к., Сеш'],
 		];
 
 		for (let i = 0; i < FORMATS.length; i++) {
@@ -33,12 +33,12 @@ describe('uz-cr locale', function () {
 	it('correct day part format', function () {
 		const d1 = newValidDate(2017, Month.Oct, 1, 0, 42, 12);
 		const d2 = newValidDate(2017, Month.Oct, 1, 18, 42, 12);
-		assert.equal(format(d1, 'h A'), '12 TO');
-		assert.equal(format(d2, 'h A'), '6 TK');
-		assert.equal(format(d1, 'h a'), '12 to');
-		assert.equal(format(d2, 'h a'), '6 tk');
-		assert.equal(format(d1, 'h aa'), '12 t.o.');
-		assert.equal(format(d2, 'h aa'), '6 t.k.');
+		assert.equal(format(d1, 'h A'), '12 ТО');
+		assert.equal(format(d2, 'h A'), '6 ТК');
+		assert.equal(format(d1, 'h a'), '12 то');
+		assert.equal(format(d2, 'h a'), '6 тк');
+		assert.equal(format(d1, 'h aa'), '12 т.о.');
+		assert.equal(format(d2, 'h aa'), '6 т.к.');
 		assert.equal(format(d1, 'HH:mm:ss'), '00:42:12');
 		assert.equal(format(d2, 'HH:mm:ss'), '18:42:12');
 	});

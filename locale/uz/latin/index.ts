@@ -43,7 +43,6 @@ const monthsGenitive = [
 	'noyabr',
 	'dekabr'
 ];
-const weekdays2char = ['Ya', 'Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh'];
 const weekdays3char = ['Yak', 'Dus', 'Ses', 'Cho', 'Pay', 'Jum', 'Sha'];
 const weekdaysFull = ['yakshanba', 'dushanba', 'seshanba', 'chorshanba', 'payshanba', 'juma', 'shanba'];
 const meridiemUppercase = ['TO', 'TK'];
@@ -56,9 +55,6 @@ export const formatters: FormatterObj = {
 
 	// Month: 'январ', 'феврал', ..., декабр
 	MMMM: (date) => monthsFull[date.getMonth()],
-
-	// Day of week: як, ду, ..., ша
-	dd: (date) => weekdays2char[date.getDay()],
 
 	// Day of week: якш, душ, ..., шан
 	ddd: (date) => weekdays3char[date.getDay()],
