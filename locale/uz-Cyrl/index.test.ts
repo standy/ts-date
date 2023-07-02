@@ -1,6 +1,6 @@
-import {Month} from '../../../src/utils/basic-types';
+import {Month} from '../../src/utils/basic-types';
 import * as assert from 'power-assert';
-import {newValidDate} from '../../../src/create/create-ts-date';
+import {newValidDate} from '../../src/create/create-ts-date';
 import {format, parse} from './index';
 
 describe('uz-lt locale', function () {
@@ -10,6 +10,7 @@ describe('uz-lt locale', function () {
 			['MMMM MMM ddd dddd A Do Wo Mo DDDo do Qo', 'avgust avg Ses seshanba TK 1 31 8 213 2 3'],
 			['D MMMM hh A', '1 avgust 12 TK'],
 			['Do MMMM, dddd', '1 avgust, seshanba'],
+			['D MMMM, hh A, dd', '1 avgust, 12 TK, Ses'],
 			['D MMMM, hh A, ddd', '1 avgust, 12 TK, Ses'],
 			['D MMMM, hh aa, ddd', '1 avgust, 12 t.k., Ses'],
 		];

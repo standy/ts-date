@@ -1,7 +1,7 @@
-import {createCustomFormatFn, createFormat} from '../../../src/format/create-format';
-import {createParse, parseOrThrowWrapper} from '../../../src/parse/create-parse';
-import {defaultFormatters} from '../../../src/format/default-formatters';
-import defaultParsers from '../../../src/parse/default-parsers';
+import {createCustomFormatFn, createFormat} from '../../src/format/create-format';
+import {createParse, parseOrThrowWrapper} from '../../src/parse/create-parse';
+import {defaultFormatters} from '../../src/format/default-formatters';
+import defaultParsers from '../../src/parse/default-parsers';
 import {
 	ParserObj,
 	FormatterObj,
@@ -10,66 +10,55 @@ import {
 	ParseByTemplateOrThrowFn,
 	ParserData,
 	Formatter,
-} from '../../../src/utils/basic-types';
-import {extend} from '../../../src/utils/utils';
-export * from '../../../src/default-exports';
+} from '../../src/utils/basic-types';
+import {extend} from '../../src/utils/utils';
+export * from '../../src/default-exports';
 
-const monthsShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+const monthsShort = ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avg', 'sen', 'okt', 'noy', 'dek'];
 const monthsFull = [
-	'январ',
-	'феврал',
-	'март',
-	'апрел',
-	'май',
-	'июн',
-	'июл',
-	'август',
-	'сентябр',
-	'октябр',
-	'ноябр',
-	'декабр'
+	'yanvar',
+	'fevral',
+	'mart',
+	'aprel',
+	'may',
+	'iyun',
+	'iyul',
+	'avgust',
+	'sentabr',
+	'oktabr',
+	'noyabr',
+	'dekabr'
 ];
-const monthsGenitive = [
-	'январ',
-	'феврал',
-	'март',
-	'апрел',
-	'май',
-	'июн',
-	'июл',
-	'август',
-	'сентябр',
-	'октябр',
-	'ноябр',
-	'декабр'
-];
-
-const weekdays3char = ['Якш', 'Душ', 'Сеш', 'Чор', 'Пай', 'Жум', 'Шан'];
-const weekdaysFull = ['якшанба', 'душанба', 'сешанба', 'чоршанба', 'пайшанба', 'жума', 'шанба'];
-const meridiemUppercase = ['ТО', 'ТК'];
-const meridiemLowercase = ['то', 'тк'];
-const meridiemFull = ['т.о.', 'т.к.'];
+const weekdays2char = ['Yak', 'Dus', 'Ses', 'Cho', 'Pay', 'Jum', 'Sha'];
+const weekdays3char = ['Yak', 'Dus', 'Ses', 'Cho', 'Pay', 'Jum', 'Sha'];
+const weekdaysFull = ['yakshanba', 'dushanba', 'seshanba', 'chorshanba', 'payshanba', 'juma', 'shanba'];
+const meridiemUppercase = ['TO', 'TK'];
+const meridiemLowercase = ['to', 'tk'];
+const meridiemFull = ['t.o.', 't.k.'];
 
 export const formatters: FormatterObj = {
-	// Month: янв, фев, ..., дек
+	// Month: yan, fev, ..., dek
 	MMM: (date) => monthsShort[date.getMonth()],
 
-	// Month: 'январ', 'феврал', ..., декабр
+	// Month: 'yanvar', 'fevral', ..., dekabr
 	MMMM: (date) => monthsFull[date.getMonth()],
 
-	// Day of week: якш, душ, ..., шан
+	// Day of week: Yak, Dus, ..., Sha
+	dd: (date) => weekdays2char[date.getDay()],
+
+	// Day of week: Yak, Dus, ..., Sha
 	ddd: (date) => weekdays3char[date.getDay()],
 
-	// Day of week: якшанба, душанба, ..., шанба
+	// Day of week: yakshanba, dushanba, ..., shanba
 	dddd: (date) => weekdaysFull[date.getDay()],
 
 	// TO, TK
 	A: (date) => meridiemUppercase[date.getHours() < 12 ? 0 : 1],
 
-	// то, тк
+	// to, tk
 	a: (date) => meridiemLowercase[date.getHours() < 12 ? 0 : 1],
 
-	// т.о., т.к.
+	// t.o., t.k.
 	aa: (date) => meridiemFull[date.getHours() < 12 ? 0 : 1],
 
 	Mo: ordinalFormatter('M'),
@@ -80,11 +69,13 @@ export const formatters: FormatterObj = {
 	Wo: ordinalFormatter('W'),
 };
 
+// Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
 function ordinalFormatter(formatterToken: string): Formatter {
 	return (date) => defaultFormatters[formatterToken](date);
 }
 
 const parsers: ParserObj = {
+	// Month: янв., фев., ..., дек.
 	MMM: [
 		monthsShort.join('|'),
 		(date, value) => {
@@ -94,11 +85,10 @@ const parsers: ParserObj = {
 	],
 
 	MMMM: [
-		monthsFull.concat(monthsGenitive).join('|'),
+		monthsFull.join('|'),
 		(date, value) => {
 			value = value.toLowerCase();
 			let index = monthsFull.indexOf(value);
-			if (index < 0) index = monthsGenitive.indexOf(value);
 			date.setMonth(index);
 		},
 	],
