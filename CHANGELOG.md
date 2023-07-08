@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/standy/ts-date/compare/v3.0.3...v3.1.0) (2023-07-08)
+
+
+### Features
+
+* add uz language ([#19](https://github.com/standy/ts-date/issues/19)) ([387a1ff](https://github.com/standy/ts-date/commit/387a1ff4ff4f310c32596de84f06c933d76902c3))
+
 ### [3.0.3](https://github.com/standy/ts-date/compare/v3.0.2...v3.0.3) (2023-03-08)
 
 ### [3.0.2](https://github.com/standy/ts-date/compare/v3.0.1...v3.0.2) (2020-07-23)
